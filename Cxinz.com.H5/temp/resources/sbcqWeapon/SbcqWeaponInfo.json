@@ -1,0 +1,164 @@
+{
+    "USEWEAPONCMD": "@激活神器",
+    "WEAPONINFO": [
+        {
+            "JOB": 0,
+            "WEAPONDESC": "帝王佩剑，也是帝道之间。治子公以陨铁铸造而成，剑身罡气萦绕，寒锋逼人。握此神剑，可加持肉身，让剑主有万夫不当之勇。",
+            "UNLOCK": false,
+            "SKILLNAMELIST": [
+                {
+                    "VIDEOURL": "dd",
+                    "VIDEOFIRSTPICURL": "first0",
+                    "IMAGE": {
+                        "FILE": "magicon",
+                        "IMAGEID": "20"
+                    },
+                    "NAME": "战狂剑法"
+                },
+                {
+                    "VIDEOURL": "dd",
+                    "VIDEOFIRSTPICURL": "first0",
+                    "IMAGE": {
+                        "FILE": "magicon",
+                        "IMAGEID": "20"
+                    },
+                    "NAME": "抱月剑法"
+                },
+                {
+                    "VIDEOURL": "dd",
+                    "VIDEOFIRSTPICURL": "first0",
+                    "IMAGE": {
+                        "FILE": "magicon",
+                        "IMAGEID": "20"
+                    },
+                    "NAME": "烈火剑"
+                },
+                {
+                    "VIDEOURL": "dd",
+                    "VIDEOFIRSTPICURL": "first0",
+                    "IMAGE": {
+                        "FILE": "magicon",
+                        "IMAGEID": "20"
+                    },
+                    "NAME": "野蛮冲撞"
+                },
+                {
+                    "VIDEOURL": "dd",
+                    "VIDEOFIRSTPICURL": "first0",
+                    "IMAGE": {
+                        "FILE": "magicon",
+                        "IMAGEID": "20"
+                    },
+                    "NAME": "怒天斩"
+                }
+            ],
+            "USESTATE": false
+        },
+        {
+            "JOB": 1,
+            "WEAPONDESC": "法神之扇，内蕴五行之力。此扇以寒铁为骨，天蚕丝为扇面。一面绘风雷无形，一面星辰深空。握此扇者可司雷，可驭火，可乘风。",
+            "UNLOCK": false,
+            "SKILLNAMELIST": [
+                {
+                    "VIDEOURL": "dd",
+                    "VIDEOFIRSTPICURL": "first0",
+                    "IMAGE": {
+                        "FILE": "magicon",
+                        "IMAGEID": "20"
+                    },
+                    "NAME": "降雷术"
+                },
+                {
+                    "VIDEOURL": "dd",
+                    "VIDEOFIRSTPICURL": "first0",
+                    "IMAGE": {
+                        "FILE": "magicon",
+                        "IMAGEID": "20"
+                    },
+                    "NAME": "冰霜咆哮"
+                },
+                {
+                    "VIDEOURL": "dd",
+                    "VIDEOFIRSTPICURL": "first0",
+                    "IMAGE": {
+                        "FILE": "magicon",
+                        "IMAGEID": "20"
+                    },
+                    "NAME": "魔法火墙"
+                },
+                {
+                    "VIDEOURL": "dd",
+                    "VIDEOFIRSTPICURL": "first0",
+                    "IMAGE": {
+                        "FILE": "magicon",
+                        "IMAGEID": "20"
+                    },
+                    "NAME": "魔法神盾"
+                },
+                {
+                    "VIDEOURL": "dd",
+                    "VIDEOFIRSTPICURL": "first0",
+                    "IMAGE": {
+                        "FILE": "magicon",
+                        "IMAGEID": "20"
+                    },
+                    "NAME": "魔法虹吸"
+                }
+            ],
+            "USESTATE": false
+        },
+        {
+            "JOB": 2,
+            "WEAPONDESC": "大方士李陵的法器，由千年雷击木炼制而成。此杖不曾雕琢，但周身纹理如龙凤缠绕，各掌阴阳。持此法器，可通天下道法。",
+            "UNLOCK": false,
+            "SKILLNAMELIST": [
+                {
+                    "VIDEOURL": "dd",
+                    "VIDEOFIRSTPICURL": "first0",
+                    "IMAGE": {
+                        "FILE": "magicon",
+                        "IMAGEID": "20"
+                    },
+                    "NAME": "降魔火符"
+                },
+                {
+                    "VIDEOURL": "dd",
+                    "VIDEOFIRSTPICURL": "first0",
+                    "IMAGE": {
+                        "FILE": "magicon",
+                        "IMAGEID": "20"
+                    },
+                    "NAME": "神兽召唤"
+                },
+                {
+                    "VIDEOURL": "dd",
+                    "VIDEOFIRSTPICURL": "first0",
+                    "IMAGE": {
+                        "FILE": "magicon",
+                        "IMAGEID": "20"
+                    },
+                    "NAME": "治疗阵法"
+                },
+                {
+                    "VIDEOURL": "dd",
+                    "VIDEOFIRSTPICURL": "first0",
+                    "IMAGE": {
+                        "FILE": "magicon",
+                        "IMAGEID": "20"
+                    },
+                    "NAME": "施毒秘术"
+                },
+                {
+                    "VIDEOURL": "dd",
+                    "VIDEOFIRSTPICURL": "first0",
+                    "IMAGE": {
+                        "FILE": "magicon",
+                        "IMAGEID": "20"
+                    },
+                    "NAME": "嗜血秘术"
+                }
+            ],
+            "USESTATE": false
+        }
+    ]
+}
