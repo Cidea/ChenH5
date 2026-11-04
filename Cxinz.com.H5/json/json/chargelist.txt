@@ -1,0 +1,2 @@
+https://www.dingniao.com/ashx/Pay/PayloadZ.ashx
+https://www.dingniao.com/ashx/Pay/CreateOrderA.ashx
