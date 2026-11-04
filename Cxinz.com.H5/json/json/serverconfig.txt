@@ -1,4 +1,0 @@
-﻿gamelist=https://gs.api.jauok.com/api/GameList?account=2371
-boItemCompare=1
-currencyShowList=1,1,1,1,1,1,1
-npcBubbleTip=1
