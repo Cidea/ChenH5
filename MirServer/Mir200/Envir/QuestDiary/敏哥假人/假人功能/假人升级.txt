@@ -1,0 +1,712 @@
+[@假人升级触发]
+{
+;---------读取HP保护---------
+#IF
+ISDUMMY
+#ACT
+DIV U40 <$MAXHP> 10
+MUL U40 U40 3
+#IF
+CHECKLEVELEX > 3
+#ACT
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 12
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt Level=<$LEVEL> 12
+;----------战士----------
+#IF
+CHECKJOB warrior
+CHECKLEVELEX = 7
+#ACT 
+MOV S12 基本剑术
+ADDSKILL <$STR(S12)> 3
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 14
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt UseSkill=<$STR(S12)>, 14
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 16
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt [<$STR(S12)>] 16
+BREAK
+#IF
+CHECKJOB warrior
+CHECKLEVELEX = 19
+#ACT 
+MOV S12 攻杀剑术
+ADDSKILL <$STR(S12)> 3
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 14
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+INC S11 <$STR(S12)>
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S11)>, 14
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 18
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt [<$STR(S12)>] 18
+BREAK
+#IF
+CHECKJOB warrior
+CHECKLEVELEX = 25
+#ACT 
+MOV S12 刺杀剑术
+ADDSKILL <$STR(S12)> 3
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 14
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+INC S11 <$STR(S12)>
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S11)>, 14
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 20
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt [<$STR(S12)>] 20
+GOTO @领新手装备25
+BREAK
+#IF
+CHECKJOB warrior
+CHECKLEVELEX = 28
+#ACT 
+MOV S12 半月弯刀
+ADDSKILL <$STR(S12)> 3
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 14
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+INC S11 <$STR(S12)>
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S11)>, 14
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 22
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt [<$STR(S12)>] 22
+BREAK
+#IF
+CHECKJOB warrior
+CHECKLEVELEX = 30
+#ACT 
+MOV S12 野蛮冲撞
+ADDSKILL <$STR(S12)> 3
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 14
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+INC S11 <$STR(S12)>
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S11)>, 14
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 24
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt [<$STR(S12)>] 24
+BREAK
+#IF
+CHECKJOB warrior
+CHECKLEVELEX = 35
+#ACT 
+MOV S12 烈火剑法
+ADDSKILL <$STR(S12)> 3
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 14
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+INC S11 <$STR(S12)>
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S11)>, 14
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 26
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt [<$STR(S12)>] 26
+GOTO @领新手装备35
+BREAK
+;----------法师学习技能----------
+#IF
+CHECKJOB wizard
+CHECKLEVELEX = 7
+#ACT
+MOV S12 火球术
+ADDSKILL <$STR(S12)> 3
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 14
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt UseSkill=<$STR(S12)>, 14
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 16
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt [<$STR(S12)>] 16
+BREAK
+#IF
+CHECKJOB wizard
+CHECKLEVELEX = 12
+#ACT 
+MOV S12 抗拒火环
+ADDSKILL <$STR(S12)> 3
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 14
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+INC S11 <$STR(S12)>
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S11)>, 14
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 18
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt [<$STR(S12)>] 18
+BREAK
+#IF
+CHECKJOB wizard
+CHECKLEVELEX = 16
+#ACT 
+MOV S12 地狱火
+ADDSKILL <$STR(S12)> 3
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 14
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+DEC S11 火球术,
+INC S11 <$STR(S12)>
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S11)>, 14
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 16
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt [<$STR(S12)>] 16
+BREAK
+#IF
+CHECKJOB wizard
+CHECKLEVELEX = 17
+#ACT 
+MOV S12 雷电术
+ADDSKILL <$STR(S12)> 3
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 14
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+DEC S11 地狱火,
+INC S11 <$STR(S12)>
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S11)>, 14
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 16
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt [<$STR(S12)>] 16
+BREAK
+#IF
+CHECKJOB wizard
+CHECKLEVELEX = 24
+#ACT 
+MOV S12 火墙
+ADDSKILL <$STR(S12)> 3
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 14
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+INC S11 <$STR(S12)>
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S11)>, 14
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 20
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt [<$STR(S12)>] 20
+BREAK
+#IF
+CHECKJOB wizard
+CHECKLEVELEX = 25
+#ACT 
+GOTO @领新手装备25
+BREAK
+#IF
+CHECKJOB wizard
+CHECKLEVELEX = 26
+#ACT 
+MOV S12 疾光电影
+ADDSKILL <$STR(S12)> 3
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 14
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+INC S11 <$STR(S12)>
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S11)>, 14
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 22
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt [<$STR(S12)>] 22
+BREAK
+#IF
+CHECKJOB wizard
+CHECKLEVELEX = 30
+#ACT 
+MOV S12 地狱雷光
+ADDSKILL <$STR(S12)> 3
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 14
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+INC S11 <$STR(S12)>
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S11)>, 14
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 24
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt [<$STR(S12)>] 24
+BREAK
+#IF
+CHECKJOB wizard
+CHECKLEVELEX = 31
+#ACT 
+MOV S12 魔法盾
+ADDSKILL <$STR(S12)> 3
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 14
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+INC S11 <$STR(S12)>
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S11)>, 14
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 26
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt [<$STR(S12)>] 26
+BREAK
+#IF
+CHECKJOB wizard
+CHECKLEVELEX = 32
+#ACT 
+MOV S12 圣言术
+ADDSKILL <$STR(S12)> 3
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 14
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+INC S11 <$STR(S12)>
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S11)>, 14
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 28
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt [<$STR(S12)>] 28
+BREAK
+#IF
+CHECKJOB wizard
+CHECKLEVELEX = 35
+#ACT 
+MOV S12 冰咆哮
+ADDSKILL <$STR(S12)> 3
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 14
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+INC S11 <$STR(S12)>
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S11)>, 14
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 30
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt [<$STR(S12)>] 30
+GOTO @领新手装备35
+BREAK
+;----------道士学习技能----------
+#IF
+CHECKJOB taoist
+CHECKLEVELEX = 7
+#ACT
+MOV S12 治愈术
+ADDSKILL <$STR(S12)> 3
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 14
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt UseSkill=<$STR(S12)>, 14
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 16
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt [<$STR(S12)>] 16
+BREAK
+#IF
+CHECKJOB taoist
+CHECKLEVELEX = 9
+#ACT 
+MOV S12 精神力战法
+ADDSKILL <$STR(S12)> 3
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 14
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+INC S11 <$STR(S12)>
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S11)>, 14
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 18
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt [<$STR(S12)>] 18
+BREAK
+#IF
+CHECKJOB taoist
+CHECKLEVELEX = 14
+#ACT 
+MOV S12 施毒术
+ADDSKILL <$STR(S12)> 3
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 14
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+INC S11 <$STR(S12)>
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S11)>, 14
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 20
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt [<$STR(S12)>] 20
+BREAK
+#IF
+CHECKJOB taoist
+CHECKLEVELEX = 18
+#ACT 
+MOV S12 灵魂火符
+ADDSKILL <$STR(S12)> 3
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 14
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+INC S11 <$STR(S12)>
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S11)>, 14
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 22
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt [<$STR(S12)>] 22
+BREAK
+#IF
+CHECKJOB taoist
+CHECKLEVELEX = 19
+#ACT 
+MOV S12 召唤骷髅
+ADDSKILL <$STR(S12)> 3
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 14
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+INC S11 <$STR(S12)>
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S11)>, 14
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 24
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt [<$STR(S12)>] 24
+BREAK
+#IF
+CHECKJOB taoist
+CHECKLEVELEX = 20
+#ACT 
+MOV S12 隐身术
+ADDSKILL <$STR(S12)> 3
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 14
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+INC S11 <$STR(S12)>
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S11)>, 14
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 26
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt [<$STR(S12)>] 26
+BREAK
+#IF
+CHECKJOB taoist
+CHECKLEVELEX = 21
+#ACT 
+MOV S12 集体隐身术
+ADDSKILL <$STR(S12)> 3
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 14
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+INC S11 <$STR(S12)>
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S11)>, 14
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 28
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt [<$STR(S12)>] 28
+BREAK
+#IF
+CHECKJOB taoist
+CHECKLEVELEX = 22
+#ACT 
+MOV S12 幽灵盾
+ADDSKILL <$STR(S12)> 3
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 14
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+INC S11 <$STR(S12)>
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S11)>, 14
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 30
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt [<$STR(S12)>] 30
+BREAK
+#IF
+CHECKJOB taoist
+CHECKLEVELEX = 25
+#ACT 
+MOV S12 神圣战甲术
+ADDSKILL <$STR(S12)> 3
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 14
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+INC S11 <$STR(S12)>
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S11)>, 14
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 32
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt [<$STR(S12)>] 32
+GOTO @领新手装备25
+BREAK
+#IF
+CHECKJOB taoist
+CHECKLEVELEX = 26
+#ACT 
+MOV S12 心灵启示
+ADDSKILL <$STR(S12)> 3
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 14
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+INC S11 <$STR(S12)>
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S11)>, 14
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 34
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt [<$STR(S12)>] 34
+BREAK
+#IF
+CHECKJOB taoist
+CHECKLEVELEX = 33
+#ACT 
+MOV S12 群体治愈术
+ADDSKILL <$STR(S12)> 3
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 14
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+INC S11 <$STR(S12)>
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S11)>, 14
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 36
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt [<$STR(S12)>] 36
+BREAK
+#IF
+CHECKJOB taoist
+CHECKLEVELEX = 35
+#ACT 
+MOV S12 召唤神兽
+ADDSKILL <$STR(S12)> 3
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 14
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+DEC S11 召唤骷髅,
+INC S11 <$STR(S12)>
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S11)>, 14
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 24
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt [<$STR(S12)>] 24
+GOTO @领新手装备35
+BREAK
+#IF
+CHECKJOB taoist
+CHECKLEVELEX = 36
+#ACT 
+MOV S12 气功波
+ADDSKILL <$STR(S12)> 3
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 14
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+INC S11 <$STR(S12)>
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S11)>, 14
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11 38
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S11
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt [<$STR(S12)>] 38
+BREAK
+
+;==============领新手25装备================
+
+[@领新手装备25]
+#IF
+NOT CHECKBAGSIZE 10
+#ACT
+GMEXECUTE ClearBag Self
+
+#IF
+gender man
+checkjob warrior
+#ACT
+give 轻型盔甲(男) 1
+AutoTakeOnItem 轻型盔甲(男) 0
+give 八荒 1
+AutoTakeOnItem 八荒 1
+give 蓝翡翠项链 1
+AutoTakeOnItem 蓝翡翠项链 3
+give 骷髅头盔 1
+AutoTakeOnItem 骷髅头盔 4
+give 死神手套 2
+AutoTakeOnItem 死神手套 5
+AutoTakeOnItem 死神手套 6
+give 珊瑚戒指 2
+AutoTakeOnItem 珊瑚戒指 7
+AutoTakeOnItem 珊瑚戒指 8
+
+#IF
+gender woman
+checkjob warrior
+#ACT
+give 轻型盔甲(女) 1
+AutoTakeOnItem 轻型盔甲(女) 0
+give 八荒 1
+AutoTakeOnItem 八荒 1
+give 蓝翡翠项链 1
+AutoTakeOnItem 蓝翡翠项链 3
+give 骷髅头盔 1
+AutoTakeOnItem 骷髅头盔 4
+give 死神手套 2
+AutoTakeOnItem 死神手套 5
+AutoTakeOnItem 死神手套 6
+give 珊瑚戒指 2
+AutoTakeOnItem 珊瑚戒指 7
+AutoTakeOnItem 珊瑚戒指 8
+
+;-------------------道士----------------------
+#IF
+gender man
+checkjob taoist
+#ACT
+give 轻型盔甲(男) 1
+AutoTakeOnItem 轻型盔甲(男) 0
+give 降魔 1
+AutoTakeOnItem 降魔 1
+give 竹笛 1
+AutoTakeOnItem 竹笛 3
+give 道士头盔 1
+AutoTakeOnItem 道士头盔 4
+give 道士手镯 2
+AutoTakeOnItem 道士手镯 5
+AutoTakeOnItem 道士手镯 6
+give 道德戒指 2
+AutoTakeOnItem 道德戒指 7
+AutoTakeOnItem 道德戒指 8
+
+#IF
+gender woman
+checkjob taoist
+#ACT
+give 轻型盔甲(女) 1
+AutoTakeOnItem 轻型盔甲(女) 0
+give 降魔 1
+AutoTakeOnItem 降魔 1
+give 竹笛 1
+AutoTakeOnItem 竹笛 3
+give 道士头盔 1
+AutoTakeOnItem 道士头盔 4
+give 道士手镯 2
+AutoTakeOnItem 道士手镯 5
+AutoTakeOnItem 道士手镯 6
+give 道德戒指 2
+AutoTakeOnItem 道德戒指 7
+AutoTakeOnItem 道德戒指 8
+
+;-------------------法师----------------------
+#IF
+gender man
+checkjob wizard
+#ACT
+give 轻型盔甲(男) 1
+AutoTakeOnItem 轻型盔甲(男) 0
+give 海魂 1
+AutoTakeOnItem 海魂 1
+give 放大镜 1
+AutoTakeOnItem 放大镜 3
+give 道士头盔 1
+AutoTakeOnItem 道士头盔 4
+give 魅力戒指 2
+AutoTakeOnItem 魅力戒指 7
+AutoTakeOnItem 魅力戒指 8
+give 黑檀手镯 2
+AutoTakeOnItem 黑檀手镯 5
+AutoTakeOnItem 黑檀手镯 6
+
+#IF
+gender woman
+checkjob wizard
+#ACT
+give 轻型盔甲(女) 1
+AutoTakeOnItem 轻型盔甲(女) 0
+give 海魂 1
+AutoTakeOnItem 海魂 1
+give 放大镜 1
+AutoTakeOnItem 放大镜 3
+give 道士头盔 1
+AutoTakeOnItem 道士头盔 4
+give 魅力戒指 2
+AutoTakeOnItem 魅力戒指 7
+AutoTakeOnItem 魅力戒指 8
+give 黑檀手镯 2
+AutoTakeOnItem 黑檀手镯 5
+AutoTakeOnItem 黑檀手镯 6
+
+#IF
+ISDUMMY
+#ACT
+MOVR P7 322 338
+MOVR P8 322 338
+MAPMOVE 3 <$STR(P7)> <$STR(P8)>
+SET [100] 1
+DUMMYSTOP
+#CALL [\敏哥假人\假人保存身上装备.txt] @读取身上数据
+BREAK
+
+;==============领新手35装备================
+
+[@领新手装备35]
+#IF
+NOT CHECKBAGSIZE 10
+#ACT
+GMEXECUTE ClearBag Self
+
+#IF
+gender man
+checkjob warrior
+#ACT
+give 重盔甲(男) 1
+AutoTakeOnItem 重盔甲(男) 0
+give 炼狱 1
+AutoTakeOnItem 炼狱 1
+give 荣誉勋章13号 1
+AutoTakeOnItem 荣誉勋章13号 2
+give 幽灵项链 1
+AutoTakeOnItem 幽灵项链 3
+give 骷髅头盔 1
+AutoTakeOnItem 骷髅头盔 4
+give 死神手套 2
+AutoTakeOnItem 死神手套 5
+AutoTakeOnItem 死神手套 6
+give 龙之戒指 2
+AutoTakeOnItem 龙之戒指 7
+AutoTakeOnItem 龙之戒指 8
+
+#IF
+gender woman
+checkjob warrior
+#ACT
+give 重盔甲(女) 1
+AutoTakeOnItem 重盔甲(女) 0
+give 炼狱 1
+AutoTakeOnItem 炼狱 1
+give 荣誉勋章13号 1
+AutoTakeOnItem 荣誉勋章13号 2
+give 幽灵项链 1
+AutoTakeOnItem 幽灵项链 3
+give 骷髅头盔 1
+AutoTakeOnItem 骷髅头盔 4
+give 死神手套 2
+AutoTakeOnItem 死神手套 5
+AutoTakeOnItem 死神手套 6
+give 龙之戒指 2
+AutoTakeOnItem 龙之戒指 7
+AutoTakeOnItem 龙之戒指 8
+
+;-------------------道士----------------------
+#IF
+gender man
+checkjob taoist
+#ACT
+give 灵魂战衣(男) 1
+AutoTakeOnItem 灵魂战衣(男) 0
+give 银蛇 1
+AutoTakeOnItem 银蛇 1
+give 荣誉勋章15号 1
+AutoTakeOnItem 荣誉勋章15号 2
+give 道士头盔 1
+AutoTakeOnItem 道士头盔 4
+give 铂金戒指 2
+AutoTakeOnItem 铂金戒指 7
+AutoTakeOnItem 铂金戒指 8
+give 天珠项链 1
+AutoTakeOnItem 天珠项链 3
+give 心灵手镯 2
+AutoTakeOnItem 心灵手镯 5
+AutoTakeOnItem 心灵手镯 6
+
+#IF
+gender woman
+checkjob taoist
+#ACT
+give 灵魂战衣(女) 1
+AutoTakeOnItem 灵魂战衣(女) 0
+give 银蛇 1
+AutoTakeOnItem 银蛇 1
+give 荣誉勋章15号 1
+AutoTakeOnItem 荣誉勋章15号 2
+give 道士头盔 1
+AutoTakeOnItem 道士头盔 4
+give 铂金戒指 2
+AutoTakeOnItem 铂金戒指 7
+AutoTakeOnItem 铂金戒指 8
+give 天珠项链 1
+AutoTakeOnItem 天珠项链 3
+give 心灵手镯 2
+AutoTakeOnItem 心灵手镯 5
+AutoTakeOnItem 心灵手镯 6
+
+;-------------------法师----------------------
+#IF
+gender man
+checkjob wizard
+#ACT
+give 魔法长袍(男) 1
+AutoTakeOnItem 魔法长袍(男) 0
+give 魔杖 1
+AutoTakeOnItem 魔杖 1
+give 荣誉勋章14号 1
+AutoTakeOnItem 荣誉勋章14号 2
+give 道士头盔 1
+AutoTakeOnItem 道士头盔 4
+give 红宝石戒指 2
+AutoTakeOnItem 红宝石戒指 7
+AutoTakeOnItem 红宝石戒指 8
+give 思贝儿手镯 2
+AutoTakeOnItem 思贝儿手镯 5
+AutoTakeOnItem 思贝儿手镯 6
+give 生命项链 1
+AutoTakeOnItem 生命项链 3
+
+#IF
+gender woman
+checkjob wizard
+#ACT
+give 魔法长袍(女) 1
+AutoTakeOnItem 魔法长袍(女) 0
+give 魔杖 1
+AutoTakeOnItem 魔杖 1
+give 荣誉勋章14号 1
+AutoTakeOnItem 荣誉勋章14号 2
+give 道士头盔 1
+AutoTakeOnItem 道士头盔 4
+give 红宝石戒指 2
+AutoTakeOnItem 红宝石戒指 7
+AutoTakeOnItem 红宝石戒指 8
+give 思贝儿手镯 2
+AutoTakeOnItem 思贝儿手镯 5
+AutoTakeOnItem 思贝儿手镯 6
+give 生命项链 1
+AutoTakeOnItem 生命项链 3
+
+#IF
+ISDUMMY
+#ACT
+#CALL [\敏哥假人\假人保存身上装备.txt] @读取身上数据
+BREAK
+}

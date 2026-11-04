@@ -1,0 +1,22 @@
+[@假人死亡]
+{
+#IF
+ISDUMMY
+#ACT
+SET [101] 1
+ADDNAMELIST ..\QuestDiary\敏哥假人\假人数据\假人死亡名单.txt
+#CALL [\敏哥假人\假人保存身上装备.txt] @读取身上数据
+;------随机复活时间-----
+MOVR M91 3000 10000
+CLEARDELAYGOTO
+DELAYGOTO <$STR(M91)> @假人延迟复活
+
+[@假人延迟复活]
+#IF
+ISDUMMY
+#ACT
+DEC I90 1
+INC I93 1
+KICK
+}
+

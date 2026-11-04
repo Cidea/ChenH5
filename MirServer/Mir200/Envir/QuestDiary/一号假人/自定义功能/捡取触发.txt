@@ -1,0 +1,147 @@
+[@自动换装]
+{
+#IF
+CHECKTEXTLIST ..\QuestDiary\一号假人\假人穿戴\穿戴列表\武器.txt <$CURRTEMNAME>
+#ACT
+MOV S$武器名称 <$CURRTEMNAME>
+#CALL [\一号假人\假人穿戴\穿戴武器系列.txt] @拾取武器触发
+BREAK
+
+#IF
+CHECKTEXTLIST ..\QuestDiary\一号假人\假人穿戴\穿戴列表\盔甲.txt <$CURRTEMNAME>
+#ACT
+MOV S$衣服名称 <$CURRTEMNAME>
+#CALL [\一号假人\假人穿戴\穿戴衣服系列.txt] @拾取衣服触发
+BREAK
+
+#IF
+CHECKTEXTLIST ..\QuestDiary\一号假人\假人穿戴\穿戴列表\头盔.txt <$CURRTEMNAME>
+#ACT
+MOV S$头盔名称 <$CURRTEMNAME>
+#CALL [\一号假人\假人穿戴\穿戴头盔系列.txt] @拾取头盔触发
+BREAK
+
+#IF
+CHECKTEXTLIST ..\QuestDiary\一号假人\假人穿戴\穿戴列表\勋章.txt <$CURRTEMNAME>
+#ACT
+MOV S$勋章名称 <$CURRTEMNAME>
+#CALL [\一号假人\假人穿戴\穿戴勋章系列.txt] @拾取勋章触发
+BREAK
+
+#IF
+CHECKTEXTLIST ..\QuestDiary\一号假人\假人穿戴\穿戴列表\项链.txt <$CURRTEMNAME>
+#ACT
+MOV S$项链名称 <$CURRTEMNAME>
+#CALL [\一号假人\假人穿戴\穿戴项链系列.txt] @拾取项链触发
+BREAK
+
+#IF
+CHECKTEXTLIST ..\QuestDiary\一号假人\假人穿戴\穿戴列表\手镯.txt <$CURRTEMNAME>
+#ACT
+MOV S$手镯名称 <$CURRTEMNAME>
+#CALL [\一号假人\假人穿戴\穿戴手镯系列.txt] @拾取手镯触发
+BREAK
+
+#IF
+CHECKTEXTLIST ..\QuestDiary\一号假人\假人穿戴\穿戴列表\戒指.txt <$CURRTEMNAME>
+#ACT
+MOV S$戒指名称 <$CURRTEMNAME>
+#CALL [\一号假人\假人穿戴\穿戴戒指系列.txt] @拾取戒指触发
+BREAK
+
+#IF
+CHECKTEXTLIST ..\QuestDiary\一号假人\假人穿戴\穿戴列表\腰带.txt <$CURRTEMNAME>
+#ACT
+MOV S$腰带名称 <$CURRTEMNAME>
+#CALL [\一号假人\假人穿戴\穿戴腰带系列.txt] @拾取腰带触发
+BREAK
+
+#IF
+CHECKTEXTLIST ..\QuestDiary\一号假人\假人穿戴\穿戴列表\靴子.txt <$CURRTEMNAME>
+#ACT
+MOV S$靴子名称 <$CURRTEMNAME>
+#CALL [\一号假人\假人穿戴\穿戴靴子系列.txt] @拾取靴子触发
+BREAK
+
+
+#IF
+CHECKTEXTLIST ..\QuestDiary\一号假人\假人穿戴\穿戴列表\马牌.txt <$CURRTEMNAME>
+#ACT
+MOV S$马牌名称 <$CURRTEMNAME>
+#CALL [\一号假人\假人穿戴\穿戴马牌系列.txt] @拾取马牌触发
+BREAK
+
+
+#IF
+CHECKTEXTLIST ..\QuestDiary\一号假人\假人穿戴\穿戴列表\毒符.txt <$CURRTEMNAME>
+#ACT
+MOV S$毒符名称 <$CURRTEMNAME>
+#CALL [\一号假人\假人穿戴\穿戴毒符系列.txt] @拾取毒符触发
+BREAK
+
+
+#IF
+CHECKTEXTLIST ..\QuestDiary\一号假人\假人穿戴\穿戴列表\宝石.txt <$CURRTEMNAME>
+#ACT
+MOV S$宝石名称 <$CURRTEMNAME>
+#CALL [\一号假人\假人穿戴\穿戴宝石系列.txt] @拾取宝石触发
+BREAK
+
+
+#IF
+CHECKTEXTLIST ..\QuestDiary\一号假人\假人穿戴\穿戴列表\军鼓.txt <$CURRTEMNAME>
+#ACT
+MOV S$军鼓名称 <$CURRTEMNAME>
+#CALL [\一号假人\假人穿戴\穿戴军鼓系列.txt] @拾取军鼓触发
+BREAK
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

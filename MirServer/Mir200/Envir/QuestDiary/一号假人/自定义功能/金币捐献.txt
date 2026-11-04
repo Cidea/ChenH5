@@ -1,0 +1,43 @@
+[@金币捐献1]
+
+{
+
+
+
+#IF
+EQUAL U1 0
+checkgold > 49999
+#ACT
+SET U1 1
+MOVR N1 50000 100000
+take 金币 <$STR(N1)>
+CALCVAR HUMAN 元宝捐献 + <$STR(N1)>
+SAVEVAR HUMAN 元宝捐献 ..\QuestDiary\数据文件\元宝捐献.txt
+ADDNAMELIST ..\QuestDiary\数据文件\捐献名单.txt
+SENDMSG 0  [金币捐献]:玩家<$USERNAME>,首次捐献金币<$STR(N1)>个!!!
+SENDMSG 0  [金币捐献]:玩家<$USERNAME>,首次捐献金币<$STR(N1)>个!!!
+CLOSE
+BREAK
+
+
+#IF
+EQUAL U1 1
+checkgold > 49999
+#ACT
+take 金币 <$STR(N1)>
+CALCVAR HUMAN 元宝捐献 + <$STR(N1)>
+SAVEVAR HUMAN 元宝捐献 ..\QuestDiary\数据文件\元宝捐献.txt
+SENDMSG 0  [金币捐献]:玩家<$USERNAME>,再次捐献金币<$STR(N1)>个!!!
+SENDMSG 0  [金币捐献]:玩家<$USERNAME>,再次捐献金币<$STR(N1)>个!!!
+CLOSE
+BREAK
+
+
+
+
+
+
+
+
+
+}

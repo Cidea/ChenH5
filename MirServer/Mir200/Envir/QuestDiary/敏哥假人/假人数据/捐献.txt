@@ -1,0 +1,17 @@
+[@假人捐献1]
+{
+Check [25] 0
+CHECKGAMEGOLD > 499
+CheckContainsText <$SERVERNAME> 01区
+#ACT
+SET [25] 1
+GAMEGOLD - 500
+INC G10 500
+CLEARNAMELIST ..\..\..\..\通区捐献\<$STR(A10)>\今日01区.txt
+AddTextListEx ..\..\..\..\通区捐献\<$STR(A10)>\今日01区.txt 今日首区:<$STR(G10)> 0
+#CALL [\系统功能\属性奖励.txt] @属性奖励
+GOTO @main
+break
+
+
+}

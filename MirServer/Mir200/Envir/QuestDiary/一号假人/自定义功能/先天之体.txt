@@ -1,0 +1,362 @@
+[@先天A]
+{
+#IF
+equal T2 
+CHECKITEM 洗髓丹 10
+#ACT
+TAKE 洗髓丹 10
+CONFERTITLE 先天之体lv1
+MOV T2 先天之体lv1
+MOV U0 1
+MESSAGEBOX 恭喜你炼成先天之体lv1成功！！
+GuildNoticeMsg 5 255 恭喜[<$USERNAME>]成功炼成[先天之体lv1]
+#CALL [\游戏登陆\封号系统.txt] @封号分类
+DELAYGOTO 1500 @先天A2
+#ELSEACT
+DELAYGOTO 1500 @先天A2
+BREAK
+
+
+[@先天A2]
+#IF
+equal T2 先天之体lv1
+CHECKITEM 洗髓丹 20
+#ACT
+TAKE 洗髓丹 20
+CONFERTITLE 先天之体lv2
+MOV T2 先天之体lv2
+MOV U0 2
+DEPRIVETITLE 先天之体lv1
+MESSAGEBOX 恭喜你炼成先天之体lv2成功！！
+GuildNoticeMsg 5 255 恭喜[<$USERNAME>]成功炼成[先天之体lv2]
+#CALL [\游戏登陆\封号系统.txt] @封号分类
+DELAYGOTO 1500 @先天A3
+#ELSEACT
+DELAYGOTO 1500 @先天A3
+BREAK
+
+
+[@先天A3]
+#IF
+equal T2 先天之体lv2
+CHECKITEM 洗髓丹 30
+#ACT
+TAKE 洗髓丹 30
+CONFERTITLE 先天之体lv3
+MOV T2 先天之体lv3
+MOV U0 3
+DEPRIVETITLE 先天之体lv2
+MESSAGEBOX 恭喜你炼成先天之体lv3成功！！
+GuildNoticeMsg 5 255 恭喜[<$USERNAME>]成功炼成[先天之体lv3]
+#CALL [\游戏登陆\封号系统.txt] @封号分类
+DELAYGOTO 1500 @先天A4
+#ELSEACT
+DELAYGOTO 1500 @先天A4
+BREAK
+
+
+[@先天A4]
+#IF
+equal T2 先天之体lv3
+CHECKITEM 洗髓丹 40
+#ACT
+TAKE 洗髓丹 40
+CONFERTITLE 先天之体lv4
+MOV T2 先天之体lv4
+MOV U0 4
+DEPRIVETITLE 先天之体lv3
+MESSAGEBOX 恭喜你炼成先天之体lv4成功！！
+GuildNoticeMsg 5 255 恭喜[<$USERNAME>]成功炼成[先天之体lv4]
+#CALL [\游戏登陆\封号系统.txt] @封号分类
+DELAYGOTO 1500 @先天A5
+#ELSEACT
+DELAYGOTO 1500 @先天A5
+BREAK
+
+
+[@先天A5]
+#IF
+equal T2 先天之体lv4
+CHECKITEM 洗髓丹 50
+#ACT
+TAKE 洗髓丹 50
+CONFERTITLE 先天之体lv5
+MOV T2 先天之体lv5
+MOV U0 5
+DEPRIVETITLE 先天之体lv4
+MESSAGEBOX 恭喜你炼成先天之体lv5成功！！
+GuildNoticeMsg 5 255 恭喜[<$USERNAME>]成功炼成[先天之体lv5]
+#CALL [\游戏登陆\封号系统.txt] @封号分类
+DELAYGOTO 1500 @先天A6
+#ELSEACT
+DELAYGOTO 1500 @先天A6
+BREAK
+
+[@先天A6]
+#IF
+equal T2 先天之体lv5
+CHECKITEM 洗髓丹 60
+#ACT
+TAKE 洗髓丹 60
+CONFERTITLE 先天之体lv6
+MOV T2 先天之体lv6
+MOV U0 6
+DEPRIVETITLE 先天之体lv5
+MESSAGEBOX 恭喜你炼成先天之体lv6成功！！
+GuildNoticeMsg 5 255 恭喜[<$USERNAME>]成功炼成[先天之体lv6]
+#CALL [\游戏登陆\封号系统.txt] @封号分类
+DELAYGOTO 1500 @先天A7
+#ELSEACT
+DELAYGOTO 1500 @先天A7
+BREAK
+
+
+[@先天A7]
+#IF
+equal T2 先天之体lv6
+CHECKITEM 洗髓丹 70
+#ACT
+TAKE 洗髓丹 70
+CONFERTITLE 先天之体lv7
+MOV T2 先天之体lv7
+MOV U0 7
+DEPRIVETITLE 先天之体lv6
+MESSAGEBOX 恭喜你炼成先天之体lv7成功！！
+GuildNoticeMsg 5 255 恭喜[<$USERNAME>]成功炼成[先天之体lv7]
+#CALL [\游戏登陆\封号系统.txt] @封号分类
+DELAYGOTO 1500 @先天A8
+#ELSEACT
+DELAYGOTO 1500 @先天A8
+BREAK
+
+[@先天A8]
+#IF
+equal T2 先天之体lv7
+CHECKITEM 洗髓丹 80
+#ACT
+TAKE 洗髓丹 80
+CONFERTITLE 先天之体lv8
+MOV T2 先天之体lv8
+MOV U0 8
+DEPRIVETITLE 先天之体lv7
+MESSAGEBOX 恭喜你炼成先天之体lv8成功！！
+GuildNoticeMsg 5 255 恭喜[<$USERNAME>]成功炼成[先天之体lv8]
+#CALL [\游戏登陆\封号系统.txt] @封号分类
+DELAYGOTO 1500 @先天A9
+#ELSEACT
+DELAYGOTO 1500 @先天A9
+BREAK
+
+
+[@先天A9]
+#IF
+equal T2 先天之体lv8
+CHECKITEM 洗髓丹 90
+#ACT
+TAKE 洗髓丹 90
+CONFERTITLE 先天之体lv9
+MOV T2 先天之体lv9
+MOV U0 9
+DEPRIVETITLE 先天之体lv8
+MESSAGEBOX 恭喜你炼成先天之体lv9成功！！
+GuildNoticeMsg 5 255 恭喜[<$USERNAME>]成功炼成[先天之体lv9]
+#CALL [\游戏登陆\封号系统.txt] @封号分类
+DELAYGOTO 1500 @先天A10
+#ELSEACT
+DELAYGOTO 1500 @先天A10
+BREAK
+
+
+[@先天A10]
+#IF
+equal T2 先天之体lv9
+CHECKITEM 洗髓丹 99
+#ACT
+TAKE 洗髓丹 99
+CONFERTITLE 先天之体lv10
+MOV T2 先天之体lv10
+MOV U0 10
+DEPRIVETITLE 先天之体lv9
+MESSAGEBOX 恭喜你炼成先天之体lv10成功！！
+GuildNoticeMsg 5 255 恭喜[<$USERNAME>]成功炼成[先天之体lv10]
+#CALL [\游戏登陆\封号系统.txt] @封号分类
+DELAYGOTO 1500 @血龙A1
+#ELSEACT
+DELAYGOTO 1500 @血龙A1
+BREAK
+
+[@血龙A1]
+#IF
+equal T3 
+CHECKITEM 血龙魄珠 10
+#ACT
+TAKE 血龙魄珠 10
+CONFERTITLE 血龙之体lv1
+MOV T3 血龙之体lv1
+MOV U1 1
+MESSAGEBOX 恭喜你炼成血龙之体lv1成功！！
+GuildNoticeMsg 5 255 恭喜[<$USERNAME>]成功炼成[血龙之体lv1]
+#CALL [\游戏登陆\封号系统.txt] @封号分类
+DELAYGOTO 1500 @血龙A2
+#ELSEACT
+DELAYGOTO 1500 @血龙A2
+BREAK
+
+[@血龙A2]
+#IF
+equal T3 血龙之体lv1
+CHECKITEM 血龙魄珠 20
+#ACT
+TAKE 血龙魄珠 20
+CONFERTITLE 血龙之体lv2
+MOV T3 血龙之体lv2
+MOV U1 2
+DEPRIVETITLE 血龙之体lv1
+MESSAGEBOX 恭喜你炼成血龙之体lv2成功！！
+GuildNoticeMsg 5 255 恭喜[<$USERNAME>]成功炼成[血龙之体lv2]
+#CALL [\游戏登陆\封号系统.txt] @封号分类
+DELAYGOTO 1500 @血龙A3
+#ELSEACT
+DELAYGOTO 1500 @血龙A3
+BREAK
+
+[@血龙A3]
+#IF
+equal T3 血龙之体lv2
+CHECKITEM 血龙魄珠 30
+#ACT
+TAKE 血龙魄珠 30
+CONFERTITLE 血龙之体lv3
+MOV T3 血龙之体lv3
+MOV U1 3
+DEPRIVETITLE 血龙之体lv2
+MESSAGEBOX 恭喜你炼成血龙之体lv3成功！！
+GuildNoticeMsg 5 255 恭喜[<$USERNAME>]成功炼成[血龙之体lv3]
+#CALL [\游戏登陆\封号系统.txt] @封号分类
+DELAYGOTO 1500 @血龙A4
+#ELSEACT
+DELAYGOTO 1500 @血龙A4
+BREAK
+
+[@血龙A4]
+#IF
+equal T3 血龙之体lv3
+CHECKITEM 血龙魄珠 40
+#ACT
+TAKE 血龙魄珠 40
+CONFERTITLE 血龙之体lv4
+MOV T3 血龙之体lv4
+MOV U1 4
+DEPRIVETITLE 血龙之体lv3
+MESSAGEBOX 恭喜你炼成血龙之体lv4成功！！
+GuildNoticeMsg 5 255 恭喜[<$USERNAME>]成功炼成[血龙之体lv4]
+#CALL [\游戏登陆\封号系统.txt] @封号分类
+DELAYGOTO 1500 @血龙A5
+#ELSEACT
+DELAYGOTO 1500 @血龙A5
+BREAK
+
+[@血龙A5]
+#IF
+equal T3 血龙之体lv4
+CHECKITEM 血龙魄珠 50
+#ACT
+TAKE 血龙魄珠 50
+CONFERTITLE 血龙之体lv5
+MOV T3 血龙之体lv5
+MOV U1 5
+DEPRIVETITLE 血龙之体lv4
+MESSAGEBOX 恭喜你炼成血龙之体lv5成功！！
+GuildNoticeMsg 5 255 恭喜[<$USERNAME>]成功炼成[血龙之体lv5]
+#CALL [\游戏登陆\封号系统.txt] @封号分类
+DELAYGOTO 1500 @血龙A6
+#ELSEACT
+DELAYGOTO 1500 @血龙A6
+BREAK
+
+[@血龙A6]
+#IF
+equal T3 血龙之体lv5
+CHECKITEM 血龙魄珠 60
+#ACT
+TAKE 血龙魄珠 60
+CONFERTITLE 血龙之体lv6
+MOV T3 血龙之体lv6
+MOV U1 6
+DEPRIVETITLE 血龙之体lv5
+MESSAGEBOX 恭喜你炼成血龙之体lv6成功！！
+GuildNoticeMsg 5 255 恭喜[<$USERNAME>]成功炼成[血龙之体lv6]
+#CALL [\游戏登陆\封号系统.txt] @封号分类
+DELAYGOTO 1500 @血龙A7
+#ELSEACT
+DELAYGOTO 1500 @血龙A7
+BREAK
+
+[@血龙A7]
+#IF
+equal T3 血龙之体lv6
+CHECKITEM 血龙魄珠 70
+#ACT
+TAKE 血龙魄珠 70
+CONFERTITLE 血龙之体lv7
+MOV T3 血龙之体lv7
+MOV U1 7
+DEPRIVETITLE 血龙之体lv6
+MESSAGEBOX 恭喜你炼成血龙之体lv7成功！！
+GuildNoticeMsg 5 255 恭喜[<$USERNAME>]成功炼成[血龙之体lv7]
+#CALL [\游戏登陆\封号系统.txt] @封号分类
+DELAYGOTO 1500 @血龙A8
+#ELSEACT
+DELAYGOTO 1500 @血龙A8
+BREAK
+
+[@血龙A8]
+#IF
+equal T3 血龙之体lv7
+CHECKITEM 血龙魄珠 80
+#ACT
+TAKE 血龙魄珠 80
+CONFERTITLE 血龙之体lv8
+MOV T3 血龙之体lv8
+MOV U1 8
+DEPRIVETITLE 血龙之体lv7
+MESSAGEBOX 恭喜你炼成血龙之体lv8成功！！
+GuildNoticeMsg 5 255 恭喜[<$USERNAME>]成功炼成[血龙之体lv8]
+#CALL [\游戏登陆\封号系统.txt] @封号分类
+DELAYGOTO 1500 @血龙A9
+#ELSEACT
+DELAYGOTO 1500 @血龙A9
+BREAK
+
+[@血龙A9]
+#IF
+equal T3 血龙之体lv8
+CHECKITEM 血龙魄珠 90
+#ACT
+TAKE 血龙魄珠 90
+CONFERTITLE 血龙之体lv9
+MOV T3 血龙之体lv9
+MOV U1 9
+DEPRIVETITLE 血龙之体lv8
+MESSAGEBOX 恭喜你炼成血龙之体lv9成功！！
+GuildNoticeMsg 5 255 恭喜[<$USERNAME>]成功炼成[血龙之体lv9]
+#CALL [\游戏登陆\封号系统.txt] @封号分类
+DELAYGOTO 1500 @血龙A10
+#ELSEACT
+DELAYGOTO 1500 @血龙A10
+BREAK
+
+[@血龙A10]
+#IF
+equal T3 血龙之体lv9
+CHECKITEM 血龙魄珠 99
+#ACT
+TAKE 血龙魄珠 99
+CONFERTITLE 血龙之体lv10
+MOV T3 血龙之体lv10
+MOV U1 10
+DEPRIVETITLE 血龙之体lv9
+MESSAGEBOX 恭喜你炼成血龙之体lv10成功！！
+GuildNoticeMsg 5 255 恭喜[<$USERNAME>]成功炼成[血龙之体lv10]
+#CALL [\游戏登陆\封号系统.txt] @封号分类
+}

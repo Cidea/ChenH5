@@ -1,0 +1,40 @@
+[@摆摊A]
+{
+#IF
+ISDUMMY
+#ACT
+MOV S$摊位名称
+
+
+#IF
+CheckLevelEx < 110
+#ACT
+BREAK
+
+#IF
+LARGE G360 4
+#ACT
+BREAK
+
+#IF
+ISDUPMODE
+#ACT
+BREAK
+
+#IF
+CHECKMYSHOP
+#ACT
+BREAK
+
+#IF
+ISDUMMY
+#ACT
+GETRANDOMLINETEXT ..\QuestDiary\一号假人\摊位名称.txt <$STR(S$摊位名称)>
+CREATEMYSHOP <$STR(S$摊位名称)>
+SHOPSTALL
+DUMMYSTOP
+INC G360 1
+SetOffTimer 210
+SetOffTimer 211
+BREAK
+}

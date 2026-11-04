@@ -1,0 +1,122 @@
+[@拾取毒符触发]
+{
+
+#IF
+CHECKJOB warrior
+CHECKTEXTLIST ..\QuestDiary\一号假人\假人穿戴\战士佩戴列表.txt <$STR(S$毒符名称)>
+#ACT
+DELAYGOTO 100 @战士替换毒符
+BREAK
+
+#IF
+CHECKJOB wizard
+CHECKTEXTLIST ..\QuestDiary\一号假人\假人穿戴\法师佩戴列表.txt <$STR(S$毒符名称)>
+#ACT
+DELAYGOTO 100 @法师替换毒符
+BREAK
+
+#IF
+CHECKJOB taoist
+CHECKTEXTLIST ..\QuestDiary\一号假人\假人穿戴\道士佩戴列表.txt <$STR(S$毒符名称)>
+#ACT
+DELAYGOTO 100 @道士替换毒符
+BREAK
+;-------------------------------------------------
+[@战士替换毒符]
+#IF
+CHECKUSEITEM 9
+#ACT
+MOV N69 <$DC>
+MOV M69 <$MAXDC>
+MOV S$原始毒符 <$BOOTS>
+AutoTakeOnItem <$STR(S$毒符名称)> 9
+#ELSEACT
+AutoTakeOnItem <$STR(S$毒符名称)> 9
+DELAYGOTO 1 @保存毒符数据
+BREAK
+
+#IF
+LARGE <$MAXDC> M69
+#ACT
+DELAYGOTO 1 @保存毒符数据
+BREAK
+
+#IF
+LARGE <$DC> N69
+#ACT
+DELAYGOTO 1 @保存毒符数据
+BREAK
+
+#ELSEACT
+AutoTakeOnItem <$STR(S$原始毒符)> 9
+
+;-------------------------------------------------
+
+[@法师替换毒符]
+#IF
+CHECKUSEITEM 9
+#ACT
+MOV N69 <$MC>
+MOV M69 <$MAXMC>
+MOV S$原始毒符 <$BOOTS>
+AutoTakeOnItem <$STR(S$毒符名称)> 9
+#ELSEACT
+AutoTakeOnItem <$STR(S$毒符名称)> 9
+DELAYGOTO 1 @保存毒符数据
+BREAK
+
+#IF
+LARGE <$MAXMC> M69
+#ACT
+DELAYGOTO 1 @保存毒符数据
+BREAK
+
+#IF
+LARGE <$MC> N69
+#ACT
+DELAYGOTO 1 @保存毒符数据
+BREAK
+
+#ELSEACT
+AutoTakeOnItem <$STR(S$原始毒符)> 9
+
+;-------------------------------------------------
+
+[@道士替换毒符]
+#IF
+CHECKUSEITEM 9
+#ACT
+MOV N69 <$SC>
+MOV M69 <$MAXSC>
+MOV S$原始毒符 <$BOOTS>
+AutoTakeOnItem <$STR(S$毒符名称)> 9
+#ELSEACT
+AutoTakeOnItem <$STR(S$毒符名称)> 9
+DELAYGOTO 1 @保存毒符数据
+BREAK
+
+#IF
+LARGE <$MAXSC> M69
+#ACT
+DELAYGOTO 1 @保存毒符数据
+BREAK
+
+#IF
+LARGE <$SC> N69
+#ACT
+DELAYGOTO 1 @保存毒符数据
+BREAK
+
+#ELSEACT
+AutoTakeOnItem <$STR(S$原始毒符)> 9
+
+[@保存毒符数据]
+#IF
+ISDUMMY
+#ACT
+GetRandomText ..\QuestDiary\一号假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S69 69
+DelTextList ..\QuestDiary\一号假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S69)>
+AddTextListEx ..\QuestDiary\一号假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt UseItems9=<$BOOTS> 69
+BREAK
+
+}

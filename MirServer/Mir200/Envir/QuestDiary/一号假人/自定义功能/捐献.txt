@@ -1,0 +1,101 @@
+[@捐献1]
+
+
+
+{
+
+#IF
+check [391] 0
+CHECKGAMEGOLD > 19
+#ACT
+inc g449 1
+set [391] 1
+GAMEGOLD - 20
+INC G10 20
+AddTextListEx ..\..\..\..\..\徐州创意\通区捐献\<$STR(A10)>\捐献列表.txt <$USERNAME>
+CONFERTITLE 沙城捐献
+#CALL [\徐州创意\爆率倍数.txt] @爆率叠加
+SENDMOVEMSG 0 249 251 350 1 ≮沙城捐献≯：感谢玩家『<$USERNAME>』为沙城奖池捐献20个元宝！
+GOTO @徐州创意_分区判断
+
+[@徐州创意_分区判断]
+#IF
+CheckContainsText <$SERVERNAME> 全区
+#ACT
+CLEARNAMELIST ..\..\..\..\..\徐州创意\通区捐献\<$STR(A10)>\今日01区.txt
+AddTextListEx ..\..\..\..\..\徐州创意\通区捐献\<$STR(A10)>\今日01区.txt 今日01区:<$STR(G10)> 0
+GOTO @main
+break
+#IF
+CheckContainsText <$SERVERNAME> 新区
+#ACT
+CLEARNAMELIST ..\..\..\..\..\徐州创意\通区捐献\<$STR(A10)>\今日01区.txt
+AddTextListEx ..\..\..\..\..\徐州创意\通区捐献\<$STR(A10)>\今日01区.txt 今日01区:<$STR(G10)> 0
+GOTO @main
+break
+#IF
+CheckContainsText <$SERVERNAME> 首区
+#ACT
+CLEARNAMELIST ..\..\..\..\..\徐州创意\通区捐献\<$STR(A10)>\今日01区.txt
+AddTextListEx ..\..\..\..\..\徐州创意\通区捐献\<$STR(A10)>\今日01区.txt 今日01区:<$STR(G10)> 0
+GOTO @main
+break
+#IF
+CheckContainsText <$SERVERNAME> 01区
+#ACT
+CLEARNAMELIST ..\..\..\..\..\徐州创意\通区捐献\<$STR(A10)>\今日01区.txt
+AddTextListEx ..\..\..\..\..\徐州创意\通区捐献\<$STR(A10)>\今日01区.txt 今日01区:<$STR(G10)> 0
+GOTO @main
+#IF
+CheckContainsText <$SERVERNAME> 02区
+#ACT
+CLEARNAMELIST ..\..\..\..\..\徐州创意\通区捐献\<$STR(A10)>\今日02区.txt
+AddTextListEx ..\..\..\..\..\徐州创意\通区捐献\<$STR(A10)>\今日02区.txt 今日02区:<$STR(G10)> 0
+GOTO @main
+#IF
+CheckContainsText <$SERVERNAME> 03区
+#ACT
+CLEARNAMELIST ..\..\..\..\..\徐州创意\通区捐献\<$STR(A10)>\今日03区.txt
+AddTextListEx ..\..\..\..\..\徐州创意\通区捐献\<$STR(A10)>\今日03区.txt 今日03区:<$STR(G10)> 0
+GOTO @main
+break
+#IF
+CheckContainsText <$SERVERNAME> 04区
+#ACT
+CLEARNAMELIST ..\..\..\..\..\徐州创意\通区捐献\<$STR(A10)>\今日04区.txt
+AddTextListEx ..\..\..\..\..\徐州创意\通区捐献\<$STR(A10)>\今日04区.txt 今日04区:<$STR(G10)> 0
+GOTO @main
+break
+#IF
+CheckContainsText <$SERVERNAME> 05区
+#ACT
+CLEARNAMELIST ..\..\..\..\..\徐州创意\通区捐献\<$STR(A10)>\今日05区.txt
+AddTextListEx ..\..\..\..\..\徐州创意\通区捐献\<$STR(A10)>\今日05区.txt 今日05区:<$STR(G10)> 0
+GOTO @main
+break
+#IF
+CheckContainsText <$SERVERNAME> 06区
+#ACT
+CLEARNAMELIST ..\..\..\..\..\徐州创意\通区捐献\<$STR(A10)>\今日06区.txt
+AddTextListEx ..\..\..\..\..\徐州创意\通区捐献\<$STR(A10)>\今日06区.txt 今日06区:<$STR(G10)> 0
+GOTO @main
+break
+#IF
+CheckContainsText <$SERVERNAME> 07区
+#ACT
+CLEARNAMELIST ..\..\..\..\..\徐州创意\通区捐献\<$STR(A10)>\今日07区.txt
+AddTextListEx ..\..\..\..\..\徐州创意\通区捐献\<$STR(A10)>\今日07区.txt 今日07区:<$STR(G10)> 0
+GOTO @main
+break
+#IF
+CheckContainsText <$SERVERNAME> 08区
+#ACT
+CLEARNAMELIST ..\..\..\..\..\徐州创意\通区捐献\<$STR(A10)>\今日08区.txt
+AddTextListEx ..\..\..\..\..\徐州创意\通区捐献\<$STR(A10)>\今日08区.txt 今日08区:<$STR(G10)> 0
+GOTO @main
+break
+
+
+
+
+}

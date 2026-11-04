@@ -1,0 +1,97 @@
+[@领奖A]
+{
+#IF
+CHECKLEVELEX > 89
+CHECKBAGSIZE  3
+large G25 0
+check [22] 0
+#act
+SET [22] 1
+DEC G25 1
+GIVE 追の避尘
+SENDMSG 1 146 0 恭喜[<$USERNAME>]成功领取了90级升级奖励获得武器“追の避尘”一件！！
+BREAK
+
+#IF
+CHECKLEVELEX > 84
+CHECKBAGSIZE  3
+large G24 0
+check [21] 0
+#act
+SET [21] 1
+DEC G24 1
+GIVE 瑪法の风 1
+SENDMSG 1 146 0 恭喜[<$USERNAME>]成功领取了85级升级奖励获得盔甲“瑪法の风”一件！！
+BREAK
+
+#IF
+CHECKLEVELEX > 84
+CHECKBAGSIZE  3
+gender Woman
+large G24 0
+check [21] 0
+#act
+SET [21] 1
+DEC G24 1
+GIVE 瑪法の云 1
+SENDMSG 1 146 0 恭喜[<$USERNAME>]成功领取了85级升级奖励获得盔甲“瑪法の云”一件！！
+BREAK
+
+#IF
+CHECKLEVELEX > 74
+CHECKBAGSIZE  3
+
+check [027] 0
+check [028] 0
+
+large G23 0
+check [20] 0
+#act
+SET [20] 1
+DEC G23 1
+GIVE 青铜斗笠 1
+AutoTakeOnItem 青铜斗笠 13
+SENDMSG 1 146 0 恭喜[<$USERNAME>]成功领取了75级升级奖励获得“青铜斗笠”！！
+BREAK
+
+#IF
+CHECKLEVELEX > 69
+CHECKBAGSIZE  3
+
+check [027] 0
+check [028] 0
+
+large G22 0
+check [19] 0
+#act
+SET [19] 1
+DEC G22 1
+GIVE 青铜盾牌 1
+AutoTakeOnItem 青铜盾牌 16
+SENDMSG 1 146 0 恭喜[<$USERNAME>]成功领取了70级升级奖励获得“青铜盾牌”！！
+BREAK
+
+#IF
+CHECKLEVELEX > 64
+CHECKBAGSIZE  3
+large G21 0
+check [17] 0
+#act
+SET [17] 1
+DEC G21 1
+GIVE 1000元宝 1
+SENDMSG 1 146 0 恭喜[<$USERNAME>]成功领取了65级升级奖励获得1000元宝x1！！
+BREAK
+
+
+
+
+
+
+
+
+
+
+
+
+}

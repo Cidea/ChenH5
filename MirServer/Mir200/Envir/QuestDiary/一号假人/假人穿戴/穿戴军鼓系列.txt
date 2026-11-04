@@ -1,0 +1,122 @@
+[@拾取军鼓触发]
+{
+
+#IF
+CHECKJOB warrior
+CHECKTEXTLIST ..\QuestDiary\一号假人\假人穿戴\战士佩戴列表.txt <$STR(S$军鼓名称)>
+#ACT
+DELAYGOTO 100 @战士替换军鼓
+BREAK
+
+#IF
+CHECKJOB wizard
+CHECKTEXTLIST ..\QuestDiary\一号假人\假人穿戴\法师佩戴列表.txt <$STR(S$军鼓名称)>
+#ACT
+DELAYGOTO 100 @法师替换军鼓
+BREAK
+
+#IF
+CHECKJOB taoist
+CHECKTEXTLIST ..\QuestDiary\一号假人\假人穿戴\道士佩戴列表.txt <$STR(S$军鼓名称)>
+#ACT
+DELAYGOTO 100 @道士替换军鼓
+BREAK
+;-------------------------------------------------
+[@战士替换军鼓]
+#IF
+CHECKUSEITEM 14
+#ACT
+MOV N73 <$DC>
+MOV M73 <$MAXDC>
+MOV S$原始军鼓 <$BOOTS>
+AutoTakeOnItem <$STR(S$军鼓名称)> 14
+#ELSEACT
+AutoTakeOnItem <$STR(S$军鼓名称)> 14
+DELAYGOTO 1 @保存军鼓数据
+BREAK
+
+#IF
+LARGE <$MAXDC> M73
+#ACT
+DELAYGOTO 1 @保存军鼓数据
+BREAK
+
+#IF
+LARGE <$DC> N73
+#ACT
+DELAYGOTO 1 @保存军鼓数据
+BREAK
+
+#ELSEACT
+AutoTakeOnItem <$STR(S$原始军鼓)> 14
+
+;-------------------------------------------------
+
+[@法师替换军鼓]
+#IF
+CHECKUSEITEM 14
+#ACT
+MOV N73 <$MC>
+MOV M73 <$MAXMC>
+MOV S$原始军鼓 <$BOOTS>
+AutoTakeOnItem <$STR(S$军鼓名称)> 14
+#ELSEACT
+AutoTakeOnItem <$STR(S$军鼓名称)> 14
+DELAYGOTO 1 @保存军鼓数据
+BREAK
+
+#IF
+LARGE <$MAXMC> M73
+#ACT
+DELAYGOTO 1 @保存军鼓数据
+BREAK
+
+#IF
+LARGE <$MC> N73
+#ACT
+DELAYGOTO 1 @保存军鼓数据
+BREAK
+
+#ELSEACT
+AutoTakeOnItem <$STR(S$原始军鼓)> 14
+
+;-------------------------------------------------
+
+[@道士替换军鼓]
+#IF
+CHECKUSEITEM 14
+#ACT
+MOV N73 <$SC>
+MOV M73 <$MAXSC>
+MOV S$原始军鼓 <$BOOTS>
+AutoTakeOnItem <$STR(S$军鼓名称)> 14
+#ELSEACT
+AutoTakeOnItem <$STR(S$军鼓名称)> 14
+DELAYGOTO 1 @保存军鼓数据
+BREAK
+
+#IF
+LARGE <$MAXSC> M73
+#ACT
+DELAYGOTO 1 @保存军鼓数据
+BREAK
+
+#IF
+LARGE <$SC> N73
+#ACT
+DELAYGOTO 1 @保存军鼓数据
+BREAK
+
+#ELSEACT
+AutoTakeOnItem <$STR(S$原始军鼓)> 14
+
+[@保存军鼓数据]
+#IF
+ISDUMMY
+#ACT
+GetRandomText ..\QuestDiary\一号假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S73 73
+DelTextList ..\QuestDiary\一号假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S73)>
+AddTextListEx ..\QuestDiary\一号假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt UseItems2=<$BOOTS> 73
+BREAK
+
+}

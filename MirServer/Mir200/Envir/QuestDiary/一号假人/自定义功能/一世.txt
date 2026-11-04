@@ -1,0 +1,270 @@
+[@一世1]
+{
+
+
+#IF
+CHECKLEVELEX > 64
+CHECKTITLE 一世五行④
+#ACT
+MOV U18 5
+TAKE 一世之土片 500
+DEPRIVETITLE 一世五行④
+CONFERTITLE 一世五行⑤
+ADDSKILL [吸星大法] 3
+
+
+SendCenterMsg 253 0 恭喜玩家：【<$USERNAME>】五行修炼等级+1，属性逆天，如神如魔，横扫千军！~ 1 5
+
+BREAK
+
+
+#IF
+CHECKLEVELEX > 63
+CHECKTITLE 一世五行③
+#ACT
+MOV U18 4
+TAKE 一世之火片 400
+DEPRIVETITLE 一世五行③
+CONFERTITLE 一世五行④
+
+
+SendCenterMsg 253 0 恭喜玩家：【<$USERNAME>】五行修炼等级+1，属性逆天，如神如魔，横扫千军！~ 1 5
+
+BREAK
+
+
+#IF
+CHECKLEVELEX > 62
+CHECKTITLE 一世五行②
+#ACT
+MOV U18 3
+TAKE 一世之水片 300
+DEPRIVETITLE 一世五行②
+CONFERTITLE 一世五行③
+
+
+SendCenterMsg 253 0 恭喜玩家：【<$USERNAME>】五行修炼等级+1，属性逆天，如神如魔，横扫千军！~ 1 5
+
+BREAK
+
+
+#IF
+CHECKTITLE 一世五行①
+CHECKLEVELEX > 61
+#ACT
+MOV U18 2
+TAKE 一世之木片 200
+DEPRIVETITLE 一世五行①
+CONFERTITLE 一世五行②
+
+
+SendCenterMsg 253 0 恭喜玩家：【<$USERNAME>】五行修炼等级+1，属性逆天，如神如魔，横扫千军！~ 1 5
+
+BREAK
+
+
+#if
+CHECKLEVELEX > 60
+#ACT
+MOV U18 1
+TAKE 一世之金片 100
+CONFERTITLE 一世五行①
+
+
+SendCenterMsg 253 0 恭喜玩家：【<$USERNAME>】五行修炼等级+1，属性逆天，如神如魔，横扫千军！~ 1 5
+
+BREAK
+
+
+
+
+
+;---------------------------
+
+
+
+
+#IF
+CHECKLEVELEX > 68
+CHECKTITLE 二世五行④
+checkgamegold > 1599999
+#ACT
+gamegold - 1599999
+MOV U18 10
+TAKE 二世之土片 550
+DEPRIVETITLE 二世五行④
+CONFERTITLE 二世五行⑤
+ADDSKILL [吸星大法lv2] 3
+
+
+SendCenterMsg 253 0 恭喜玩家：【<$USERNAME>】五行修炼等级+1，属性逆天，如神如魔，横扫千军！~ 1 5
+
+BREAK
+
+
+#IF
+CHECKLEVELEX > 67
+CHECKTITLE 二世五行③
+checkgamegold > 1599999
+#ACT
+gamegold - 1599999
+MOV U18 9
+TAKE 二世之火片 450
+DEPRIVETITLE 二世五行③
+CONFERTITLE 二世五行④
+
+
+SendCenterMsg 253 0 恭喜玩家：【<$USERNAME>】五行修炼等级+1，属性逆天，如神如魔，横扫千军！~ 1 5
+
+BREAK
+
+
+#IF
+CHECKLEVELEX > 66
+CHECKTITLE 二世五行②
+checkgamegold > 1599999
+#ACT
+gamegold - 1599999
+MOV U18 8
+TAKE 二世之水片 350
+DEPRIVETITLE 二世五行②
+CONFERTITLE 二世五行③
+
+
+SendCenterMsg 253 0 恭喜玩家：【<$USERNAME>】五行修炼等级+1，属性逆天，如神如魔，横扫千军！~ 1 5
+
+BREAK
+
+
+#IF
+CHECKLEVELEX > 65
+CHECKTITLE 二世五行①
+checkgamegold > 1599999
+#ACT
+gamegold - 1599999
+MOV U18 7
+TAKE 二世之木片 250
+DEPRIVETITLE 二世五行①
+CONFERTITLE 二世五行②
+
+
+SendCenterMsg 253 0 恭喜玩家：【<$USERNAME>】五行修炼等级+1，属性逆天，如神如魔，横扫千军！~ 1 5
+
+BREAK
+
+
+
+#IF
+CHECKLEVELEX > 64
+
+CHECKTITLE 一世五行⑤
+checkgamegold > 1599999
+#ACT
+gamegold - 1599999
+MOV U18 6
+TAKE 二世之金片 150
+CONFERTITLE 二世五行①
+
+
+SendCenterMsg 253 0 恭喜玩家：【<$USERNAME>】五行修炼等级+1，属性逆天，如神如魔，横扫千军！~ 1 5
+
+BREAK
+
+
+;--------------------------------
+
+
+
+#IF
+CHECKLEVELEX > 73
+CHECKTITLE 三世五行④
+checkgamegold > 3599999
+Random 150
+#ACT
+gamegold - 3599999
+MOV U18 15
+TAKE 三世之土片 600
+DEPRIVETITLE 三世五行④
+CONFERTITLE 三世五行⑤
+ADDSKILL [吸星大法lv3] 3
+
+
+SendCenterMsg 253 0 恭喜玩家：【<$USERNAME>】五行修炼等级+1，属性逆天，如神如魔，横扫千军！~ 1 5
+
+BREAK
+
+
+#IF
+CHECKLEVELEX > 72
+CHECKTITLE 三世五行③
+checkgamegold > 3599999
+Random 150
+#ACT
+gamegold - 3599999
+MOV U18 14
+TAKE 三世之火片 500
+DEPRIVETITLE 三世五行③
+CONFERTITLE 三世五行④
+
+
+SendCenterMsg 253 0 恭喜玩家：【<$USERNAME>】五行修炼等级+1，属性逆天，如神如魔，横扫千军！~ 1 5
+
+BREAK
+
+
+#IF
+CHECKLEVELEX > 71
+CHECKTITLE 三世五行②
+checkgamegold > 3599999
+Random 150
+#ACT
+gamegold - 3599999
+MOV U18 13
+TAKE 三世之水片 400
+DEPRIVETITLE 三世五行②
+CONFERTITLE 三世五行③
+
+
+SendCenterMsg 253 0 恭喜玩家：【<$USERNAME>】五行修炼等级+1，属性逆天，如神如魔，横扫千军！~ 1 5
+
+BREAK
+
+
+#IF
+CHECKLEVELEX > 70
+
+CHECKTITLE 三世五行①
+checkgamegold > 3599999
+Random 150
+#ACT
+gamegold - 3599999
+MOV U18 12
+TAKE 三世之木片 300
+DEPRIVETITLE 三世五行①
+CONFERTITLE 三世五行②
+
+
+SendCenterMsg 253 0 恭喜玩家：【<$USERNAME>】五行修炼等级+1，属性逆天，如神如魔，横扫千军！~ 1 5
+
+BREAK
+
+#IF
+CHECKLEVELEX > 69
+CHECKTITLE 二世五行⑤
+checkgamegold > 3599999
+Random 150
+#ACT
+gamegold - 3599999
+MOV U18 11
+TAKE 三世之金片 200
+CONFERTITLE 三世五行①
+
+
+SendCenterMsg 253 0 恭喜玩家：【<$USERNAME>】五行修炼等级+1，属性逆天，如神如魔，横扫千军！~ 1 5
+
+BREAK
+
+
+
+
+}

@@ -1,0 +1,129 @@
+[@拾取武器触发]
+{
+#IF
+CHECKVAR GLOBAL 假人_装备自换 = 开启
+#ACT
+#ELSEACT
+BREAK
+
+#IF
+CHECKJOB warrior
+CHECKTEXTLIST ..\QuestDiary\敏哥假人\假人穿戴\战士佩戴列表.txt <$STR(S$武器名称)>
+#ACT
+DELAYGOTO 500 @战士替换武器
+BREAK
+
+#IF
+CHECKJOB wizard
+CHECKTEXTLIST ..\QuestDiary\敏哥假人\假人穿戴\法师佩戴列表.txt <$STR(S$武器名称)>
+#ACT
+DELAYGOTO 500 @法师替换武器
+BREAK
+
+#IF
+CHECKJOB taoist
+CHECKTEXTLIST ..\QuestDiary\敏哥假人\假人穿戴\道士佩戴列表.txt <$STR(S$武器名称)>
+#ACT
+DELAYGOTO 500 @道士替换武器
+BREAK
+;-------------------------------------------------
+[@战士替换武器]
+#IF
+CHECKUSEITEM 1
+#ACT
+MOV N61 <$DC>
+MOV M61 <$MAXDC>
+MOV S$原始武器 <$WEAPON>
+AutoTakeOnItem <$STR(S$武器名称)> 1
+#ELSEACT
+AutoTakeOnItem <$STR(S$武器名称)> 1
+DELAYGOTO 1 @保存武器数据
+BREAK
+
+#IF
+LARGE <$MAXDC> M61
+#ACT
+DELAYGOTO 1 @保存武器数据
+BREAK
+
+#IF
+LARGE <$DC> N61
+#ACT
+DELAYGOTO 1 @保存武器数据
+BREAK
+
+#ELSEACT
+AutoTakeOnItem <$STR(S$原始武器)> 1
+
+;-------------------------------------------------
+
+[@法师替换武器]
+#IF
+CHECKUSEITEM 1
+#ACT
+MOV N61 <$MC>
+MOV M61 <$MAXMC>
+MOV S$原始武器 <$WEAPON>
+AutoTakeOnItem <$STR(S$武器名称)> 1
+#ELSEACT
+AutoTakeOnItem <$STR(S$武器名称)> 1
+DELAYGOTO 1 @保存武器数据
+BREAK
+
+#IF
+LARGE <$MAXMC> M61
+#ACT
+DELAYGOTO 1 @保存武器数据
+BREAK
+
+#IF
+LARGE <$MC> N61
+#ACT
+DELAYGOTO 1 @保存武器数据
+BREAK
+
+#ELSEACT
+AutoTakeOnItem <$STR(S$原始武器)> 1
+BREAK
+
+;-------------------------------------------------
+
+[@道士替换武器]
+#IF
+CHECKUSEITEM 1
+#ACT
+MOV N61 <$SC>
+MOV M61 <$MAXSC>
+MOV S$原始武器 <$WEAPON>
+AutoTakeOnItem <$STR(S$武器名称)> 1
+#ELSEACT
+AutoTakeOnItem <$STR(S$武器名称)> 1
+DELAYGOTO 1 @保存武器数据
+BREAK
+
+#IF
+LARGE <$MAXSC> M61
+#ACT
+DELAYGOTO 1 @保存武器数据
+BREAK
+
+#IF
+LARGE <$SC> N61
+#ACT
+DELAYGOTO 1 @保存武器数据
+BREAK
+
+#ELSEACT
+AutoTakeOnItem <$STR(S$原始武器)> 1
+BREAK
+
+[@保存武器数据]
+#IF
+ISDUMMY
+#ACT
+GetRandomText ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S61 61
+DelTextList ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S61)>
+AddTextListEx ..\QuestDiary\敏哥假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt UseItems1=<$WEAPON> 61
+BREAK
+
+}

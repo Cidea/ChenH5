@@ -1,0 +1,122 @@
+[@拾取马牌触发]
+{
+
+#IF
+CHECKJOB warrior
+CHECKTEXTLIST ..\QuestDiary\一号假人\假人穿戴\战士佩戴列表.txt <$STR(S$马牌名称)>
+#ACT
+DELAYGOTO 100 @战士替换马牌
+BREAK
+
+#IF
+CHECKJOB wizard
+CHECKTEXTLIST ..\QuestDiary\一号假人\假人穿戴\法师佩戴列表.txt <$STR(S$马牌名称)>
+#ACT
+DELAYGOTO 100 @法师替换马牌
+BREAK
+
+#IF
+CHECKJOB taoist
+CHECKTEXTLIST ..\QuestDiary\一号假人\假人穿戴\道士佩戴列表.txt <$STR(S$马牌名称)>
+#ACT
+DELAYGOTO 100 @道士替换马牌
+BREAK
+;-------------------------------------------------
+[@战士替换马牌]
+#IF
+CHECKUSEITEM 15
+#ACT
+MOV N74 <$DC>
+MOV M74 <$MAXDC>
+MOV S$原始马牌 <$BOOTS>
+AutoTakeOnItem <$STR(S$马牌名称)> 15
+#ELSEACT
+AutoTakeOnItem <$STR(S$马牌名称)> 15
+DELAYGOTO 1 @保存马牌数据
+BREAK
+
+#IF
+LARGE <$MAXDC> M74
+#ACT
+DELAYGOTO 1 @保存马牌数据
+BREAK
+
+#IF
+LARGE <$DC> N74
+#ACT
+DELAYGOTO 1 @保存马牌数据
+BREAK
+
+#ELSEACT
+AutoTakeOnItem <$STR(S$原始马牌)> 15
+
+;-------------------------------------------------
+
+[@法师替换马牌]
+#IF
+CHECKUSEITEM 15
+#ACT
+MOV N74 <$MC>
+MOV M74 <$MAXMC>
+MOV S$原始马牌 <$BOOTS>
+AutoTakeOnItem <$STR(S$马牌名称)> 15
+#ELSEACT
+AutoTakeOnItem <$STR(S$马牌名称)> 15
+DELAYGOTO 1 @保存马牌数据
+BREAK
+
+#IF
+LARGE <$MAXMC> M74
+#ACT
+DELAYGOTO 1 @保存马牌数据
+BREAK
+
+#IF
+LARGE <$MC> N74
+#ACT
+DELAYGOTO 1 @保存马牌数据
+BREAK
+
+#ELSEACT
+AutoTakeOnItem <$STR(S$原始马牌)> 15
+
+;-------------------------------------------------
+
+[@道士替换马牌]
+#IF
+CHECKUSEITEM 15
+#ACT
+MOV N74 <$SC>
+MOV M74 <$MAXSC>
+MOV S$原始马牌 <$BOOTS>
+AutoTakeOnItem <$STR(S$马牌名称)> 15
+#ELSEACT
+AutoTakeOnItem <$STR(S$马牌名称)> 15
+DELAYGOTO 1 @保存马牌数据
+BREAK
+
+#IF
+LARGE <$MAXSC> M74
+#ACT
+DELAYGOTO 1 @保存马牌数据
+BREAK
+
+#IF
+LARGE <$SC> N74
+#ACT
+DELAYGOTO 1 @保存马牌数据
+BREAK
+
+#ELSEACT
+AutoTakeOnItem <$STR(S$原始马牌)> 15
+
+[@保存马牌数据]
+#IF
+ISDUMMY
+#ACT
+GetRandomText ..\QuestDiary\一号假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S74 74
+DelTextList ..\QuestDiary\一号假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S74)>
+AddTextListEx ..\QuestDiary\一号假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt UseItems2=<$BOOTS> 74
+BREAK
+
+}

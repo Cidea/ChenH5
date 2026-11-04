@@ -1,0 +1,465 @@
+[@称号1]
+
+
+{
+
+
+#IF
+CHECKTITLE 小修士
+;checkitem   神土豪碎片 5
+;checkgamegold > 1199999999
+#ACT
+;gamegold - 1200000000
+;take   神土豪碎片 5
+DEPRIVETITLE   小修士
+CONFERTITLE    ☆练气期☆
+SENDMSG 1 {新年快乐：|251:0:1}恭喜玩家{[<$USERNAME>]|253:0:1},{[晋升]|252:0:1}:[☆练气期☆|70:0:1}]爆率称号
+
+
+break
+
+
+#IF
+CHECKTITLE ☆练气期☆
+;checkitem   神土豪碎片 5
+checkgamegold > 99999
+#ACT
+gamegold - 100000
+;take   神土豪碎片 5
+DEPRIVETITLE   ☆练气期☆
+CONFERTITLE    ☆巩基期☆
+SENDMSG 1 {新年快乐：|251:0:1}恭喜玩家{[<$USERNAME>]|253:0:1},{[晋升]|252:0:1}:[☆巩基期☆|70:0:1}]爆率称号
+
+
+break
+
+
+#IF
+CHECKTITLE ☆巩基期☆
+;checkitem   神土豪碎片 5
+checkgamegold > 199999
+#ACT
+gamegold - 200000
+;take   神土豪碎片 5
+DEPRIVETITLE   ☆巩基期☆
+CONFERTITLE    ☆结丹期☆
+SENDMSG 1 {新年快乐：|251:0:1}恭喜玩家{[<$USERNAME>]|253:0:1},{[晋升]|252:0:1}:[☆结丹期☆|70:0:1}]爆率称号
+
+
+break
+
+
+#IF
+CHECKTITLE ☆结丹期☆
+;checkitem   神土豪碎片 5
+checkgamegold > 399999
+#ACT
+gamegold - 400000
+;take   神土豪碎片 5
+DEPRIVETITLE   ☆结丹期☆
+CONFERTITLE    ☆元婴期☆
+SENDMSG 1 {新年快乐：|251:0:1}恭喜玩家{[<$USERNAME>]|253:0:1},{[晋升]|252:0:1}:[☆元婴期☆|70:0:1}]爆率称号
+
+
+break
+
+
+#IF
+CHECKTITLE ☆元婴期☆
+;checkitem   神土豪碎片 5
+checkgamegold > 799999
+#ACT
+gamegold - 800000
+;take   神土豪碎片 5
+DEPRIVETITLE   ☆元婴期☆
+CONFERTITLE    ☆化神期☆
+SENDMSG 1 {新年快乐：|251:0:1}恭喜玩家{[<$USERNAME>]|253:0:1},{[晋升]|252:0:1}:[☆化神期☆|70:0:1}]爆率称号
+
+
+break
+
+
+#IF
+CHECKTITLE ☆化神期☆
+;checkitem   神土豪碎片 5
+checkgamegold > 1199999
+#ACT
+gamegold - 1200000
+;take   神土豪碎片 5
+DEPRIVETITLE   ☆化神期☆
+CONFERTITLE    ☆炼虚期☆
+SENDMSG 1 {新年快乐：|251:0:1}恭喜玩家{[<$USERNAME>]|253:0:1},{[晋升]|252:0:1}:[☆炼虚期☆|70:0:1}]爆率称号
+
+
+break
+
+
+#IF
+CHECKTITLE ☆炼虚期☆
+;checkitem   神土豪碎片 5
+checkgamegold > 1599999
+#ACT
+gamegold - 1600000
+;take   神土豪碎片 5
+DEPRIVETITLE   ☆炼虚期☆
+CONFERTITLE    ☆合体期☆
+SENDMSG 1 {新年快乐：|251:0:1}恭喜玩家{[<$USERNAME>]|253:0:1},{[晋升]|252:0:1}:[☆合体期☆|70:0:1}]爆率称号
+
+
+break
+
+
+#IF
+CHECKTITLE ☆合体期☆
+;checkitem   神土豪碎片 5
+checkgamegold > 1999999
+#ACT
+gamegold - 2000000
+;take   神土豪碎片 5
+DEPRIVETITLE   ☆合体期☆
+CONFERTITLE    ☆大乘期☆
+SENDMSG 1 {新年快乐：|251:0:1}恭喜玩家{[<$USERNAME>]|253:0:1},{[晋升]|252:0:1}:[☆大乘期☆|70:0:1}]爆率称号
+
+
+break
+
+
+#IF
+CHECKTITLE ☆大乘期☆
+;checkitem   神土豪碎片 5
+checkgamegold > 2499999
+#ACT
+gamegold - 2500000
+;take   神土豪碎片 5
+DEPRIVETITLE   ☆大乘期☆
+CONFERTITLE    ☆大罗金仙☆
+SENDMSG 1 {新年快乐：|251:0:1}恭喜玩家{[<$USERNAME>]|253:0:1},{[晋升]|252:0:1}:[☆大罗金仙☆|70:0:1}]爆率称号
+
+
+break
+
+
+#IF
+CHECKTITLE ☆大罗金仙☆
+;checkitem   神土豪碎片 5
+checkgamegold > 2999999
+#ACT
+gamegold - 3000000
+;take   神土豪碎片 5
+DEPRIVETITLE   ☆大罗金仙☆
+CONFERTITLE    ☆九天玄仙☆
+SENDMSG 1 {新年快乐：|251:0:1}恭喜玩家{[<$USERNAME>]|253:0:1},{[晋升]|252:0:1}:[☆九天玄仙☆|70:0:1}]爆率称号
+
+
+break
+
+
+
+
+
+
+
+#IF
+CHECKTITLE ☆九天玄仙☆
+;checkitem   隐世高人卷轴 5
+checkgamegold > 3999999
+#ACT
+gamegold - 4000000
+;take   隐世高人卷轴 5
+DEPRIVETITLE   ☆九天玄仙☆
+CONFERTITLE    ☆隐世高人☆
+SENDMSG 1 {新年快乐：|251:0:1}恭喜玩家{[<$USERNAME>]|253:0:1},{[晋升]|252:0:1}:[☆隐世高人☆|70:0:1}]爆率称号
+
+
+break
+
+
+#IF
+CHECKTITLE ☆隐世高人☆
+;checkitem   春秋至尊卷轴 5
+checkgamegold > 4999999
+#ACT
+gamegold - 5000000
+;take   春秋至尊卷轴 5
+DEPRIVETITLE   ☆隐世高人☆
+CONFERTITLE    ☆春秋至尊☆
+SENDMSG 1 {新年快乐：|251:0:1}恭喜玩家{[<$USERNAME>]|253:0:1},{[晋升]|252:0:1}:[☆春秋至尊☆|70:0:1}]爆率称号
+
+
+break
+
+
+#IF
+CHECKTITLE ☆春秋至尊☆
+;checkitem   乱世豪杰卷轴 5
+checkgamegold > 5999999
+#ACT
+gamegold - 6000000
+;take   乱世豪杰卷轴 5
+DEPRIVETITLE   ☆春秋至尊☆
+CONFERTITLE    ☆乱世豪杰☆
+SENDMSG 1 {新年快乐：|251:0:1}恭喜玩家{[<$USERNAME>]|253:0:1},{[晋升]|252:0:1}:[☆乱世豪杰☆|70:0:1}]爆率称号
+
+
+break
+
+
+#IF
+CHECKTITLE ☆乱世豪杰☆
+;checkitem   叱咤江湖卷轴 5
+checkgamegold > 6999999
+#ACT
+gamegold - 7000000
+;take   叱咤江湖卷轴 5
+DEPRIVETITLE   ☆乱世豪杰☆
+CONFERTITLE    ☆叱咤江湖☆
+SENDMSG 1 {新年快乐：|251:0:1}恭喜玩家{[<$USERNAME>]|253:0:1},{[晋升]|252:0:1}:[☆叱咤江湖☆|70:0:1}]爆率称号
+
+
+break
+
+
+#IF
+CHECKTITLE ☆叱咤江湖☆
+;checkitem   傲视群雄卷轴 5
+checkgamegold > 8999999
+#ACT
+gamegold - 9000000
+;take   傲视群雄卷轴 5
+DEPRIVETITLE   ☆叱咤江湖☆
+CONFERTITLE    ☆傲视群雄☆
+SENDMSG 1 {新年快乐：|251:0:1}恭喜玩家{[<$USERNAME>]|253:0:1},{[晋升]|252:0:1}:[☆傲视群雄☆|70:0:1}]爆率称号
+
+
+break
+
+
+#IF
+CHECKTITLE ☆傲视群雄☆
+;checkitem   剑震江湖卷轴 5
+checkgamegold > 10999999
+#ACT
+gamegold - 11000000
+;take   剑震江湖卷轴 5
+DEPRIVETITLE   ☆傲视群雄☆
+CONFERTITLE    ☆剑震江湖☆
+SENDMSG 1 {新年快乐：|251:0:1}恭喜玩家{[<$USERNAME>]|253:0:1},{[晋升]|252:0:1}:[☆剑震江湖☆|70:0:1}]爆率称号
+
+
+break
+
+
+#IF
+CHECKTITLE ☆剑震江湖☆
+;checkitem   武定江山卷轴 5
+checkgamegold > 12999999
+#ACT
+gamegold - 13000000
+;take   武定江山卷轴 5
+DEPRIVETITLE   ☆剑震江湖☆
+CONFERTITLE    ☆武定江山☆
+SENDMSG 1 {新年快乐：|251:0:1}恭喜玩家{[<$USERNAME>]|253:0:1},{[晋升]|252:0:1}:[☆武定江山☆|70:0:1}]爆率称号
+
+
+break
+
+
+#IF
+CHECKTITLE ☆武定江山☆
+;checkitem   盖世英豪卷轴 5
+checkgamegold > 14999999
+#ACT
+gamegold - 15000000
+;take   盖世英豪卷轴 5
+DEPRIVETITLE   ☆武定江山☆
+CONFERTITLE    ☆盖世英豪☆
+SENDMSG 1 {新年快乐：|251:0:1}恭喜玩家{[<$USERNAME>]|253:0:1},{[晋升]|252:0:1}:[☆盖世英豪☆|70:0:1}]爆率称号
+
+
+break
+
+
+#IF
+CHECKTITLE ☆盖世英豪☆
+;checkitem   无极天罡卷轴 5
+checkgamegold > 17999999
+#ACT
+gamegold - 18000000
+;take   无极天罡卷轴 5
+DEPRIVETITLE   ☆盖世英豪☆
+CONFERTITLE    ☆无极天罡☆
+SENDMSG 1 {新年快乐：|251:0:1}恭喜玩家{[<$USERNAME>]|253:0:1},{[晋升]|252:0:1}:[☆无极天罡☆|70:0:1}]爆率称号
+
+
+break
+
+
+#IF
+CHECKTITLE ☆无极天罡☆
+;checkitem   义薄云天卷轴 5
+checkgamegold > 19999999
+#ACT
+gamegold - 20000000
+;take   义薄云天卷轴 5
+DEPRIVETITLE   ☆无极天罡☆
+CONFERTITLE    ☆义薄云天☆
+SENDMSG 1 {新年快乐：|251:0:1}恭喜玩家{[<$USERNAME>]|253:0:1},{[晋升]|252:0:1}:[☆义薄云天☆|70:0:1}]爆率称号
+
+
+break
+
+
+
+
+#IF
+CHECKTITLE ☆义薄云天☆
+;checkitem   江山如画卷轴 5
+checkgamegold > 21999999
+#ACT
+gamegold - 22000000
+;take   江山如画卷轴 5
+DEPRIVETITLE   ☆义薄云天☆
+CONFERTITLE    ☆江山如画☆
+SENDMSG 1 {新年快乐：|251:0:1}恭喜玩家{[<$USERNAME>]|253:0:1},{[晋升]|252:0:1}:[☆江山如画☆|70:0:1}]爆率称号
+
+
+break
+
+
+#IF
+CHECKTITLE ☆江山如画☆
+;checkitem   雷霆万钧卷轴 5
+checkgamegold > 23999999
+#ACT
+gamegold - 24000000
+;take   雷霆万钧卷轴 5
+DEPRIVETITLE   ☆江山如画☆
+CONFERTITLE    ☆雷霆万钧☆
+SENDMSG 1 {新年快乐：|251:0:1}恭喜玩家{[<$USERNAME>]|253:0:1},{[晋升]|252:0:1}:[☆雷霆万钧☆|70:0:1}]爆率称号
+
+
+break
+
+
+#IF
+CHECKTITLE ☆雷霆万钧☆
+;checkitem   美伦美央卷轴 5
+checkgamegold > 25999999
+#ACT
+gamegold - 26000000
+;take   美伦美央卷轴 5
+DEPRIVETITLE   ☆雷霆万钧☆
+CONFERTITLE    ☆美伦美央☆
+SENDMSG 1 {新年快乐：|251:0:1}恭喜玩家{[<$USERNAME>]|253:0:1},{[晋升]|252:0:1}:[☆美伦美央☆|70:0:1}]爆率称号
+
+
+break
+
+
+#IF
+CHECKTITLE ☆美伦美央☆
+;checkitem   逐鹿中原卷轴 5
+checkgamegold > 27999999
+#ACT
+gamegold - 28000000
+;take   逐鹿中原卷轴 5
+DEPRIVETITLE   ☆美伦美央☆
+CONFERTITLE    ☆逐鹿中原☆
+SENDMSG 1 {新年快乐：|251:0:1}恭喜玩家{[<$USERNAME>]|253:0:1},{[晋升]|252:0:1}:[☆逐鹿中原☆|70:0:1}]爆率称号
+
+
+break
+
+
+#IF
+CHECKTITLE ☆逐鹿中原☆
+;checkitem   浪迹天涯卷轴 5
+checkgamegold > 29999999
+#ACT
+gamegold - 30000000
+;take   浪迹天涯卷轴 5
+DEPRIVETITLE   ☆逐鹿中原☆
+CONFERTITLE    ☆浪迹天涯☆
+SENDMSG 1 {新年快乐：|251:0:1}恭喜玩家{[<$USERNAME>]|253:0:1},{[晋升]|252:0:1}:[☆浪迹天涯☆|70:0:1}]爆率称号
+
+
+break
+
+
+#IF
+CHECKTITLE ☆浪迹天涯☆
+;checkitem   舍我其谁卷轴 5
+checkgamegold > 31999999
+#ACT
+gamegold - 32000000
+;take   舍我其谁卷轴 5
+DEPRIVETITLE   ☆浪迹天涯☆
+CONFERTITLE    ☆舍我其谁☆
+SENDMSG 1 {新年快乐：|251:0:1}恭喜玩家{[<$USERNAME>]|253:0:1},{[晋升]|252:0:1}:[☆舍我其谁☆|70:0:1}]爆率称号
+
+
+break
+
+
+#IF
+CHECKTITLE ☆舍我其谁☆
+;checkitem   群雄逐鹿卷轴 5
+checkgamegold > 33999999
+#ACT
+gamegold - 34000000
+;take   群雄逐鹿卷轴 5
+DEPRIVETITLE   ☆舍我其谁☆
+CONFERTITLE    ☆群雄逐鹿☆
+SENDMSG 1 {新年快乐：|251:0:1}恭喜玩家{[<$USERNAME>]|253:0:1},{[晋升]|252:0:1}:[☆群雄逐鹿☆|70:0:1}]爆率称号
+
+
+break
+
+
+#IF
+CHECKTITLE ☆群雄逐鹿☆
+;checkitem   百鸟朝凤卷轴 5
+checkgamegold > 35999999
+#ACT
+gamegold - 36000000
+;take   百鸟朝凤卷轴 5
+DEPRIVETITLE   ☆群雄逐鹿☆
+CONFERTITLE    ☆百鸟朝凤☆
+SENDMSG 1 {新年快乐：|251:0:1}恭喜玩家{[<$USERNAME>]|253:0:1},{[晋升]|252:0:1}:[☆百鸟朝凤☆|70:0:1}]爆率称号
+
+
+break
+
+
+#IF
+CHECKTITLE ☆百鸟朝凤☆
+;checkitem   横扫千军卷轴 5
+checkgamegold > 37999999
+#ACT
+gamegold - 38000000
+;take   横扫千军卷轴 5
+DEPRIVETITLE   ☆百鸟朝凤☆
+CONFERTITLE    ☆横扫千军☆
+SENDMSG 1 {新年快乐：|251:0:1}恭喜玩家{[<$USERNAME>]|253:0:1},{[晋升]|252:0:1}:[☆横扫千军☆|70:0:1}]爆率称号
+break
+
+
+#IF
+CHECKTITLE ☆横扫千军☆
+;checkitem   风华绝代卷轴 5
+checkgamegold > 39999999
+#ACT
+gamegold - 40000000
+;take   风华绝代卷轴 5
+DEPRIVETITLE   ☆横扫千军☆
+CONFERTITLE    ☆风华绝代☆
+SENDMSG 1 {新年快乐：|251:0:1}恭喜玩家{[<$USERNAME>]|253:0:1},{[晋升]|252:0:1}:[☆风华绝代☆|70:0:1}]爆率称号
+break
+
+
+
+
+
+
+
+}

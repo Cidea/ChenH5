@@ -1,0 +1,17 @@
+;注意：以下脚本进入等级、全服提示、等等都需要根据你的版本自己修改。
+[@假人泡点专用]
+{
+#IF
+ISDUMMY
+CHECKGAMEGOLD < 100000
+#ACT
+GAMEGOLD + 100000
+
+#IF
+CHECKLEVELEX > 0
+#ACT
+MAP <$GLOBAL(假人_泡点地图)>
+SetOnTimer <$GLOBAL(假人_计时器编号)> 1
+SENDMSG 0 25 254 勇士:{「<$USERNAME>」|251:0:1}进入激情泡点。
+CHANGEATTATCKMODE 6
+}

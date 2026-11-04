@@ -1,0 +1,76 @@
+[@开始充值A]
+{
+
+
+#IF
+Random 10
+CHECKLEVELEX > 10
+SMALL G259 6
+check [37] 0
+#ACT
+GAMEGOLD + 210
+GAMEGIRD + 210
+SET [37] 1
+INC G259 1
+SENDMSG 1 ★[%s]:★恭喜玩家<$USERNAME>通过在线充值获得元宝200,如果您也想获得,请赶快充值吧!
+BREAK
+
+#IF
+Random 15
+CHECKLEVELEX > 10
+SMALL G259 8
+check [37] 0
+#ACT
+GAMEGOLD + 160
+GAMEGIRD + 150
+SET [37] 1
+INC G259 1
+SENDMSG 1 ★[%s]:★恭喜玩家<$USERNAME>通过在线充值获得元宝150,如果您也想获得,请赶快充值吧!
+BREAK
+
+
+
+#IF
+Random 10
+CHECKLEVELEX > 10
+SMALL G259 9
+check [37] 0
+#ACT
+GAMEGOLD + 110
+GAMEGIRD + 110
+SET [37] 1
+INC G259 1
+SENDMSG 1 ★[%s]:★恭喜玩家<$USERNAME>通过在线充值获得元宝100,如果您也想获得,请赶快充值吧!
+BREAK
+
+
+
+#IF
+Random 10
+CHECKLEVELEX > 10
+SMALL G259 5
+check [37] 0
+#ACT
+GAMEGOLD + 80
+GAMEGIRD + 80
+SET [37] 1
+INC G259 1
+SENDMSG 1 ★[%s]:★恭喜玩家<$USERNAME>通过在线充值获得元宝80,如果您也想获得,请赶快充值吧!
+BREAK
+
+
+#IF
+Random 5
+CHECKLEVELEX > 10
+SMALL G259 8
+check [37] 0
+#ACT
+GAMEGOLD + 50
+GAMEGIRD + 50
+SET [37] 1
+INC G259 1
+SENDMSG 1 ★[%s]:★恭喜玩家<$USERNAME>通过在线充值获得元宝50,如果您也想获得,请赶快充值吧!
+BREAK
+
+
+}

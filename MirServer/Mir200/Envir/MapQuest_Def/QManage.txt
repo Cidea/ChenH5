@@ -1,0 +1,1325 @@
+[@Startup]
+#ACT
+#CALL [\敏哥假人\假人变量.txt] @假人全局变量
+MOV G11 3
+
+
+
+
+[@Login]
+#IF
+#ACT
+;#############chen取消消息提醒 EXTENDBAGOPENITEMCOUNT = 0
+;#############chen取消消息提醒 SendMsg 6 你已经打开大背包功能！！！！！
+
+#IF
+#ACT
+ShowGodBless 1
+OpenGodBless 0
+OpenGodBless 1
+OpenGodBless 2
+OpenGodBless 3
+OpenGodBless 4
+OpenGodBless 5
+OpenGodBless 6
+OpenGodBless 7
+OpenGodBless 8
+OpenGodBless 9
+OpenGodBless 10
+OpenGodBless 11
+;#############chen取消消息提醒 SendMsg 5 成功开启生肖盒子！！！！！！！！！
+
+
+
+#IF
+CHECKLEVELEX > 0
+#ACT
+#CALL [\游戏登陆\登陆脚本.txt] @登陆设置
+
+#IF
+ISDUMMY
+#ACT
+#CALL [\敏哥假人\假人登录.txt] @登陆配置
+
+
+
+#IF
+HAVEGUILD
+NOT CHECKGUILDLIST ..\QuestDiary\敏哥假人\假人行会\真假综合行会.txt
+#ACT
+ADDGUILDLIST ..\QuestDiary\敏哥假人\假人行会\真假综合行会.txt
+
+
+
+;##########################敏哥假人专用##########################
+;##########################敏哥假人专用##########################
+;##########################敏哥假人专用##########################
+[@OnTimer210]
+#IF
+ISONMAP <$GLOBAL(假人_泡点地图)>
+#ACT
+GOTO @泡点行动控制
+BREAK
+
+#IF
+CHECK [103] 1
+CheckMonMap <$MAP> 20
+CheckRangeMonCount <$MAP> <$X> <$Y> 20 < 1
+#ACT
+MAP <$MAP>
+
+#IF
+RANDOM 10
+CHECK [103] 1
+CheckRangeMonCount <$MAP> <$X> <$Y> 200 < 1
+#ACT
+GoHome
+;-------------安全区随机移动-------------
+#IF
+RANDOM 5
+CheckHumInRange 0 330 268 5
+#ACT
+MOVR P7 322 338
+MOVR P8 261 278
+GotoNow <$STR(P7)> <$STR(P8)>
+
+#IF
+RANDOM 5
+CheckHumInRange 3 330 330 5
+#ACT
+MOVR P7 322 338
+MOVR P8 322 338
+GotoNow <$STR(P7)> <$STR(P8)>
+
+#IF
+RANDOM 5
+CheckHumInRange 4 240 200 5
+#ACT
+MOVR P7 233 247
+MOVR P8 194 208
+GotoNow <$STR(P7)> <$STR(P8)>
+
+#IF
+RANDOM 5
+CheckHumInRange 5 141 335 5
+#ACT
+MOVR P7 134 145
+MOVR P8 331 342
+GotoNow <$STR(P7)> <$STR(P8)>
+
+#IF
+RANDOM 5
+CheckHumInRange 6 125 156 5
+#ACT
+MOVR P7 118 129
+MOVR P8 150 161
+GotoNow <$STR(P7)> <$STR(P8)>
+
+#IF
+RANDOM 5
+CheckHumInRange 11 178 326 5
+#ACT
+MOVR P7 171 182
+MOVR P8 320 331
+GotoNow <$STR(P7)> <$STR(P8)>
+;--------------------------------
+;-------------假人创建行会-------------
+#IF
+RANDOM 50
+NOT HAVEGUILD
+CHECKVAR GLOBAL 假人_自建行会 = 开启
+CHECKLEVEL <$GLOBAL(假人_掌门等级)>
+#ACT
+MAPMOVE 0 347 186
+MOV S16
+GetRandomText ..\QuestDiary\敏哥假人\假人行会\假人专属行会.txt S16 <$GLOBAL(假人_行会数量)>
+DELAYGOTO 100 @假人创建行会
+
+;#IF
+;CheckHumInRange 0 335 267 10 
+;RANDOM <$GLOBAL(假人_充值几率)>
+;CHECKLEVEL <$GLOBAL(假人_自充等级)>
+;CHECKVAR GLOBAL 假人_自充会员 = 开启
+#ACT
+;#CALL [\敏哥假人\假人会员\充值系统.txt] @假人充值
+
+;--------------------------------
+#IF
+INSAFEZONE
+NOT HAVEGUILD
+RANDOM <$GLOBAL(假人_入会几率)>
+CHECKLEVEL <$GLOBAL(假人_入会等级)>
+CHECKVAR GLOBAL 假人_入会开关 = 开启
+#ACT
+GOTO @假人即时入会
+;--------------------------------
+#IF
+CHECKUNDERWAR 沙巴克
+CHECKVAR GLOBAL 假人_攻城开关 = 开启
+CHECKLEVEL <$GLOBAL(假人_攻城等级)>
+#ACT
+GOTO @假人攻沙行会检测
+BREAK
+#ELSEACT
+GOTO @分配随机地图
+
+;======================================
+
+[@假人攻沙行会检测]
+#IF
+CHECK [100] 1
+#ACT
+GOTO @重新启动假人
+
+#IF
+CHECKVAR GLOBAL 假人_攻沙行会 = 允许
+#ACT
+GOTO @假人启动模拟攻城
+BREAK
+
+#IF
+HAVEGUILD
+#ACT
+GOTO @假人启动模拟攻城
+BREAK
+#ELSEACT
+GOTO @分配随机地图
+
+;---------------------
+[@分配随机地图]
+#OR
+CheckItemDura 0 < 10000 0
+CheckItemDura 1 < 10000 0
+CheckItemDura 2 < 3000 0
+#ACT
+ACTREPAIRALL
+;-------------25级以下新手地图-------------
+#IF
+ISONMAP 0
+CHECKLEVELEX < 25
+CHECKVAR GLOBAL 假人_仿真登录 = 开启
+#ACT
+SET [100] 0
+DUMMYSTART
+CHANGEATTATCKMODE 1
+MAP <$GLOBAL(假人_新手地图)>
+SENDMSG 0 250 249 勇士：[%s]进入[<$MapTitle>]练级去了！
+BREAK
+
+;-------------36级以下默认泡点-------------
+#IF
+ISONMAP 3
+CHECKLEVELEX < 36
+CHECKVAR GLOBAL 假人_泡点开关 = 开启
+#ACT
+#CALL [\敏哥假人\假人功能\假人泡点.txt] @假人泡点专用
+BREAK
+
+#IF
+RANDOM 20
+INSAFEZONE
+#ACT
+MOVR P90 12
+DELAYCALL 100 @开始分配地图
+
+[@开始分配地图]
+#IF
+EQUAL P90 0
+CHECKVAR GLOBAL 假人_登录比奇 = 开启
+#ACT
+MAPMOVE 0 288 615
+BREAK
+
+#IF
+EQUAL P90 1
+#ACT
+GOTO @进入打怪地图
+BREAK
+
+#IF
+EQUAL P90 2
+#ACT
+GOTO @进入打怪地图
+BREAK
+
+#IF
+EQUAL P90 3
+CHECKVAR GLOBAL 假人_登录盟重 = 开启
+#ACT
+MAPMOVE 3 330  330
+BREAK
+
+#IF
+EQUAL P90 4
+CHECKVAR GLOBAL 假人_登录封魔 = 开启
+#ACT
+MAPMOVE 4 232  193
+BREAK
+
+#IF
+EQUAL P90 5
+CHECKVAR GLOBAL 假人_登录苍月 = 开启
+#ACT
+MAPMOVE 5 141  335
+BREAK
+
+#IF
+EQUAL P90 6
+CHECKVAR GLOBAL 假人_登录魔龙 = 开启
+#ACT
+MAPMOVE 6 125  156
+BREAK
+
+#IF
+EQUAL P90 7
+CHECKVAR GLOBAL 假人_泡点开关 = 开启
+CHECKLEVELEX < <$GLOBAL(假人_泡点等级)>
+#ACT
+#CALL [\敏哥假人\假人功能\假人泡点.txt] @假人泡点专用
+BREAK
+
+#IF
+EQUAL P90 8
+#ACT
+GOTO @进入打怪地图
+BREAK
+
+#IF
+EQUAL P90 9
+#ACT
+GOTO @进入打怪地图
+BREAK
+
+#IF
+EQUAL P90 10
+#ACT
+GOTO @进入打怪地图
+BREAK
+
+#IF
+EQUAL P90 11
+CHECKVAR GLOBAL 假人_登录白日 = 开启
+#ACT
+MAPMOVE 11 170  319
+BREAK
+
+[@进入打怪地图]
+#IF
+INSAFEZONE
+CHECKVAR GLOBAL 假人_随机杀怪 = 开启
+#ACT
+SET [100] 0
+DUMMYSTART
+MOVR M93 10 30
+GOTO @按等级分配打怪地图
+BREAK
+
+[@按等级分配打怪地图]
+#IF
+CHECKLEVEL <$GLOBAL(假人_TJDTCSLV)>
+#ACT
+MOVR M91 1 5
+GOTO @按等级随机选择地图
+BREAK
+
+#IF
+CHECKLEVEL <$GLOBAL(假人_GJDTCSLV)>
+#ACT
+MOVR M91 1 4
+GOTO @按等级随机选择地图
+BREAK
+
+#IF
+CHECKLEVEL <$GLOBAL(假人_ZJDTCSLV)>
+#ACT
+MOVR M91 1 3
+GOTO @按等级随机选择地图
+BREAK
+
+#IF
+CHECKLEVEL <$GLOBAL(假人_CJDTCSLV)>
+#ACT
+MOVR M91 1 2
+GOTO @按等级随机选择地图
+BREAK
+
+[@按等级随机选择地图]
+;------------------------随机更改模式------------------------
+#IF
+CHECKLEVELEX < 35
+#ACT
+CHANGEATTATCKMODE 1
+
+#IF
+RANDOM 2
+CHECKLEVELEX > 35
+#ACT
+CHANGEATTATCKMODE 6
+
+#IF
+RANDOM 3
+CHECKLEVELEX > 35
+#ACT
+CHANGEATTATCKMODE 1
+
+#IF
+RANDOM 5
+CHECKLEVELEX > 35
+#ACT
+CHANGEATTATCKMODE 0
+;------------------------正式地图传送------------------------
+
+#IF
+EQUAL M91 1
+#ACT
+#CALL [\敏哥假人\假人地图\打怪地图_初级.txt] @初级地图脚本
+BREAK
+
+
+
+#IF
+EQUAL M91 2
+#ACT
+#CALL [\敏哥假人\假人地图\打怪地图_中级.txt] @中级地图脚本
+BREAK
+
+
+
+#IF
+EQUAL M91 3
+#ACT
+#CALL [\敏哥假人\假人地图\打怪地图_高级.txt] @高级地图脚本
+BREAK
+
+
+;##################（假人辅助功能）###################
+
+[@OnTimer211]
+#IF
+INSAFEZONE
+CHECK [103] 1
+#ACT
+BREAKTIMERECALL
+SET [103] 0
+
+#IF
+ISDUPMODE 1
+ISONMAP <$GLOBAL(假人_泡点地图>
+#ACT
+MOV P8 <$Y>
+INC P8 2
+MOV P7 <$X>
+GotoNow <$STR(P7)> <$STR(P8)>
+SET [100] 0
+DUMMYSTART
+CHANGEATTATCKMODE 0
+
+#IF
+CHECK [100] 0
+CheckHumInRange <$GLOBAL(假人_泡点地图)> <$GLOBAL(假人_抢水坐标X1)> <$GLOBAL(假人_抢水坐标Y1)> <$GLOBAL(假人_抢水点范围)>
+#ACT
+SET [100] 1
+DUMMYSTOP
+SENDMSG 0 58 223 勇士：【%s】占领了泡点地图①号抢水点
+#IF
+CHECK [100] 0
+CheckHumInRange <$GLOBAL(假人_泡点地图)> <$GLOBAL(假人_抢水坐标X2)> <$GLOBAL(假人_抢水坐标Y2)> <$GLOBAL(假人_抢水点范围)>
+#ACT
+SET [100] 1
+DUMMYSTOP
+SENDMSG 0 58 223 勇士：【%s】占领了泡点地图②号抢水点
+
+;-------------假人读取所在城市-------------
+#IF
+INSAFEZONE
+NOT ISONMAP <$GLOBAL(假人_复活城市)>
+#ACT
+CALCVAR HUMAN 假人_复活城市 = <$MAP>
+SAVEVAR HUMAN 假人_复活城市 ..\QuestDiary\敏哥假人\假人数据\个人数据Save.txt
+
+;-------------假人回城清除红名-------------
+#IF
+CHECKPKPOINTEX > 199
+#ACT
+MAPMOVE 3 333 333
+CHANGEPKPOINT - 100
+SET [100] 1
+DUMMYSTOP
+;-------------假人HP值不足回城-------------
+#IF
+CHECK [101] 0
+SMALL <$HP> <$STR(U40)>
+ISONMAP <$GLOBAL(假人_泡点地图)>
+#ACT
+GOTO @假人传送土城
+HUMANHP + <$STR(U40)>
+HUMANMP + <$STR(U40)>
+HUMANHP + 100
+
+#IF
+CHECK [101] 0
+NOT INSAFEZONE
+SMALL <$HP> <$STR(U40)>
+#ACT
+GoHome
+HUMANHP + <$STR(U40)>
+HUMANMP + <$STR(U40)>
+HUMANHP + 100
+;-------------假人在安全区开挂机-------------
+#IF
+RANDOM 5
+INSAFEZONE
+CHECK [100] 0
+ISONMAP <$GLOBAL(假人_泡点地图)>
+#ACT
+SET [100] 1
+DUMMYSTOP
+
+#IF
+RANDOM 20
+INSAFEZONE
+CHECK [100] 0
+#ACT
+SET [100] 1
+DUMMYSTOP
+;-------------假人在线回收装备-------------
+#IF
+CHECKVAR GLOBAL 假人_在线回收 = 开启
+NOT CHECKBAGSIZE <$GLOBAL(假人_回收频率)>
+#ACT
+SET [100] 1
+DUMMYSTOP
+MAPMOVE 3 330 330
+GotoNow 325 336
+#CALL [\敏哥假人\假人功能\假人回收.txt] @回收装备
+;-------------假人在线随机喊话-------------
+;#IF
+;CHECKVAR GLOBAL 假人_随机喊话 = 开启
+;CHECKLEVEL <$GLOBAL(假人_喊话等级)>
+;RANDOM <$GLOBAL(假人_喊话几率)>
+;#ACT
+;GOTO @假人说话
+;-------------假人在线追踪真人-------------
+;#IF
+;CHECK [101] 0
+;CHECKLEVEL 19
+;CheckMonMap <$GLOBAL(假人_追杀地点)> 1
+;CHECKVAR GLOBAL 假人_追杀真人 = 开启
+;RANDOM <$GLOBAL(假人_追杀几率)>
+;#ACT
+;GOTO @假人开始追杀
+
+#IF
+RANDOM 35
+CHECK [102] 1
+CHECKRANGEMONCOUNTEX <$MAP> <$X> <$Y> 20 < 1
+#ACT
+SET [102] 0
+GoHome
+
+;-------------------城市地图活动范围控制-------------
+#IF
+RANDOM 10
+ISONMAP 0
+CHECKLEVEL 35
+NOT CheckHumInRange 0 330 268 50
+CHECKVAR GLOBAL 假人_攻城开关 = 关闭
+#ACT
+MOVR P7 322 338
+MOVR P8 261 278
+MAPMOVE 0 <$STR(P7)> <$STR(P8)>
+BREAK
+
+#IF
+ISONMAP 3
+NOT CheckHumInRange 3 330 330 30
+CHECKVAR GLOBAL 假人_攻城开关 = 关闭
+#ACT
+MOVR P7 322 338
+MOVR P8 322 338
+MAPMOVE 3 <$STR(P7)> <$STR(P8)>
+BREAK
+
+#IF
+ISONMAP 3
+RANDOM 10
+NOT CheckHumInRange 3 330 330 25
+CHECKVAR GLOBAL 假人_攻城开关 = 关闭
+#ACT
+SET [100] 1
+DUMMYSTOP
+MOVR P7 322 338
+MOVR P8 322 338
+AUTOGOTOXY 3 <$STR(P7)> <$STR(P8)>
+BREAK
+
+#IF
+RANDOM 6
+ISONMAP 4
+NOT CheckHumInRange 4 240 200 30
+CHECKVAR GLOBAL 假人_攻城开关 = 关闭
+#ACT
+MOVR P7 233 247
+MOVR P8 194 208
+MAPMOVE 4 <$STR(P7)> <$STR(P8)>
+BREAK
+
+#IF
+RANDOM 6
+ISONMAP 5
+NOT CheckHumInRange 5 141 335 30
+CHECKVAR GLOBAL 假人_攻城开关 = 关闭
+#ACT
+MOVR P7 134 145
+MOVR P8 331 342
+MAPMOVE 5 <$STR(P7)> <$STR(P8)>
+BREAK
+
+#IF
+RANDOM 6
+ISONMAP 6
+NOT CheckHumInRange 6 125 156 30
+CHECKVAR GLOBAL 假人_攻城开关 = 关闭
+#ACT
+MOVR P7 118 129
+MOVR P8 150 161
+MAPMOVE 6 <$STR(P7)> <$STR(P8)>
+BREAK
+
+#IF
+RANDOM 6
+ISONMAP 11
+NOT CheckHumInRange 11 178 326 30
+CHECKVAR GLOBAL 假人_攻城开关 = 关闭
+#ACT
+MOVR P7 171 182
+MOVR P8 320 331
+MAPMOVE 11 <$STR(P7)> <$STR(P8)>
+BREAK
+
+;##############################################################################
+
+;-------------------假人即时入会-------------
+[@假人即时入会]
+#IF
+ISDUMMY
+RANDOM 5
+NOT HAVEGUILD
+#ACT
+MOV P50 3
+GOTO @假人继续入会
+BREAK
+
+[@假人继续入会]
+#IF
+CHECKVAR GLOBAL 假人_加入真会 = 开启
+#ACT
+GETRANDOMLINETEXT ..\QuestDiary\敏哥假人\假人行会\真假综合行会.txt S11
+#ELSEACT
+GETRANDOMLINETEXT ..\QuestDiary\敏哥假人\假人行会\假人专属行会.txt S11
+
+#IF
+ISDUMMY
+LARGE P50 0
+CHECKTEXTLIST ..\QuestDiary\敏哥假人\假人行会\假人过滤行会.txt <$STR(S11)>
+#ACT
+DEC P50 1
+DELAYGOTO 10 @假人继续入会
+#ELSEACT
+ADDGUILDMEMBER <$STR(S11)>
+CHANGEATTATCKMODE 5
+
+;----------------假人退出行会------------
+[@假人退出行会]
+#IF
+ISDUMMY
+HAVEGUILD
+#ACT
+DelGuildMember <$GLOBAL(假人_离开行会)> <$USERNAME>
+BREAK
+;===============假人回程==============
+[@假人传送土城]
+#IF
+ISDUMMY
+#ACT
+MOVR P7 322 338
+MOVR P8 322 338
+MAPMOVE 3 <$STR(P7)> <$STR(P8)>
+BREAK
+
+[@假人_LY_土城]
+#IF
+ISDUMMY
+ISONMAP <$GLOBAL(假人_来源地图)>
+#ACT
+MOVR P7 322 338
+MOVR P8 322 338
+MAPMOVE 3 <$STR(P7)> <$STR(P8)>
+BREAK
+
+[@假人_MB_土城]
+#IF
+ISDUMMY
+ISONMAP <$GLOBAL(假人_目标地图)>
+#ACT
+MOVR P7 322 338
+MOVR P8 322 338
+MAPMOVE 3 <$STR(P7)> <$STR(P8)>
+BREAK
+
+[@假人传送比奇]
+#IF
+ISDUMMY
+#ACT
+MOVR P7 322 338
+MOVR P8 261 278
+MAPMOVE 0 <$STR(P7)> <$STR(P8)>
+BREAK
+
+[@假人_LY_比奇]
+#IF
+ISDUMMY
+ISONMAP <$GLOBAL(假人_来源地图)>
+#ACT
+MOVR P7 322 338
+MOVR P8 261 278
+MAPMOVE 0 <$STR(P7)> <$STR(P8)>
+BREAK
+
+[@假人_MB_比奇]
+#IF
+ISDUMMY
+ISONMAP <$GLOBAL(假人_目标地图)>
+#ACT
+MOVR P7 322 338
+MOVR P8 261 278
+MAPMOVE 0 <$STR(P7)> <$STR(P8)>
+BREAK
+
+[@假人传送白日]
+#IF
+ISDUMMY
+#ACT
+MOVR P7 171 182
+MOVR P8 320 331
+MAPMOVE 11 <$STR(P7)> <$STR(P8)>
+BREAK
+
+[@假人_LY_白日]
+#IF
+ISDUMMY
+ISONMAP <$GLOBAL(假人_来源地图)>
+#ACT
+MOVR P7 171 182
+MOVR P8 320 331
+MAPMOVE 11 <$STR(P7)> <$STR(P8)>
+BREAK
+
+[@假人_MB_白日]
+#IF
+ISDUMMY
+ISONMAP <$GLOBAL(假人_目标地图)>
+#ACT
+MOVR P7 171 182
+MOVR P8 320 331
+MAPMOVE 11 <$STR(P7)> <$STR(P8)>
+BREAK
+
+[@假人传送苍月]
+#IF
+ISDUMMY
+#ACT
+MOVR P7 134 145
+MOVR P8 331 342
+MAPMOVE 5 <$STR(P7)> <$STR(P8)>
+BREAK
+
+[@假人_LY_苍月]
+#IF
+ISDUMMY
+ISONMAP <$GLOBAL(假人_来源地图)>
+#ACT
+MOVR P7 134 145
+MOVR P8 331 342
+MAPMOVE 5 <$STR(P7)> <$STR(P8)>
+BREAK
+
+[@假人_MB_苍月]
+#IF
+ISDUMMY
+ISONMAP <$GLOBAL(假人_目标地图)>
+#ACT
+MOVR P7 134 145
+MOVR P8 331 342
+MAPMOVE 5 <$STR(P7)> <$STR(P8)>
+BREAK
+
+[@假人传送封魔]
+#IF
+ISDUMMY
+#ACT
+MOVR P7 233 247
+MOVR P8 194 208
+MAPMOVE 4 <$STR(P7)> <$STR(P8)>
+BREAK
+
+[@假人_LY_封魔]
+#IF
+ISDUMMY
+ISONMAP <$GLOBAL(假人_来源地图)>
+#ACT
+MOVR P7 233 247
+MOVR P8 194 208
+MAPMOVE 4 <$STR(P7)> <$STR(P8)>
+BREAK
+
+[@假人_MB_封魔]
+#IF
+ISDUMMY
+ISONMAP <$GLOBAL(假人_目标地图)>
+#ACT
+MOVR P7 233 247
+MOVR P8 194 208
+MAPMOVE 4 <$STR(P7)> <$STR(P8)>
+BREAK
+
+[@假人传送魔龙]
+#IF
+ISDUMMY
+#ACT
+MOVR P7 118 129
+MOVR P8 150 161
+MAPMOVE 6 <$STR(P7)> <$STR(P8)>
+BREAK
+
+[@假人_LY_魔龙]
+#IF
+ISDUMMY
+ISONMAP <$GLOBAL(假人_来源地图)>
+#ACT
+MOVR P7 118 129
+MOVR P8 150 161
+MAPMOVE 6 <$STR(P7)> <$STR(P8)>
+BREAK
+
+[@假人_MB_魔龙]
+#IF
+ISDUMMY
+ISONMAP <$GLOBAL(假人_目标地图)>
+#ACT
+MOVR P7 118 129
+MOVR P8 150 161
+MAPMOVE 6 <$STR(P7)> <$STR(P8)>
+BREAK
+
+;-----------------假人转移--------
+[@假人转移至目标ZC]
+#IF
+ISDUMMY
+CHECKVAR GLOBAL 假人_目标范围 > 0
+#ACT
+MOV P81 <$GLOBAL(假人_目标坐标X)>
+MOV P82 <$GLOBAL(假人_目标坐标Y)>
+INC P81 <$GLOBAL(假人_目标范围)>
+INC P82 <$GLOBAL(假人_目标范围)>
+MUL P83 <$GLOBAL(假人_目标范围)> 2
+MOVR P84 <$STR(P83)>
+DEC P81 <$STR(P84)>
+MOVR P84 <$STR(P83)>
+DEC P82 <$STR(P84)>
+
+#IF
+ISDUMMY
+CHECK [100] 1
+#ACT
+MOVR P85 100 2000
+DELAYGOTO <$STR(P85)> @重新启动假人
+
+#IF
+ISDUMMY
+CHECKVAR GLOBAL 假人_来源地图 = *
+CHECKVAR GLOBAL 假人_目标范围 = 0
+#ACT
+MAP <$GLOBAL(假人_目标地图)>
+BREAK
+
+#IF
+ISDUMMY
+CHECKVAR GLOBAL 假人_来源地图 = *
+CHECKVAR GLOBAL 假人_目标范围 > 0
+#ACT
+MAPMOVE <$GLOBAL(假人_目标地图)> <$STR(P81)> <$STR(P82)>
+BREAK
+
+#IF
+ISDUMMY
+ISONMAP <$GLOBAL(假人_来源地图)>
+CHECKVAR GLOBAL 假人_目标范围 = 0
+#ACT
+MAP <$GLOBAL(假人_目标地图)>
+BREAK
+
+#IF
+ISDUMMY
+ISONMAP <$GLOBAL(假人_来源地图)>
+CHECKVAR GLOBAL 假人_目标范围 > 0
+#ACT
+MAPMOVE <$GLOBAL(假人_目标地图)> <$STR(P81)> <$STR(P82)>
+BREAK
+
+[@假人转移至目标GJ]
+#IF
+ISDUMMY
+CHECKVAR GLOBAL 假人_目标范围 > 0
+#ACT
+MOV P81 <$GLOBAL(假人_目标坐标X)>
+MOV P82 <$GLOBAL(假人_目标坐标Y)>
+INC P81 <$GLOBAL(假人_目标范围)>
+INC P82 <$GLOBAL(假人_目标范围)>
+MUL P83 <$GLOBAL(假人_目标范围)> 2
+MOVR P84 <$STR(P83)>
+DEC P81 <$STR(P84)>
+MOVR P84 <$STR(P83)>
+DEC P82 <$STR(P84)>
+SETOFFTIMER 210
+SETOFFTIMER 211
+DUMMYSTOP
+SET [100] 1
+
+#IF
+ISDUMMY
+CHECKVAR GLOBAL 假人_来源地图 = *
+CHECKVAR GLOBAL 假人_目标范围 = 0
+#ACT
+MAP <$GLOBAL(假人_目标地图)>
+BREAK
+
+#IF
+ISDUMMY
+CHECKVAR GLOBAL 假人_目标范围 > 0
+CHECKVAR GLOBAL 假人_来源地图 = *
+#ACT
+MAPMOVE <$GLOBAL(假人_目标地图)> <$STR(P81)> <$STR(P82)>
+BREAK
+
+#IF
+ISDUMMY
+ISONMAP <$GLOBAL(假人_来源地图)>
+CHECKVAR GLOBAL 假人_目标范围 = 0
+#ACT
+MAP <$GLOBAL(假人_目标地图)>
+BREAK
+
+#IF
+ISDUMMY
+CHECKVAR GLOBAL 假人_目标范围 > 0
+ISONMAP <$GLOBAL(假人_来源地图)>
+#ACT
+MAPMOVE <$GLOBAL(假人_目标地图)> <$STR(P81)> <$STR(P82)>
+BREAK
+
+;-----------------假人下线--------
+[@假人计时下线]
+#IF
+ISDUMMY
+CHECKVAR GLOBAL 假人_运行时长 > 0
+#ACT
+MOVR M91 500 3000
+DELAYGOTO <$STR(M91)> @假人延迟下线
+BREAK
+
+[@清理假人LY]
+#IF
+ISDUMMY
+CHECKVAR GLOBAL 假人_来源地图 = *
+#ACT
+MOVR M91 500 3000
+DELAYGOTO <$STR(M91)> @假人延迟下线
+BREAK
+#IF
+ISDUMMY
+ISONMAP <$GLOBAL(假人_来源地图)>
+#ACT
+MOVR M91 500 3000
+DELAYGOTO <$STR(M91)> @假人延迟下线
+BREAK
+
+[@清理假人MB]
+#IF
+ISDUMMY
+ISONMAP <$GLOBAL(假人_目标地图)>
+#ACT
+MOVR M91 500 3000
+DELAYGOTO <$STR(M91)> @假人延迟下线
+BREAK
+
+[@有会假人下线]
+#IF
+ISDUMMY
+HAVEGUILD
+#ACT
+MOVR M91 500 3000
+DELAYGOTO <$STR(M91)> @假人延迟下线
+BREAK
+
+[@无会假人下线]
+#IF
+ISDUMMY
+NOT HAVEGUILD
+#ACT
+MOVR M91 500 3000
+DELAYGOTO <$STR(M91)> @假人延迟下线
+BREAK
+
+[@假人延迟下线]
+#IF
+EQUAL I90 1
+#ACT
+MOV I91 0
+#IF
+ISDUMMY
+#ACT
+DEC I90 1
+KICK
+
+;============行动控制===============
+[@暂停假人_LY]
+#IF
+ISDUMMY
+CHECKVAR GLOBAL 假人_来源地图 = *
+#ACT
+SET [100] 1
+SETOFFTIMER 210
+SETOFFTIMER 211
+DUMMYSTOP
+CLEARDELAYGOTO
+BREAK
+#IF
+ISDUMMY
+ISONMAP <$GLOBAL(假人_来源地图)>
+#ACT
+SET [100] 1
+SETOFFTIMER 210
+SETOFFTIMER 211
+DUMMYSTOP
+CLEARDELAYGOTO
+BREAK
+
+[@暂停假人_MB]
+#IF
+ISDUMMY
+ISONMAP <$GLOBAL(假人_目标地图)>
+#ACT
+SET [100] 1
+SETOFFTIMER 210
+SETOFFTIMER 211
+DUMMYSTOP
+CLEARDELAYGOTO
+BREAK
+
+[@启动假人_LY]
+#IF
+ISDUMMY
+CHECKVAR GLOBAL 假人_来源地图 = *
+#ACT
+MOVR P85 100 2000
+DELAYGOTO <$STR(P85)> @重新启动假人
+BREAK
+#IF
+ISDUMMY
+ISONMAP <$GLOBAL(假人_来源地图)>
+#ACT
+MOVR P85 100 2000
+DELAYGOTO <$STR(P85)> @重新启动假人
+BREAK
+
+[@启动假人_MB]
+#IF
+ISDUMMY
+ISONMAP <$GLOBAL(假人_目标地图)>
+#ACT
+MOVR P85 100 2000
+DELAYGOTO <$STR(P85)> @重新启动假人
+BREAK
+
+[@重新启动假人]
+#IF
+ISDUMMY
+#ACT
+SET [100] 0
+SetOnTimer 210 <$GLOBAL(假人_活动频率)>
+SetOnTimer 211 1
+DUMMYSTART
+BREAK
+
+[@假人改变活跃]
+#IF
+ISDUMMY
+#ACT
+MOVR P91 100 2000
+DELAYGOTO <$STR(P91)> @假人延迟活跃
+
+[@假人延迟活跃]
+#IF
+ISDUMMY
+#ACT
+SetOnTimer 210 <$GLOBAL(假人_活动频率)>
+
+
+[@假人启动模拟攻城]
+#IF
+RANDOM 3
+CHECKVAR GLOBAL 假人_进攻点A = 开启
+NOT CheckHumInRange 3 <$GLOBAL(假人_进攻点AX)> <$GLOBAL(假人_进攻点AY)> 15
+#ACT
+MOV P81 <$GLOBAL(假人_进攻点AX)>
+MOV P82 <$GLOBAL(假人_进攻点AY)>
+INC P81 <$GLOBAL(假人_进攻点AF)>
+INC P82 <$GLOBAL(假人_进攻点AF)>
+MUL P83 <$GLOBAL(假人_进攻点AF)> 2
+MOVR P84 <$STR(P83)>
+DEC P81 <$STR(P84)>
+MOVR P84 <$STR(P83)>
+DEC P82 <$STR(P84)>
+MAPMOVE 3 <$STR(P81)> <$STR(P82)>
+BREAK
+
+#IF
+RANDOM 3
+CHECKVAR GLOBAL 假人_进攻点B = 开启
+NOT CheckHumInRange 3 <$GLOBAL(假人_进攻点BX)> <$GLOBAL(假人_进攻点BY)> 15
+#ACT
+MOV P81 <$GLOBAL(假人_进攻点BX)>
+MOV P82 <$GLOBAL(假人_进攻点BY)>
+INC P81 <$GLOBAL(假人_进攻点BF)>
+INC P82 <$GLOBAL(假人_进攻点BF)>
+MUL P83 <$GLOBAL(假人_进攻点BF)> 2
+MOVR P84 <$STR(P83)>
+DEC P81 <$STR(P84)>
+MOVR P84 <$STR(P83)>
+DEC P82 <$STR(P84)>
+MAPMOVE 3 <$STR(P81)> <$STR(P82)>
+BREAK
+
+#IF
+RANDOM 3
+CHECKVAR GLOBAL 假人_进攻点C = 开启
+NOT CheckHumInRange 3 <$GLOBAL(假人_进攻点CX)> <$GLOBAL(假人_进攻点CY)> 15
+#ACT
+MOV P81 <$GLOBAL(假人_进攻点CX)>
+MOV P82 <$GLOBAL(假人_进攻点CY)>
+INC P81 <$GLOBAL(假人_进攻点CF)>
+INC P82 <$GLOBAL(假人_进攻点CF)>
+MUL P83 <$GLOBAL(假人_进攻点CF)> 2
+MOVR P84 <$STR(P83)>
+DEC P81 <$STR(P84)>
+MOVR P84 <$STR(P83)>
+DEC P82 <$STR(P84)>
+MAPMOVE 3 <$STR(P81)> <$STR(P82)>
+BREAK
+
+#IF
+RANDOM 3
+CHECKVAR GLOBAL 假人_进攻皇宫 = 开启
+NOT ISONMAP <$GLOBAL(假人_沙皇宫ID)>
+#ACT
+MAP <$GLOBAL(假人_沙皇宫ID)>
+BREAK
+
+;============假人说话===============
+;[@假人说话]
+;#IF
+;RANDOM 10
+;#ACT
+;GETRANDOMLINETEXT ..\QuestDiary\敏哥假人\假人发言\公共喊话.txt S18
+;GuildNoticeMsg 0 151 (!)%s:<$STR(S18)> Map
+;BREAK
+;#IF
+;RANDOM 20
+;NOT INSAFEZONE
+;#ACT
+;GETRANDOMLINETEXT ..\QuestDiary\敏哥假人\假人发言\普通发言.txt S18
+;GuildNoticeMsg 0 255 %s:<$STR(S18)> Map
+;BREAK
+;#IF
+;RANDOM 30
+;#ACT
+;GETRANDOMLINETEXT ..\QuestDiary\敏哥假人\假人发言\私聊信息.txt S18
+;GuildNoticeMsg 252 255 %s[Lv<$LEVEL>]=〉<$STR(S18)> Map
+;BREAK
+
+;============假人追杀===============
+[@假人追杀]
+#IF
+ISDUMMY
+#ACT
+BREAK
+#ELSEACT
+MOVR P91 1000 20000
+DELAYGOTO <$STR(P91)> @真人延迟触发
+
+;[@真人延迟触发]
+;#IF
+;NOT INSAFEZONE
+;CHECKVAR GLOBAL 假人_追杀地点 =
+;CHECKLEVEL <$GLOBAL(假人_追杀等级)>
+;NOT CHECKTEXTLIST ..\QuestDiary\敏哥假人\假人地图\禁止追踪地图.txt <$MAP>
+;CheckMonMap <$MAP> 1
+;#ACT
+;CALCVAR GLOBAL 假人_追杀地点 = <$MAP>
+;SAVEVAR GLOBAL 假人_追杀地点 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+;BREAK
+
+;[@假人开始追杀]
+;#IF
+;CHECKHUM <$GLOBAL(假人_追杀地点)> 1
+;NOT ISONMAP <$GLOBAL(假人_追杀地点)>
+;CHECKMAPDUMMYCOUNT <$GLOBAL(假人_追杀地点)> < 20
+;#ACT
+;SET [102] 1
+;MAP <$GLOBAL(假人_追杀地点)>
+;BREAK
+;============假人自建行会===============
+[@假人创建行会]
+#IF
+EQUAL S16 
+#ACT
+GotoNow 27 34
+GETRANDOMLINETEXT ..\QuestDiary\敏哥假人\假人行会\假人自建行会.txt S17
+AddGuild <$STR(S17)> <$USERNAME>
+#ELSEACT
+CALCVAR GLOBAL 假人_自建行会 = 关闭
+SAVEVAR GLOBAL 假人_自建行会 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+BREAK
+#IF
+HAVEGUILD
+#ACT
+ADDGUILDLIST ..\QuestDiary\敏哥假人\假人行会\假人专属行会.txt
+ADDGUILDLIST ..\QuestDiary\敏哥假人\假人行会\真假综合行会.txt
+DELAYGOTO 3000 @假人传送土城
+#ELSEACT
+DELAYGOTO 3000 @假人传送土城
+;============泡点行动控制===============
+;[@泡点行动控制]
+
+;#IF
+;RANDOM 100
+;#ACT
+;GOTO @假人传送土城
+;BREAK
+
+;#IF
+;RANDOM 50
+;INSAFEZONE
+;#ACT
+;SET [100] 0
+;DUMMYSTART
+;MOV P8 <$Y>
+;INC P8 10
+;MOV P7 <$X>
+;GotoNow <$STR(P7)> <$STR(P8)>
+
+;#IF
+;RANDOM 3
+;INSAFEZONE
+;CheckMonMap <$MAP> 1
+;#ACT
+;MOV P8 <$Y>
+;INC P8 10
+;MOV P7 <$X>
+;GotoNow <$STR(P7)> <$STR(P8)>
+
+
+
+
+
+#IF
+RANDOM 5
+NOT INSAFEZONE
+#ACT
+GOTO @假人检测抢水
+
+[@假人检测抢水]
+#IF
+CHECKVAR GLOBAL 假人_抢水点范围 > 0
+#ACT
+MOV P81 <$GLOBAL(假人_抢水坐标X1)>
+MOV P82 <$GLOBAL(假人_抢水坐标Y1)>
+INC P81 <$GLOBAL(假人_抢水点范围)>
+INC P82 <$GLOBAL(假人_抢水点范围)>
+MUL P83 <$GLOBAL(假人_抢水点范围)> 2
+MOVR P84 <$STR(P83)>
+DEC P81 <$STR(P84)>
+MOVR P84 <$STR(P83)>
+DEC P82 <$STR(P84)>
+;---------------------------------------
+MOV P85 <$GLOBAL(假人_抢水坐标X2)>
+MOV P86 <$GLOBAL(假人_抢水坐标Y2)>
+INC P85 <$GLOBAL(假人_抢水点范围)>
+INC P86 <$GLOBAL(假人_抢水点范围)>
+MUL P87 <$GLOBAL(假人_抢水点范围)> 2
+MOVR P88 <$STR(P87)>
+DEC P85 <$STR(P88)>
+MOVR P88 <$STR(P87)>
+DEC P86 <$STR(P88)>
+#ELSEACT
+MOV P81 <$GLOBAL(假人_抢水坐标X1)>
+MOV P82 <$GLOBAL(假人_抢水坐标Y1)>
+MOV P85 <$GLOBAL(假人_抢水坐标X2)>
+MOV P86 <$GLOBAL(假人_抢水坐标Y2)>
+;---------------------------------------
+#IF
+CHECKMAPMOVE <$MAP> <$STR(P81)> <$STR(P82)>
+#ACT
+SET [100] 0
+DUMMYSTART
+GotoNow <$STR(P81)> <$STR(P82)>
+BREAK
+
+#IF
+CHECKMAPMOVE <$MAP> <$STR(P85)> <$STR(P86)>
+#ACT
+SET [100] 0
+DUMMYSTART
+GotoNow <$STR(P85)> <$STR(P86)>
+BREAK
+
+#ELSEACT
+CHANGEATTATCKMODE 0
+SET [100] 0
+DUMMYSTART
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#If 
+CHECKLEVELEX < 30
+#Act
+GMEXECUTE 禁言 self 9999999
+SendMsg 5 [提示]:为避免新人恶意捣乱，30级以下禁止发言！
+#ELSEACT
+GMEXECUTE 解除禁言 Self
+
+
+
+
+
+
+
+
+
+

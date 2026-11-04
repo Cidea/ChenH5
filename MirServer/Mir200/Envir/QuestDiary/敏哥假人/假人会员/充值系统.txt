@@ -1,0 +1,84 @@
+;-------------------------------------------------------------
+;注意：根据自己的版本修改加入会员的积分数量，充值全服提示也要修改
+;-------------------------------------------------------------
+[@假人充值]
+{
+;-------元宝小于5千万才充值-------
+#IF
+CHECKGAMEGOLD < 1
+#ACT
+MOV S15
+GetRandomText ..\QuestDiary\敏哥假人\假人会员\会员名单.txt S15 <$GLOBAL(假人_会员名额)>
+#ELSEACT
+GAMEGOLD - 1
+BREAK 
+;-------检测是否有名额-------
+#IF
+EQUAL S15 
+#ACT
+GETRANDOMLINETEXT ..\QuestDiary\敏哥假人\假人会员\充值金额.txt P96
+GOTO @假人充值元宝
+#ELSEACT
+GOTO @会员继续充值
+BREAK 
+
+[@会员继续充值]
+#IF
+CHECKNAMELIST ..\QuestDiary\敏哥假人\假人会员\会员名单.txt
+#ACT
+GETRANDOMLINETEXT ..\QuestDiary\敏哥假人\假人会员\充值金额.txt P96
+GOTO @假人充值元宝
+BREAK 
+#ELSEACT
+MOVR P95 4
+GetRandomText ..\QuestDiary\敏哥假人\假人会员\充值金额.txt P96 P95
+GOTO @假人充值元宝
+
+;===========================
+[@假人充值元宝]
+#IF
+ISDUMMY
+RANDOM 5
+#ACT
+MUL P97 P96 <$GLOBAL(假人_元宝比例)>
+MUL P98 P96 <$GLOBAL(假人_积分比例)>
+GAMEGOLD + <$STR(P97)>
+SENDMSG 1 ★[%s]:玩家<$USERNAME>使用我服推出的在线充值购买功能，获得<$STR(P97)>元宝.如果您也需要充值,请赶紧找元宝充值使者，充值获取吧！！
+CALCVAR HUMAN 假人_消费积分 + <$STR(P98)>
+SAVEVAR HUMAN 假人_消费积分 ..\QuestDiary\敏哥假人\假人数据\消费积分Save.txt
+
+#IF
+CHECKNAMELIST ..\QuestDiary\敏哥假人\假人会员\会员名单.txt
+#ACT
+#CALL [\敏哥假人\假人会员\赞助封号.txt] @假人赞助封号
+
+#IF
+EQUAL S15 
+NOT CHECKNAMELIST ..\QuestDiary\敏哥假人\假人会员\会员名单.txt
+#ACT
+DELAYGOTO 1000 @假人延迟加入会员
+
+[@假人延迟加入会员]
+#IF
+CHECKVAR HUMAN 假人_消费积分 ? 200
+#ACT
+#CALL [\敏哥假人\假人保存身上装备.txt] @读取身上数据
+SENDMSG 0 250 249 恭喜：勇士[%s]加入了会员
+ADDNAMELIST ..\QuestDiary\敏哥假人\假人会员\会员名单.txt
+ADDNAMELIST ..\QuestDiary\敏哥假人\假人数据\假人死亡名单.txt
+DEC I90 1
+INC I93 1
+KICK
+}
+
+
+
+
+
+
+
+
+
+
+
+

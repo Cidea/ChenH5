@@ -1,0 +1,122 @@
+[@拾取盾牌触发]
+{
+
+#IF
+CHECKJOB warrior
+CHECKTEXTLIST ..\QuestDiary\一号假人\假人穿戴\战士佩戴列表.txt <$STR(S$盾牌名称)>
+#ACT
+DELAYGOTO 100 @战士替换盾牌
+BREAK
+
+#IF
+CHECKJOB wizard
+CHECKTEXTLIST ..\QuestDiary\一号假人\假人穿戴\法师佩戴列表.txt <$STR(S$盾牌名称)>
+#ACT
+DELAYGOTO 100 @法师替换盾牌
+BREAK
+
+#IF
+CHECKJOB taoist
+CHECKTEXTLIST ..\QuestDiary\一号假人\假人穿戴\道士佩戴列表.txt <$STR(S$盾牌名称)>
+#ACT
+DELAYGOTO 100 @道士替换盾牌
+BREAK
+;-------------------------------------------------
+[@战士替换盾牌]
+#IF
+CHECKUSEITEM 16
+#ACT
+MOV N76 <$DC>
+MOV M76 <$MAXDC>
+MOV S$原始盾牌 <$BOOTS>
+AutoTakeOnItem <$STR(S$盾牌名称)> 16
+#ELSEACT
+AutoTakeOnItem <$STR(S$盾牌名称)> 16
+DELAYGOTO 1 @保存盾牌数据
+BREAK
+
+#IF
+LARGE <$MAXDC> M76
+#ACT
+DELAYGOTO 1 @保存盾牌数据
+BREAK
+
+#IF
+LARGE <$DC> N76
+#ACT
+DELAYGOTO 1 @保存盾牌数据
+BREAK
+
+#ELSEACT
+AutoTakeOnItem <$STR(S$原始盾牌)> 16
+
+;-------------------------------------------------
+
+[@法师替换盾牌]
+#IF
+CHECKUSEITEM 16
+#ACT
+MOV N76 <$MC>
+MOV M76 <$MAXMC>
+MOV S$原始盾牌 <$BOOTS>
+AutoTakeOnItem <$STR(S$盾牌名称)> 16
+#ELSEACT
+AutoTakeOnItem <$STR(S$盾牌名称)> 16
+DELAYGOTO 1 @保存盾牌数据
+BREAK
+
+#IF
+LARGE <$MAXMC> M76
+#ACT
+DELAYGOTO 1 @保存盾牌数据
+BREAK
+
+#IF
+LARGE <$MC> N76
+#ACT
+DELAYGOTO 1 @保存盾牌数据
+BREAK
+
+#ELSEACT
+AutoTakeOnItem <$STR(S$原始盾牌)> 16
+
+;-------------------------------------------------
+
+[@道士替换盾牌]
+#IF
+CHECKUSEITEM 16
+#ACT
+MOV N76 <$SC>
+MOV M76 <$MAXSC>
+MOV S$原始盾牌 <$BOOTS>
+AutoTakeOnItem <$STR(S$盾牌名称)> 16
+#ELSEACT
+AutoTakeOnItem <$STR(S$盾牌名称)> 16
+DELAYGOTO 1 @保存盾牌数据
+BREAK
+
+#IF
+LARGE <$MAXSC> M76
+#ACT
+DELAYGOTO 1 @保存盾牌数据
+BREAK
+
+#IF
+LARGE <$SC> N76
+#ACT
+DELAYGOTO 1 @保存盾牌数据
+BREAK
+
+#ELSEACT
+AutoTakeOnItem <$STR(S$原始盾牌)> 16
+
+[@保存盾牌数据]
+#IF
+ISDUMMY
+#ACT
+GetRandomText ..\QuestDiary\一号假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S76 76
+DelTextList ..\QuestDiary\一号假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S76)>
+AddTextListEx ..\QuestDiary\一号假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt UseItems16=<$BOOTS> 76
+BREAK
+
+}

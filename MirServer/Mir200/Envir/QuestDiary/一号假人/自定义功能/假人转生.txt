@@ -1,0 +1,106 @@
+[@会员转生A]
+{
+#IF
+CHECKRENEWLEVEL = 0
+CHECKLEVELEX > 54
+CHECKITEM 一级魔石 3
+#ACT
+TAKE 一级魔石 3
+GAMEGOLD - 500
+RENEWLEVEL 1 0 10
+ChangeModeEx 5 65535 10
+ChangeModeEx 6 65535 10
+ChangeModeEx 7 65535 10
+PLAYEFFECT 41 232 40 1 100 0 0 0
+SENDMSG 1 146 0 恭喜[<$USERNAME>]成功进行了第一次转生！
+MOV S2 〖羽化转生Lv.1〗
+#CALL [\游戏登陆\封号系统.txt] @封号分类
+DELAYGOTO 2000 @二转
+BREAK
+
+[@二转]
+#IF
+CHECKRENEWLEVEL = 1
+CHECKLEVELEX > 59
+CHECKITEM 二级魔石 3
+#ACT
+TAKE  二级魔石 3
+GAMEGOLD - 1000
+RENEWLEVEL 1 0 20
+ChangeModeEx 5 65535 20
+ChangeModeEx 6 65535 20
+ChangeModeEx 7 65535 20
+PLAYEFFECT 41 232 40 1 100 0 0 0
+SENDMSG 1 146 0 恭喜[<$USERNAME>]成功进行了第二次转生！
+MOV S2 〖羽化转生Lv.2〗
+#CALL [\游戏登陆\封号系统.txt] @封号分类
+DELAYGOTO 2000 @三转
+BREAK
+
+[@三转]
+#IF
+CHECKRENEWLEVEL = 2
+CHECKLEVELEX > 64
+CHECKITEM 三级魔石 3
+#ACT
+TAKE 三级魔石 3
+GAMEGOLD - 3000
+RENEWLEVEL 1 0 30
+ChangeModeEx 5 65535 30
+ChangeModeEx 6 65535 30
+ChangeModeEx 7 65535 30
+PLAYEFFECT 41 232 40 1 100 0 0 0
+SENDMSG 1 146 0 恭喜[<$USERNAME>]成功进行了第三次转生！
+MOV S2 〖羽化转生Lv.3〗
+#CALL [\游戏登陆\封号系统.txt] @封号分类
+DELAYGOTO 2000 @四转
+BREAK
+
+[@四转]
+#IF
+CHECKRENEWLEVEL = 3
+CHECKLEVELEX > 69
+CHECKITEM 四级魔石 3
+#ACT
+TAKE 四级魔石 3
+GAMEGOLD - 6000
+RENEWLEVEL 1 0 40
+ChangeModeEx 5 65535 50
+ChangeModeEx 6 65535 50
+ChangeModeEx 7 65535 50
+PLAYEFFECT 41 232 40 1 100 0 0 0
+SENDMSG 1 146 0 恭喜[<$USERNAME>]成功进行了第四次转生！
+MOV S2 〖羽化转生Lv.4〗
+#CALL [\游戏登陆\封号系统.txt] @封号分类
+BREAK
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,3913 @@
+[@假人预设]
+{
+#IF
+CHECKTEXTLIST ..\QuestDiary\安歌更新\GM机器码.txt <$MACHINEID>
+#ELSEACT
+MESSAGEBOX 提示：傻狗别乱点,这是GM爸爸专用的功能。
+BREAK
+
+;--------------系统初始数据只读取一次------------------
+#IF
+CHECKVAR GLOBAL 假人_选登录器 =
+#SAY
+\ \
+欢迎使用敏哥独家制作GOM引擎完美智能假人系统。\
+\ \
+请选择你当前使用的登录器类型：原创作者：敏哥  QQ：776118181\
+\ \
+<选择13周年登录器/@13周年>        <选择连击版登录器/@连击版>\
+\ \
+如果选择错误会导致界面错位的现象，可以还原默认配置重新选择。\
+#ACT
+BREAK
+#ELSEACT
+GOTO @基本设置
+
+[@13周年]
+#ACT
+CALCVAR GLOBAL 假人_选登录器 = 13周年
+SAVEVAR GLOBAL 假人_活动频率 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+DELAYGOTO 1 @延迟初始变量
+
+[@连击版]
+#ACT
+CALCVAR GLOBAL 假人_选登录器 = 连击版
+SAVEVAR GLOBAL 假人_选登录器 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+DELAYGOTO 1 @延迟初始变量
+
+;===============================================================================
+
+[@基本设置]
+#IF
+CHECKDUMMYCOUNT = 0
+#ACT
+MOV I90 0
+MOV I92 0
+MOV I93 0
+MOV I94 0
+MOV I95 0
+CLEARNAMELIST ..\QuestDiary\敏哥假人\假人数据\假人死亡名单.txt
+;-----------------------------------------------------------------------
+#IF
+CHECKVAR GLOBAL 假人_定时登录 = 开启
+#ACT
+MOV S11 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S11 <ImgEx:2:9:1:-2>
+#IF
+CHECKVAR GLOBAL 假人_定时清理 = 开启
+#ACT
+MOV S15 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S15 <ImgEx:2:9:1:-2>
+#IF
+CHECKVAR GLOBAL 假人_上线挂机 = 开启
+#ACT
+MOV S21 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S21 <ImgEx:2:9:1:-2>
+#IF
+LARGE I91 0
+#ACT
+MOV S20 开启
+MOV S22 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S20 关闭
+MOV S22 <ImgEx:2:9:1:-2>
+#IF
+CHECKVAR GLOBAL 假人_装备自补 = 开启
+#ACT
+MOV S24 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S24 <ImgEx:2:9:1:-2>
+#IF
+CHECKVAR GLOBAL 假人_随机杀怪 = 开启
+#ACT
+MOV S25 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S25 <ImgEx:2:9:1:-2>
+#IF
+CHECKVAR GLOBAL 假人_仿真登录 = 开启
+#ACT
+MOV S26 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S26 <ImgEx:2:9:1:-2>
+
+#IF
+#ACT
+MOV S12 <$GLOBAL(假人_登录日期)>
+MOV S13 <$GLOBAL(假人_登录小时)>
+MOV S14 <$GLOBAL(假人_登录分钟)>
+MOV S16 <$GLOBAL(假人_新手地图)>
+MOV S31 <$GLOBAL(假人_登录地图)>
+MOV S32 <$GLOBAL(假人_登录坐标X)>
+MOV S33 <$GLOBAL(假人_登录坐标Y)>
+MOV S34 <$GLOBAL(假人_登录范围)>
+MOV S35 <$GLOBAL(假人_登录数量)>
+MOV S36 <$GLOBAL(假人_装备级别)>
+MOV S37 <$GLOBAL(假人_登录间隔)>
+MOV S39 <$GLOBAL(假人_活动频率)>
+MOV S40 <$GLOBAL(假人_入会等级)>
+;--------------显示界面------------------
+;-空格
+SetStringBlank 参数1 参数2 参数3 <$STR(S12)> 3  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S13)> 3  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S14)> 3  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S16)> 17 1
+SetStringBlank 参数1 参数2 参数3 <$STR(S31)> 17 1
+SetStringBlank 参数1 参数2 参数3 <$STR(S32)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S34)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S36)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S37)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S39)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S40)> 7  1
+;--------------------------------------
+OPENMERCHANTBIGDLG 9 0 1 0 0 0 0
+#IF
+CHECKVAR GLOBAL 假人_选登录器 = 13周年
+#SAY
+<ImgEx:1:9:413:-26/@exit><ImgEx:20:9:-47:29>\
+<ImgEx:9:10:-2:-9><ImgEx:13:9:-2:-9/@假人配置><ImgEx:15:9:-2:-9/@地图匹配><ImgEx:17:9:-2:-9/@其他控制><ImgEx:19:9:-2:-9/@模拟攻沙><ImgEx:7:9:16:-2|7#点击刷新/@基本设置>   <在线假人：/FCOLOR=250><$STR(I90)>\
+<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_定时登录)>^/@定时登录> <ImgEx:6:9:162:14><ImgEx:9:9:119:14|7#日期/@@InPutInteger12> <ImgEx:6:9:113:14><ImgEx:9:9:70:14|7#小时/@@InPutInteger13> <ImgEx:6:9:64:14>
+<ImgEx:9:9:21:14|7#分钟/@@InPutInteger14> <ImgEx:6:9:79:14><ImgEx:9:9:36:14|7#默认[0]为无限在线!^7#计算单位为：[分钟]^7#中途修改则重新计时/@@InPutInteger15>\
+<$STR(S11)> <定时登录假人/FCOLOR=103>  <→/FCOLOR=58>  <预设时间:/FCOLOR=103>  <$STR(S12)><日/FCOLOR=250>  <$STR(S13)><时/FCOLOR=253>  <$STR(S14)><分/FCOLOR=254>  <运行时长:/FCOLOR=103> <$GLOBAL(假人_运行时长)>\
+<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_上线挂机)>^/@上线开关>  <ImgEx:4:9:97:14|250#状态：<$STR(S20)>^/@登录假人自>   <ImgEx:6:9:222:14>
+<ImgEx:9:9:179:14|7#自动登录间隔计时[秒]/@@InPutInteger37>   <ImgEx:6:9:209:14><ImgEx:9:9:166:14|7#全局假人上限/@@InPutInteger38>\
+<$STR(S21)> <挂机状态登录/FCOLOR=103>      <$STR(S22)> <自动登录假人/FCOLOR=103>    <间 隔:/FCOLOR=103> <$STR(S37)> <上 限:/FCOLOR=103> <$GLOBAL(假人_登录总数)>\
+<ImgEx:5:9:139:14><ImgEx:8:9:38:14|7#输入“=”取人物当前地图坐标/@@InPutString31>  <ImgEx:6:9:74:14><ImgEx:9:9:31:14/@@InPutInteger32>  <ImgEx:6:9:67:14><ImgEx:9:9:24:14/@@InPutInteger33>\
+登录地图信息：<地图(ID):/FCOLOR=103> <$STR(S31)> <坐标X:/FCOLOR=103> <$STR(S32)> <坐标Y:/FCOLOR=103> <$STR(S33)>\
+<ImgEx:6:9:138:14><ImgEx:9:9:95:14|7#以登录点向四周扩散^7#建议根据地图大小设置/@@InPutInteger34>    <ImgEx:6:9:178:14><ImgEx:9:9:135:14|7#装备级别为[1-5]^7#设置[6]为随机等级装备^7#级别越高假人的装备越好/@@InPutInteger36>　
+<ImgEx:6:9:171:14><ImgEx:9:9:128:14|7#手动登录假人数量/@@InPutInteger35>\
+假人登录设置：<出生范围:/FCOLOR=103> <$STR(S34)>        <装备级别:/FCOLOR=103> <$STR(S36)> <人 数:/FCOLOR=103> <$STR(S35)>\
+<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_仿真登录)>^7#新人上线模式/@仿真人登录> <ImgEx:5:9:163:14> <ImgEx:8:9:62:14|7#输入新手训练地图ID/@@InPutString16(可自己传送到新手地图输入"="自动识别)>　
+<ImgEx:6:9:134:14><ImgEx:9:9:91:14|7#建议5-20之间^7#参数越小越活跃/@@InPutInteger39>\
+<$STR(S26)> <仿真人登录/FCOLOR=103>    <新手训练地图:/FCOLOR=103> <$STR(S16)>   <设置活跃度:/FCOLOR=103> <$STR(S39)>\
+<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_装备自补)>^/@装备自补> <ImgEx:6:9:354:14><ImgEx:9:9:301:14|7#为[0]时则不召唤英雄/@@InPutInteger41>\
+<$STR(S24)> <装备自补/FCOLOR=103>(<爆装备后自动补齐身上已缺装备/FCOLOR=160>)      <可召唤英雄等级:/FCOLOR=254> <$GLOBAL(假人_召唤英雄)>\
+<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_随机杀怪)>^7#开启后假人可自动进入列表中预设的地图打怪^7#关闭后假人只在各大城市范围活动/@随机杀怪>\
+<$STR(S25)> <随机杀怪模式/FCOLOR=103>(<开启后假人更活跃/FCOLOR=160>)\
+<>                                   <ImgEx:22:9:5:-14/@初始化假人>  <ImgEx:23:9:5:-14/@登录假人即>\
+#ELSESAY
+\ \
+\ \
+<ImgEx:1:9:435:-32/@exit><ImgEx:20:9:-25:29>\
+　<ImgEx:9:10:-2:-9><ImgEx:13:9:-2:-9/@假人配置><ImgEx:15:9:-2:-9/@地图匹配><ImgEx:17:9:-2:-9/@其他控制><ImgEx:19:9:-2:-9/@模拟攻沙><ImgEx:7:9:16:-2|7#点击刷新/@基本设置>   <在线假人：/FCOLOR=250><$STR(I90)>\
+　<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_定时登录)>^/@定时登录> <ImgEx:6:9:162:14><ImgEx:9:9:119:14|7#日期/@@InPutInteger12> <ImgEx:6:9:113:14><ImgEx:9:9:70:14|7#小时/@@InPutInteger13> <ImgEx:6:9:64:14>
+<ImgEx:9:9:21:14|7#分钟/@@InPutInteger14> <ImgEx:6:9:79:14><ImgEx:9:9:36:14|7#默认[0]为无限在线!^7#计算单位为：[分钟]^7#中途修改则重新计时/@@InPutInteger15>\
+　<$STR(S11)> <定时登录假人/FCOLOR=103>  <→/FCOLOR=58>  <预设时间:/FCOLOR=103>  <$STR(S12)><日/FCOLOR=250>  <$STR(S13)><时/FCOLOR=253>  <$STR(S14)><分/FCOLOR=254>  <运行时长:/FCOLOR=103> <$GLOBAL(假人_运行时长)>\
+　<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_上线挂机)>^/@上线开关>  <ImgEx:4:9:97:14|250#状态：<$STR(S20)>^/@登录假人自>   <ImgEx:6:9:222:14>
+<ImgEx:9:9:179:14|7#自动登录间隔计时[秒]/@@InPutInteger37>   <ImgEx:6:9:209:14><ImgEx:9:9:166:14|7#全局假人上限/@@InPutInteger38>\
+　<$STR(S21)> <挂机状态登录/FCOLOR=103>      <$STR(S22)> <自动登录假人/FCOLOR=103>    <间 隔:/FCOLOR=103> <$STR(S37)> <上 限:/FCOLOR=103> <$GLOBAL(假人_登录总数)>\
+　<ImgEx:5:9:139:14><ImgEx:8:9:38:14|7#输入“=”取人物当前地图坐标/@@InPutString31>  <ImgEx:6:9:74:14><ImgEx:9:9:31:14/@@InPutInteger32>  <ImgEx:6:9:67:14><ImgEx:9:9:24:14/@@InPutInteger33>\
+　登录地图信息：<地图(ID):/FCOLOR=103> <$STR(S31)> <坐标X:/FCOLOR=103> <$STR(S32)> <坐标Y:/FCOLOR=103> <$STR(S33)>\
+　<ImgEx:6:9:138:14><ImgEx:9:9:95:14|7#以登录点向四周扩散^7#建议根据地图大小设置/@@InPutInteger34>    <ImgEx:6:9:178:14><ImgEx:9:9:135:14|7#装备级别为[1-5]^7#设置[6]为随机等级装备^7#级别越高假人的装备越好/@@InPutInteger36>　
+<ImgEx:6:9:171:14><ImgEx:9:9:128:14|7#手动登录假人数量/@@InPutInteger35>\
+　假人登录设置：<出生范围:/FCOLOR=103> <$STR(S34)>        <装备级别:/FCOLOR=103> <$STR(S36)> <人 数:/FCOLOR=103> <$STR(S35)>\
+　<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_仿真登录)>^7#新人上线模式/@仿真人登录> <ImgEx:5:9:163:14> <ImgEx:8:9:62:14|7#输入新手训练地图ID/@@InPutString16(站在新手地图内输入"="可自动识别)>　
+<ImgEx:6:9:134:14><ImgEx:9:9:91:14|7#建议5-20之间^7#参数越小越活跃/@@InPutInteger39>\
+　<$STR(S26)> <仿真人登录/FCOLOR=103>    <新手训练地图:/FCOLOR=103> <$STR(S16)>   <设置活跃度:/FCOLOR=103> <$STR(S39)>\
+　<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_装备自补)>^/@装备自补> <ImgEx:6:9:354:14><ImgEx:9:9:301:14|7#为[0]时则不召唤英雄/@@InPutInteger41>\
+　<$STR(S24)> <装备自补/FCOLOR=103>(<爆装备后自动补齐身上已缺装备/FCOLOR=160>)      <可召唤英雄等级:/FCOLOR=254> <$GLOBAL(假人_召唤英雄)>\
+　<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_随机杀怪)>^7#开启后假人可自动进入列表中预设的地图打怪^7#关闭后假人只在各大城市范围活动/@随机杀怪>\
+　<$STR(S25)> <随机杀怪模式/FCOLOR=103>(<开启后假人更活跃/FCOLOR=160>)\
+　                                  <ImgEx:22:9:5:-18/@初始化假人>  <ImgEx:23:9:5:-18/@登录假人即>\
+
+
+[@InPutInteger12]
+#IF
+LARGE N12 31
+#ACT
+MESSAGEBOX 提示：输入错误，请输入正确的日期。
+BREAK
+
+#IF
+LARGE N12 0
+#ACT
+CALCVAR GLOBAL 假人_登录日期 = <$STR(N12)>
+SAVEVAR GLOBAL 假人_登录日期 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 你设置的登录日期为：<$STR(N12)>日
+GOTO @基本设置
+BREAK
+
+[@InPutInteger13]
+#IF
+LARGE N13 23
+#ACT
+MESSAGEBOX 提示：输入错误，请输入正确的小时。
+BREAK
+#ELSEACT
+CALCVAR GLOBAL 假人_登录小时 = <$STR(N13)>
+SAVEVAR GLOBAL 假人_登录小时 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 你设置的登录小时为：<$STR(N13)>时
+GOTO @基本设置
+BREAK
+
+[@InPutInteger14]
+#IF
+LARGE N14 59
+#ACT
+MESSAGEBOX 提示：输入错误，请输入正确的分钟。
+BREAK
+#ELSEACT
+CALCVAR GLOBAL 假人_登录分钟 = <$STR(N14)>
+SAVEVAR GLOBAL 假人_登录分钟 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 你设置的登录分钟为：<$STR(N14)>分
+GOTO @基本设置
+BREAK
+
+[@InPutInteger15]
+#IF
+LARGE N15 65535
+#ACT
+MESSAGEBOX 错误：最高支持65535分钟。
+BREAK
+
+#IF
+EQUAL N15 0
+#ACT
+CALCVAR GLOBAL 假人_运行时长 = <$STR(N15)>
+SAVEVAR GLOBAL 假人_运行时长 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+MOV I96 0
+GOTO @基本设置
+MESSAGEBOX 你设置的是所有假人无限在线模式。
+BREAK
+
+#ELSEACT
+CALCVAR GLOBAL 假人_运行时长 = <$STR(N15)>
+SAVEVAR GLOBAL 假人_运行时长 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+MUL I96 <$GLOBAL(假人_运行时长)> 60
+GOTO @基本设置
+MESSAGEBOX 你设置的是当每个假人运行【<$STR(N15)>】分钟后自动下线
+BREAK
+
+[@InPutString16]
+#IF
+CheckStringlength S16 > 16
+#ACT
+MESSAGEBOX 错误：最多可以输入16 个字符。
+BREAK
+
+#IF
+CompareText S16 =
+#ACT
+CALCVAR GLOBAL 假人_新手地图 = <$MAP>
+SAVEVAR GLOBAL 假人_新手地图 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 假人新手训练地图ID为：<$MAP>
+GOTO @基本设置
+BREAK
+
+#IF
+CheckStringlength S16 > 0
+#ACT
+CALCVAR GLOBAL 假人_新手地图 = <$STR(S16)>
+SAVEVAR GLOBAL 假人_新手地图 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 假人新手训练地图ID为：<$STR(S16)>
+GOTO @基本设置
+BREAK
+
+[@InPutString31]
+#IF
+CheckStringlength S31 > 16
+#ACT
+MESSAGEBOX 错误：最多可以输入16 个字符。
+BREAK
+
+#IF
+CompareText S31 =
+#ACT
+CALCVAR GLOBAL 假人_登录地图 = <$MAP>
+SAVEVAR GLOBAL 假人_登录地图 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_登录坐标X = <$X>
+SAVEVAR GLOBAL 假人_登录坐标X ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_登录坐标Y = <$Y>
+SAVEVAR GLOBAL 假人_登录坐标Y ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 自定义假人登录地图ID为：<$MAP>，坐标X为：<$X>，坐标Y为：<$Y>
+GOTO @基本设置
+BREAK
+
+#IF
+CheckStringlength S31 > 0
+#ACT
+CALCVAR GLOBAL 假人_登录地图 = <$STR(S31)>
+SAVEVAR GLOBAL 假人_登录地图 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 自定义假人登录地图ID为：<$STR(S31)>
+GOTO @基本设置
+BREAK
+
+[@InPutInteger32]
+#IF
+CheckStringlength N32 > 4
+#ACT
+MESSAGEBOX 错误：你输入的字符超出了设定范围。
+BREAK
+
+#IF
+LARGE N32 0
+#ACT
+CALCVAR GLOBAL 假人_登录坐标X = <$STR(N32)>
+SAVEVAR GLOBAL 假人_登录坐标X ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 自定义假人登录地图坐标X为：<$STR(N32)>
+GOTO @基本设置
+BREAK
+
+[@InPutInteger33]
+#IF
+CheckStringlength N33 > 4
+#ACT
+MESSAGEBOX 错误：你输入的字符超出了设定范围。
+BREAK
+
+#IF
+LARGE N33 0
+#ACT
+CALCVAR GLOBAL 假人_登录坐标Y = <$STR(N33)>
+SAVEVAR GLOBAL 假人_登录坐标Y ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 自定义假人登录地图坐标Y为：<$STR(N33)>
+GOTO @基本设置
+BREAK
+
+[@InPutInteger34]
+#IF
+LARGE N34 1000
+#ACT
+MESSAGEBOX 错误：你输入的范围太大了。
+BREAK
+
+#IF
+LARGE N34 0
+#ACT
+CALCVAR GLOBAL 假人_登录范围 = <$STR(N34)>
+SAVEVAR GLOBAL 假人_登录范围 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @基本设置
+BREAK
+
+[@InPutInteger35]
+#IF
+CheckStringlength N35 > 3
+#ACT
+MESSAGEBOX 错误：你输入的字符超出了设定范围。
+BREAK
+
+#IF
+LARGE N35 0
+#ACT
+CALCVAR GLOBAL 假人_登录数量 = <$STR(N35)>
+SAVEVAR GLOBAL 假人_登录数量 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @基本设置
+BREAK
+
+[@InPutInteger36]
+#IF
+LARGE N36 6
+#ACT
+MESSAGEBOX 错误：设置的级别不能大于6级。
+BREAK
+
+#IF
+LARGE N36 0
+#ACT
+CALCVAR GLOBAL 假人_装备级别 = <$STR(N36)>
+SAVEVAR GLOBAL 假人_装备级别 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @基本设置
+BREAK
+
+[@InPutInteger37]
+#IF
+CheckStringlength N37 > 4
+#ACT
+MESSAGEBOX 错误：你输入的数字太大了。
+BREAK
+
+#IF
+LARGE N37 9
+#ACT
+CALCVAR GLOBAL 假人_登录间隔 = <$STR(N37)>
+SAVEVAR GLOBAL 假人_登录间隔 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @基本设置
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：登录假人的间隔不能低于10秒
+
+[@InPutInteger38]
+#IF
+LARGE N38 1000
+#ACT
+MESSAGEBOX 提示：为考虑引擎的流畅性，暂时最高支持登录1000个假人。
+BREAK
+
+#IF
+LARGE N38 0
+#ACT
+CALCVAR GLOBAL 假人_登录总数 = <$STR(N38)>
+SAVEVAR GLOBAL 假人_登录总数 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @基本设置
+BREAK
+
+[@InPutInteger39]
+#IF
+LARGE N39 120
+#ACT
+MESSAGEBOX 提示：建议输入[5-120]以内的数值。
+BREAK
+
+#IF
+LARGE N39 0
+#ACT
+CALCVAR GLOBAL 假人_活动频率 = <$STR(N39)>
+SAVEVAR GLOBAL 假人_活动频率 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+Gmexecute 开始提问 @假人改变活跃
+GOTO @基本设置
+BREAK
+
+[@InPutInteger40]
+#IF
+LARGE N40 65535
+#ACT
+MESSAGEBOX 提示：建议输入[65535]以内的数值。
+BREAK
+
+#IF
+LARGE N40 0
+#ACT
+CALCVAR GLOBAL 假人_入会等级 = <$STR(N40)>
+SAVEVAR GLOBAL 假人_入会等级 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @基本设置
+BREAK
+
+[@InPutInteger41]
+#IF
+LARGE N41 65535
+#ACT
+MESSAGEBOX 提示：建议输入[65535]以内的数值。
+BREAK
+
+#IF
+CheckStringlength N41 > 0
+#ACT
+CALCVAR GLOBAL 假人_召唤英雄 = 0
+SAVEVAR GLOBAL 假人_召唤英雄 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @基本设置
+MESSAGEBOX 提示：暂时不支持召唤英雄功能，有需要的以后添加。
+BREAK
+
+
+[@登录假人即]
+#IF
+CHECKDUMMYCOUNT < 1000
+#ACT
+DUMMYLOGON <$GLOBAL(假人_登录地图)> <$GLOBAL(假人_登录坐标X)> <$GLOBAL(假人_登录坐标Y)> <$GLOBAL(假人_登录数量)>
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：当前服务器假人已经超出[1000]人。
+
+[@定时登录]
+#IF
+LARGE I91 0
+#ACT
+MESSAGEBOX 提示：你已经启动了自动登录假人，两者不能同时开启。
+BREAK
+
+#IF
+CHECKVAR GLOBAL 假人_定时登录 = 开启
+#ACT
+CALCVAR GLOBAL 假人_定时登录 = 关闭
+SAVEVAR GLOBAL 假人_定时登录 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @基本设置
+#ELSEACT
+CALCVAR GLOBAL 假人_定时登录 = 开启
+SAVEVAR GLOBAL 假人_定时登录 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @基本设置
+
+[@登录假人自]
+#IF
+CHECKVAR GLOBAL 假人_定时登录 = 开启
+#ACT
+MESSAGEBOX 提示：请先关闭定时登录假人。
+BREAK
+
+#IF
+LARGE I91 0
+#ACT
+MOV I91 0
+MOV I92 0
+GOTO @基本设置
+#ELSEACT
+MOV I91 1
+GOTO @基本设置
+
+[@仿真人登录]
+#IF
+CHECKVAR GLOBAL 假人_新手地图 =
+CHECKVAR GLOBAL 假人_仿真登录 = 关闭
+#ACT
+MESSAGEBOX 提示：请先设置新手练级地图ID。
+BREAK
+
+#IF
+CHECKVAR GLOBAL 假人_仿真登录 = 开启
+#ACT
+CALCVAR GLOBAL 假人_仿真登录 = 关闭
+SAVEVAR GLOBAL 假人_仿真登录 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @基本设置
+#ELSEACT
+CALCVAR GLOBAL 假人_仿真登录 = 开启
+SAVEVAR GLOBAL 假人_仿真登录 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @基本设置
+
+[@上线开关]
+#IF
+CHECKVAR GLOBAL 假人_上线挂机 = 开启
+#ACT
+CALCVAR GLOBAL 假人_上线挂机 = 关闭
+SAVEVAR GLOBAL 假人_上线挂机 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @基本设置
+#ELSEACT
+CALCVAR GLOBAL 假人_上线挂机 = 开启
+SAVEVAR GLOBAL 假人_上线挂机 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @基本设置
+
+[@装备自补]
+#IF
+CHECKVAR GLOBAL 假人_装备自补 = 开启
+#ACT
+CALCVAR GLOBAL 假人_装备自补 = 关闭
+SAVEVAR GLOBAL 假人_装备自补 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @基本设置
+#ELSEACT
+CALCVAR GLOBAL 假人_装备自补 = 开启
+SAVEVAR GLOBAL 假人_装备自补 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @基本设置
+
+[@随机杀怪]
+#IF
+CHECKVAR GLOBAL 假人_随机杀怪 = 开启
+#ACT
+CALCVAR GLOBAL 假人_随机杀怪 = 关闭
+SAVEVAR GLOBAL 假人_随机杀怪 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @基本设置
+#ELSEACT
+CALCVAR GLOBAL 假人_随机杀怪 = 开启
+SAVEVAR GLOBAL 假人_随机杀怪 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @基本设置
+
+
+;###########################################
+[@假人配置]
+#IF
+CHECKVAR GLOBAL 假人_自动捡物 = 1
+#ACT
+MOV S21 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S21 <ImgEx:2:9:1:-2>
+#IF
+CHECKVAR GLOBAL 假人_装备掉落 = 1
+#ACT
+MOV S22 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S22 <ImgEx:2:9:1:-2>
+#IF
+CHECKVAR GLOBAL 假人_包裹掉落 = 1
+#ACT
+MOV S23 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S23 <ImgEx:2:9:1:-2>
+
+#IF
+CHECKVAR GLOBAL 假人_佩戴盾牌 = 开启
+#ACT
+MOV S24 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S24 <ImgEx:2:9:1:-2>
+
+#IF
+CHECKVAR GLOBAL 假人_佩戴军鼓 = 开启
+#ACT
+MOV S25 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S25 <ImgEx:2:9:1:-2>
+
+#IF
+CHECKVAR GLOBAL 假人_佩戴马牌 = 开启
+#ACT
+MOV S26 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S26 <ImgEx:2:9:1:-2>
+
+#IF
+CHECKVAR GLOBAL 假人_护体神盾 = 开启
+#ACT
+MOV S27 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S27 <ImgEx:2:9:1:-2>
+
+#IF
+CHECKVAR GLOBAL 假人_倚天辟地 = 开启
+#ACT
+MOV S28 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S28 <ImgEx:2:9:1:-2>
+
+#IF
+CHECKVAR GLOBAL 假人_分身术 = 开启
+#ACT
+MOV S29 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S29 <ImgEx:2:9:1:-2>
+
+#IF
+CHECKVAR GLOBAL 假人_攻击模式 = 0
+#ACT
+MOV S30 <全体攻击|249#主动攻击所有玩家与怪物^/FCOLOR=147>
+#IF
+CHECKVAR GLOBAL 假人_攻击模式 = 1
+#ACT
+MOV S30 <和平攻击|249#非PK模式^/FCOLOR=147>
+#IF
+CHECKVAR GLOBAL 假人_攻击模式 = 2
+#ACT
+MOV S30 <夫妻攻击|249#与人物模式相同^/FCOLOR=147>
+#IF
+CHECKVAR GLOBAL 假人_攻击模式 = 3
+#ACT
+MOV S30 <师徒攻击|249#与人物模式相同^/FCOLOR=147>
+#IF
+CHECKVAR GLOBAL 假人_攻击模式 = 4
+#ACT
+MOV S30 <编组攻击|249#与人物模式相同^/FCOLOR=147>
+#IF
+CHECKVAR GLOBAL 假人_攻击模式 = 5
+#ACT
+MOV S30 <行会攻击|249#与人物模式相同^250#已经入会的假人默认为当前模式/FCOLOR=147>
+#IF
+CHECKVAR GLOBAL 假人_攻击模式 = 6
+#ACT
+MOV S30 <红名攻击|249#不主动攻击，受攻击后反击^/FCOLOR=147>
+
+#IF
+#ACT
+MOV S45 <$GLOBAL(假人_说话几率)>
+MOV S46 <$GLOBAL(假人_掉装几率)>
+MOV S47 <$GLOBAL(假人_极品机率)>
+;--------------显示界面------------------
+;-空格
+SetStringBlank 参数1 参数2 参数3 <$STR(S45)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S46)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S47)> 7  1
+;--------------------------------------
+OPENMERCHANTBIGDLG 9 0 1 0 0 0 0
+#IF
+CHECKVAR GLOBAL 假人_选登录器 = 13周年
+#SAY
+<ImgEx:1:9:413:-26/@exit><ImgEx:20:9:-47:29>\
+<ImgEx:11:9:-2:-9/@基本设置><ImgEx:12:9:-2:-9><ImgEx:15:9:-2:-9/@地图匹配><ImgEx:17:9:-2:-9/@其他控制><ImgEx:19:9:-2:-9/@模拟攻沙><ImgEx:7:9:16:-2|7#点击刷新/@假人配置>   <在线假人：/FCOLOR=250><$STR(I90)>\
+<┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>\
+<ImgEx:5:9:79:14>\
+<假人攻击模式:/FCOLOR=103> [<$STR(S30)>] <更改/@更改攻击模式>     [<配置操作介绍|7#1、所有操作只针对初次登录生效^7#2、或假人死亡重新上线也可生效>]\
+<ImgEx:4:9:1:14/@自动捡物>            <ImgEx:6:9:108:14><ImgEx:9:9:61:14/@@InPutInteger45>\
+<$STR(S21)> <自动捡物/FCOLOR=103>    <被攻击时说话几率:/FCOLOR=103> <$STR(S45)>(<数字越大几率越小，英雄无效/FCOLOR=160>)\
+<ImgEx:4:9:1:14/@身上掉落>            <ImgEx:6:9:108:14><ImgEx:9:9:61:14/@@InPutInteger46>\
+<$STR(S22)> <允许死亡爆身上装备/FCOLOR=103>     <机 率:/FCOLOR=103> <$STR(S46)>(<数字越小掉装备几率越高/FCOLOR=160>)\
+<ImgEx:4:9:1:14/@包裹掉落>            <ImgEx:6:9:108:14><ImgEx:9:9:61:14/@@InPutInteger47>            <ImgEx:6:9:106:14><ImgEx:9:9:63:14/@@InPutInteger48>\
+<$STR(S23)> <允许包裹掉落/FCOLOR=103>    <装备极品机率:/FCOLOR=103> <$STR(S47)>     <装备元素机率:/FCOLOR=103> <$GLOBAL(假人_元素机率)>\
+<>  <ImgEx:4:9:145:14|250#状态：<$GLOBAL(假人_佩戴盾牌)>^/@是否盾牌>      <ImgEx:4:9:181:14|250#状态：<$GLOBAL(假人_佩戴军鼓)>^/@是否军鼓>       <ImgEx:4:9:205:14|250#状态：<$GLOBAL(假人_佩戴马牌)>^/@是否马牌>\
+<允许假人佩戴的特殊装备|7#装备名字在装备文件夹修改/FCOLOR=250> <→/FCOLOR=58> <$STR(S24)> <盾牌/FCOLOR=103>       <$STR(S25)> <军鼓/FCOLOR=103>      <$STR(S26)> <马牌/FCOLOR=103>\
+<>  <ImgEx:4:9:145:14|250#状态：<$GLOBAL(假人_护体神盾)>^/@是否护体神盾>  <ImgEx:4:9:205:14|250#状态：<$GLOBAL(假人_倚天辟地)>^/@是否倚天辟地>   <ImgEx:4:9:253:14|250#状态：<$GLOBAL(假人_分身术)>^/@是否分身术>\
+<允许假人学习的通用技能|7#开启后大于45级有几率学习/FCOLOR=250> <→/FCOLOR=58> <$STR(S27)> <护体神盾/FCOLOR=103>   <$STR(S28)> <倚天辟地/FCOLOR=103>  <$STR(S29)> <分 身 术/FCOLOR=103>\
+\ \
+<┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17><下一页/@假人配置2><┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>
+#ELSESAY
+\ \
+\ \
+<ImgEx:1:9:435:-32/@exit><ImgEx:20:9:-25:29>\
+　<ImgEx:11:9:-2:-9/@基本设置><ImgEx:12:9:-2:-9><ImgEx:15:9:-2:-9/@地图匹配><ImgEx:17:9:-2:-9/@其他控制><ImgEx:19:9:-2:-9/@模拟攻沙><ImgEx:7:9:16:-2|7#点击刷新/@假人配置>   <在线假人：/FCOLOR=250><$STR(I90)>\
+<┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>\
+　<ImgEx:5:9:79:14>\
+　<假人攻击模式:/FCOLOR=103> [<$STR(S30)>] <更改/@更改攻击模式>     [<配置操作介绍|7#1、所有操作只针对初次登录生效^7#2、或假人死亡重新上线也可生效>]\
+　<ImgEx:4:9:1:14/@自动捡物>            <ImgEx:6:9:108:14><ImgEx:9:9:61:14/@@InPutInteger45>\
+　<$STR(S21)> <自动捡物/FCOLOR=103>    <被攻击时说话几率:/FCOLOR=103> <$STR(S45)>(<数字越大几率越小，英雄无效/FCOLOR=160>)\
+　<ImgEx:4:9:1:14/@身上掉落>            <ImgEx:6:9:108:14><ImgEx:9:9:61:14/@@InPutInteger46>\
+　<$STR(S22)> <允许死亡爆身上装备/FCOLOR=103>     <机 率:/FCOLOR=103> <$STR(S46)>(<数字越小掉装备几率越高/FCOLOR=160>)\
+　<ImgEx:4:9:1:14/@包裹掉落>            <ImgEx:6:9:108:14><ImgEx:9:9:61:14/@@InPutInteger47>            <ImgEx:6:9:106:14><ImgEx:9:9:63:14/@@InPutInteger48>\
+　<$STR(S23)> <允许包裹掉落/FCOLOR=103>    <装备极品机率:/FCOLOR=103> <$STR(S47)>     <装备元素机率:/FCOLOR=103> <$GLOBAL(假人_元素机率)>\
+　  <ImgEx:4:9:145:14|250#状态：<$GLOBAL(假人_佩戴盾牌)>^/@是否盾牌>      <ImgEx:4:9:181:14|250#状态：<$GLOBAL(假人_佩戴军鼓)>^/@是否军鼓>       <ImgEx:4:9:205:14|250#状态：<$GLOBAL(假人_佩戴马牌)>^/@是否马牌>\
+　<允许假人佩戴的特殊装备|7#装备名字在装备文件夹修改/FCOLOR=250> <→/FCOLOR=58> <$STR(S24)> <盾牌/FCOLOR=103>       <$STR(S25)> <军鼓/FCOLOR=103>      <$STR(S26)> <马牌/FCOLOR=103>\
+　  <ImgEx:4:9:145:14|250#状态：<$GLOBAL(假人_护体神盾)>^/@是否护体神盾>  <ImgEx:4:9:205:14|250#状态：<$GLOBAL(假人_倚天辟地)>^/@是否倚天辟地>   <ImgEx:4:9:253:14|250#状态：<$GLOBAL(假人_分身术)>^/@是否分身术>\
+　<允许假人学习的通用技能|7#开启后大于45级有几率学习/FCOLOR=250> <→/FCOLOR=58> <$STR(S27)> <护体神盾/FCOLOR=103>   <$STR(S28)> <倚天辟地/FCOLOR=103>  <$STR(S29)> <分 身 术/FCOLOR=103>\
+\ \
+　<┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17><下一页/@假人配置2><┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>
+
+[@更改攻击模式]
+#IF
+CHECKVAR GLOBAL 假人_攻击模式 < 6
+#ACT
+CALCVAR GLOBAL 假人_攻击模式 + 1
+SAVEVAR GLOBAL 假人_攻击模式 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @假人配置
+BREAK
+#ELSEACT
+CALCVAR GLOBAL 假人_攻击模式 = 0
+SAVEVAR GLOBAL 假人_攻击模式 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @假人配置
+
+[@自动捡物]
+#IF
+CHECKVAR GLOBAL 假人_自动捡物 = 1
+#ACT
+CALCVAR GLOBAL 假人_自动捡物 = 0
+SAVEVAR GLOBAL 假人_自动捡物 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 提示：假人自动捡物已经关闭...
+GOTO @假人配置
+#ELSEACT
+CALCVAR GLOBAL 假人_自动捡物 = 1
+SAVEVAR GLOBAL 假人_自动捡物 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 提示：假人自动捡物已经开启...
+GOTO @假人配置
+
+[@InPutInteger45]
+#IF
+LARGE N45 2000
+#ACT
+MESSAGEBOX 提示：建议输入[2000]以内的数值。
+BREAK
+
+#IF
+LARGE N45 0
+#ACT
+CALCVAR GLOBAL 假人_说话几率 = <$STR(N45)>
+SAVEVAR GLOBAL 假人_说话几率 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @假人配置
+BREAK
+
+[@身上掉落]
+#IF
+CHECKVAR GLOBAL 假人_装备掉落 = 1
+#ACT
+CALCVAR GLOBAL 假人_装备掉落 = 0
+SAVEVAR GLOBAL 假人_装备掉落 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 提示：假人身上装备掉落已经关闭...
+GOTO @假人配置
+#ELSEACT
+CALCVAR GLOBAL 假人_装备掉落 = 1
+SAVEVAR GLOBAL 假人_装备掉落 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 提示：假人身上装备掉落已经开启...
+GOTO @假人配置
+
+[@包裹掉落]
+#IF
+CHECKVAR GLOBAL 假人_包裹掉落 = 1
+#ACT
+CALCVAR GLOBAL 假人_包裹掉落 = 0
+SAVEVAR GLOBAL 假人_包裹掉落 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 提示：假人包裹掉落已经关闭...
+GOTO @假人配置
+#ELSEACT
+CALCVAR GLOBAL 假人_包裹掉落 = 1
+SAVEVAR GLOBAL 假人_包裹掉落 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 提示：假人包裹掉落已经开启...
+GOTO @假人配置
+
+[@InPutInteger46]
+#IF
+LARGE N46 5000
+#ACT
+MESSAGEBOX 提示：建议输入[5000]以内的数值。
+BREAK
+
+#IF
+LARGE N46 0
+#ACT
+CALCVAR GLOBAL 假人_掉装几率 = <$STR(N46)>
+SAVEVAR GLOBAL 假人_掉装几率 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @假人配置
+BREAK
+
+[@InPutInteger47]
+#IF
+LARGE N47 1000
+#ACT
+MESSAGEBOX 提示：建议输入[1000]以内的数值。
+BREAK
+
+#IF
+LARGE N47 0
+#ACT
+CALCVAR GLOBAL 假人_极品机率 = <$STR(N47)>
+SAVEVAR GLOBAL 假人_极品机率 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @假人配置
+BREAK
+
+[@InPutInteger48]
+#IF
+LARGE N48 1000
+#ACT
+MESSAGEBOX 提示：建议输入[1000]以内的数值。
+BREAK
+
+#IF
+LARGE N48 0
+#ACT
+CALCVAR GLOBAL 假人_元素机率 = <$STR(N48)>
+SAVEVAR GLOBAL 假人_元素机率 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @假人配置
+BREAK
+
+[@是否盾牌]
+#IF
+CHECKVAR GLOBAL 假人_佩戴盾牌 = 开启
+#ACT
+CALCVAR GLOBAL 假人_佩戴盾牌 = 关闭
+SAVEVAR GLOBAL 假人_佩戴盾牌 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @假人配置
+#ELSEACT
+CALCVAR GLOBAL 假人_佩戴盾牌 = 开启
+SAVEVAR GLOBAL 假人_佩戴盾牌 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @假人配置
+
+[@是否军鼓]
+#IF
+CHECKVAR GLOBAL 假人_佩戴军鼓 = 开启
+#ACT
+CALCVAR GLOBAL 假人_佩戴军鼓 = 关闭
+SAVEVAR GLOBAL 假人_佩戴军鼓 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @假人配置
+#ELSEACT
+CALCVAR GLOBAL 假人_佩戴军鼓 = 开启
+SAVEVAR GLOBAL 假人_佩戴军鼓 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @假人配置
+
+[@是否马牌]
+#IF
+CHECKVAR GLOBAL 假人_佩戴马牌 = 开启
+#ACT
+CALCVAR GLOBAL 假人_佩戴马牌 = 关闭
+SAVEVAR GLOBAL 假人_佩戴马牌 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @假人配置
+#ELSEACT
+CALCVAR GLOBAL 假人_佩戴马牌 = 开启
+SAVEVAR GLOBAL 假人_佩戴马牌 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @假人配置
+
+[@是否护体神盾]
+#IF
+CHECKVAR GLOBAL 假人_护体神盾 = 开启
+#ACT
+CALCVAR GLOBAL 假人_护体神盾 = 关闭
+SAVEVAR GLOBAL 假人_护体神盾 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @假人配置
+#ELSEACT
+CALCVAR GLOBAL 假人_护体神盾 = 开启
+SAVEVAR GLOBAL 假人_护体神盾 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @假人配置
+
+[@是否倚天辟地]
+#IF
+CHECKVAR GLOBAL 假人_倚天辟地 = 开启
+#ACT
+CALCVAR GLOBAL 假人_倚天辟地 = 关闭
+SAVEVAR GLOBAL 假人_倚天辟地 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @假人配置
+#ELSEACT
+CALCVAR GLOBAL 假人_倚天辟地 = 开启
+SAVEVAR GLOBAL 假人_倚天辟地 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @假人配置
+
+[@是否分身术]
+#IF
+CHECKVAR GLOBAL 假人_分身术 = 开启
+#ACT
+CALCVAR GLOBAL 假人_分身术 = 关闭
+SAVEVAR GLOBAL 假人_分身术 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @假人配置
+#ELSEACT
+CALCVAR GLOBAL 假人_分身术 = 开启
+SAVEVAR GLOBAL 假人_分身术 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @假人配置
+;==============================================
+
+[@假人配置2]
+#IF
+#ACT
+MOV S51 <$GLOBAL(假人_ZDYJNMCZ1)>
+MOV S52 <$GLOBAL(假人_ZDYJNMCZ2)>
+MOV S53 <$GLOBAL(假人_ZDYJNMCF1)>
+MOV S54 <$GLOBAL(假人_ZDYJNMCF2)>
+MOV S55 <$GLOBAL(假人_ZDYJNMCD1)>
+MOV S56 <$GLOBAL(假人_ZDYJNMCD2)>
+;--------------显示界面------------------
+;-空格
+SetStringBlank 参数1 参数2 参数3 <$STR(S51)> 17  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S52)> 17  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S53)> 17  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S54)> 17  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S55)> 17  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S56)> 17  1
+;--------------------------------------
+OPENMERCHANTBIGDLG 9 0 1 0 0 0 0
+#IF
+CHECKVAR GLOBAL 假人_选登录器 = 13周年
+#SAY
+<ImgEx:1:9:413:-26/@exit><ImgEx:20:9:-47:29>\
+<ImgEx:11:9:-2:-9/@基本设置><ImgEx:12:9:-2:-9><ImgEx:15:9:-2:-9/@地图匹配><ImgEx:17:9:-2:-9/@其他控制><ImgEx:19:9:-2:-9/@模拟攻沙><ImgEx:7:9:16:-2|7#点击刷新/@假人配置2>   <在线假人：/FCOLOR=250><$STR(I90)>\
+<┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>\
+<ImgEx:5:9:174:14><ImgEx:8:9:73:14|7#输入技能名字/@@InPutString51>  <ImgEx:6:9:134:14><ImgEx:9:9:91:14|7#设置可练习等级/@@InPutInteger51>\
+<假人战士技能：>  <自定义技能一:/FCOLOR=103> <$STR(S51)>  <学习等级:/FCOLOR=103> <$GLOBAL(假人_ZDYJNXLZ1)>\
+<ImgEx:5:9:174:14><ImgEx:8:9:73:14|7#输入技能名字/@@InPutString52>  <ImgEx:6:9:134:14><ImgEx:9:9:91:14|7#设置可练习等级/@@InPutInteger52>\
+<>                <自定义技能二:/FCOLOR=103> <$STR(S52)>  <学习等级:/FCOLOR=103> <$GLOBAL(假人_ZDYJNXLZ2)>\
+<ImgEx:5:9:174:14><ImgEx:8:9:73:14|7#输入技能名字/@@InPutString53>  <ImgEx:6:9:134:14><ImgEx:9:9:91:14|7#设置可练习等级/@@InPutInteger53>\
+<假人法师技能：>  <自定义技能一:/FCOLOR=103> <$STR(S53)>  <学习等级:/FCOLOR=103> <$GLOBAL(假人_ZDYJNXLF1)>\
+<ImgEx:5:9:174:14><ImgEx:8:9:73:14|7#输入技能名字/@@InPutString54>  <ImgEx:6:9:134:14><ImgEx:9:9:91:14|7#设置可练习等级/@@InPutInteger54>\
+<>                <自定义技能二:/FCOLOR=103> <$STR(S54)>  <学习等级:/FCOLOR=103> <$GLOBAL(假人_ZDYJNXLF2)>\
+<ImgEx:5:9:174:14><ImgEx:8:9:73:14|7#输入技能名字/@@InPutString55>  <ImgEx:6:9:134:14><ImgEx:9:9:91:14|7#设置可练习等级/@@InPutInteger55>\
+<假人道士技能：>  <自定义技能一:/FCOLOR=103> <$STR(S55)>  <学习等级:/FCOLOR=103> <$GLOBAL(假人_ZDYJNXLD1)>\
+<ImgEx:5:9:174:14><ImgEx:8:9:73:14|7#输入技能名字/@@InPutString56>  <ImgEx:6:9:134:14><ImgEx:9:9:91:14|7#设置可练习等级/@@InPutInteger56>\
+<>                <自定义技能二:/FCOLOR=103> <$STR(S56)>  <学习等级:/FCOLOR=103> <$GLOBAL(假人_ZDYJNXLD2)>\
+\ \
+<┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17><上一页/@假人配置><┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>
+#ELSESAY
+\ \
+\ \
+<ImgEx:1:9:435:-32/@exit><ImgEx:20:9:-25:29>\
+　<ImgEx:11:9:-2:-9/@基本设置><ImgEx:12:9:-2:-9><ImgEx:15:9:-2:-9/@地图匹配><ImgEx:17:9:-2:-9/@其他控制><ImgEx:19:9:-2:-9/@模拟攻沙><ImgEx:7:9:16:-2|7#点击刷新/@假人配置2>   <在线假人：/FCOLOR=250><$STR(I90)>\
+　<┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>\
+　<ImgEx:5:9:174:14><ImgEx:8:9:73:14|7#输入技能名字/@@InPutString51>  <ImgEx:6:9:134:14><ImgEx:9:9:91:14|7#设置可练习等级/@@InPutInteger51>\
+　<假人战士技能：>  <自定义技能一:/FCOLOR=103> <$STR(S51)>  <学习等级:/FCOLOR=103> <$GLOBAL(假人_ZDYJNXLZ1)>\
+　<ImgEx:5:9:174:14><ImgEx:8:9:73:14|7#输入技能名字/@@InPutString52>  <ImgEx:6:9:134:14><ImgEx:9:9:91:14|7#设置可练习等级/@@InPutInteger52>\
+　                <自定义技能二:/FCOLOR=103> <$STR(S52)>  <学习等级:/FCOLOR=103> <$GLOBAL(假人_ZDYJNXLZ2)>\
+　<ImgEx:5:9:174:14><ImgEx:8:9:73:14|7#输入技能名字/@@InPutString53>  <ImgEx:6:9:134:14><ImgEx:9:9:91:14|7#设置可练习等级/@@InPutInteger53>\
+　<假人法师技能：>  <自定义技能一:/FCOLOR=103> <$STR(S53)>  <学习等级:/FCOLOR=103> <$GLOBAL(假人_ZDYJNXLF1)>\
+　<ImgEx:5:9:174:14><ImgEx:8:9:73:14|7#输入技能名字/@@InPutString54>  <ImgEx:6:9:134:14><ImgEx:9:9:91:14|7#设置可练习等级/@@InPutInteger54>\
+　                <自定义技能二:/FCOLOR=103> <$STR(S54)>  <学习等级:/FCOLOR=103> <$GLOBAL(假人_ZDYJNXLF2)>\
+　<ImgEx:5:9:174:14><ImgEx:8:9:73:14|7#输入技能名字/@@InPutString55>  <ImgEx:6:9:134:14><ImgEx:9:9:91:14|7#设置可练习等级/@@InPutInteger55>\
+　<假人道士技能：>  <自定义技能一:/FCOLOR=103> <$STR(S55)>  <学习等级:/FCOLOR=103> <$GLOBAL(假人_ZDYJNXLD1)>\
+　<ImgEx:5:9:174:14><ImgEx:8:9:73:14|7#输入技能名字/@@InPutString56>  <ImgEx:6:9:134:14><ImgEx:9:9:91:14|7#设置可练习等级/@@InPutInteger56>\
+　                <自定义技能二:/FCOLOR=103> <$STR(S56)>  <学习等级:/FCOLOR=103> <$GLOBAL(假人_ZDYJNXLD2)>\
+\ \
+　<┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17><上一页/@假人配置><┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>
+
+
+[@InPutString51]
+#IF
+CheckStringlength S51 > 16
+#ACT
+MESSAGEBOX 错误：最多支持16个字符的技能名称。
+BREAK
+
+#IF
+CheckStringlength S51 > 0
+#ACT
+CALCVAR GLOBAL 假人_ZDYJNMCZ1 = <$STR(S51)>
+SAVEVAR GLOBAL 假人_ZDYJNMCZ1 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 战士自定义技能一名称为：<$STR(S51)>
+GOTO @假人配置2
+BREAK
+
+[@InPutInteger51]
+#IF
+CHECKVAR GLOBAL 假人_ZDYJNMCZ1 =
+#ACT
+MESSAGEBOX 错误：你还没有设置自定义技能一的名称。
+BREAK
+
+#IF
+EQUAL N51 0
+#ACT
+CALCVAR GLOBAL 假人_ZDYJNXLZ1 = <$STR(N51)>
+SAVEVAR GLOBAL 假人_ZDYJNXLZ1 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 你已经设置[<$GLOBAL(假人_ZDYJNMCZ1)>]关闭，已禁止学习
+GOTO @假人配置2
+BREAK
+
+
+#IF
+SMALL N51 65535
+#ACT
+CALCVAR GLOBAL 假人_ZDYJNXLZ1 = <$STR(N51)>
+SAVEVAR GLOBAL 假人_ZDYJNXLZ1 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 你已经设置[<$GLOBAL(假人_ZDYJNMCZ1)>]到达[<$STR(N51)>]级开始学习，如需关闭请设置：0
+GOTO @假人配置2
+#ELSEACT
+MESSAGEBOX 提示：建议输入[65535]以内的数值。
+BREAK
+
+
+
+[@InPutString52]
+#IF
+CheckStringlength S52 > 16
+#ACT
+MESSAGEBOX 错误：最多支持16个字符的技能名称。
+BREAK
+
+#IF
+CheckStringlength S52 > 0
+#ACT
+CALCVAR GLOBAL 假人_ZDYJNMCZ2 = <$STR(S52)>
+SAVEVAR GLOBAL 假人_ZDYJNMCZ2 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 战士自定义技能二名称为：<$STR(S52)>
+GOTO @假人配置2
+BREAK
+
+[@InPutInteger52]
+#IF
+CHECKVAR GLOBAL 假人_ZDYJNMCZ2 =
+#ACT
+MESSAGEBOX 错误：你还没有设置自定义技能二的名称。
+BREAK
+
+#IF
+EQUAL N52 0
+#ACT
+CALCVAR GLOBAL 假人_ZDYJNXLZ2 = <$STR(N52)>
+SAVEVAR GLOBAL 假人_ZDYJNXLZ2 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 你已经设置[<$GLOBAL(假人_ZDYJNMCZ2)>]关闭，已禁止学习
+GOTO @假人配置2
+BREAK
+
+
+#IF
+SMALL N52 65535
+#ACT
+CALCVAR GLOBAL 假人_ZDYJNXLZ2 = <$STR(N52)>
+SAVEVAR GLOBAL 假人_ZDYJNXLZ2 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 你已经设置[<$GLOBAL(假人_ZDYJNMCZ2)>]到达[<$STR(N52)>]级开始学习，如需关闭请设置：0
+GOTO @假人配置2
+#ELSEACT
+MESSAGEBOX 提示：建议输入[65535]以内的数值。
+BREAK
+
+;##############################################
+
+[@InPutString53]
+#IF
+CheckStringlength S53 > 16
+#ACT
+MESSAGEBOX 错误：最多支持16个字符的技能名称。
+BREAK
+
+#IF
+CheckStringlength S53 > 0
+#ACT
+CALCVAR GLOBAL 假人_ZDYJNMCF1 = <$STR(S53)>
+SAVEVAR GLOBAL 假人_ZDYJNMCF1 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 法师自定义技能一名称为：<$STR(S53)>
+GOTO @假人配置2
+BREAK
+
+[@InPutInteger53]
+#IF
+CHECKVAR GLOBAL 假人_ZDYJNMCF1 =
+#ACT
+MESSAGEBOX 错误：你还没有设置自定义技能一的名称。
+BREAK
+
+#IF
+EQUAL N53 0
+#ACT
+CALCVAR GLOBAL 假人_ZDYJNXLF1 = <$STR(N53)>
+SAVEVAR GLOBAL 假人_ZDYJNXLF1 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 你已经设置[<$GLOBAL(假人_ZDYJNMCF1)>]关闭，已禁止学习
+GOTO @假人配置2
+BREAK
+
+
+#IF
+SMALL N53 65535
+#ACT
+CALCVAR GLOBAL 假人_ZDYJNXLF1 = <$STR(N53)>
+SAVEVAR GLOBAL 假人_ZDYJNXLF1 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 你已经设置[<$GLOBAL(假人_ZDYJNMCF1)>]到达[<$STR(N53)>]级开始学习，如需关闭请设置：0
+GOTO @假人配置2
+#ELSEACT
+MESSAGEBOX 提示：建议输入[65535]以内的数值。
+BREAK
+
+
+[@InPutString54]
+#IF
+CheckStringlength S54 > 16
+#ACT
+MESSAGEBOX 错误：最多支持16个字符的技能名称。
+BREAK
+
+#IF
+CheckStringlength S54 > 0
+#ACT
+CALCVAR GLOBAL 假人_ZDYJNMCF2 = <$STR(S54)>
+SAVEVAR GLOBAL 假人_ZDYJNMCF2 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 法师自定义技能二名称为：<$STR(S54)>
+GOTO @假人配置2
+BREAK
+
+[@InPutInteger54]
+#IF
+CHECKVAR GLOBAL 假人_ZDYJNMCF2 =
+#ACT
+MESSAGEBOX 错误：你还没有设置自定义技能二的名称。
+BREAK
+
+#IF
+EQUAL N54 0
+#ACT
+CALCVAR GLOBAL 假人_ZDYJNXLF2 = <$STR(N54)>
+SAVEVAR GLOBAL 假人_ZDYJNXLF2 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 你已经设置[<$GLOBAL(假人_ZDYJNMCF2)>]关闭，已禁止学习
+GOTO @假人配置2
+BREAK
+
+
+#IF
+SMALL N54 65535
+#ACT
+CALCVAR GLOBAL 假人_ZDYJNXLF2 = <$STR(N54)>
+SAVEVAR GLOBAL 假人_ZDYJNXLF2 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 你已经设置[<$GLOBAL(假人_ZDYJNMCF2)>]到达[<$STR(N54)>]级开始学习，如需关闭请设置：0
+GOTO @假人配置2
+#ELSEACT
+MESSAGEBOX 提示：建议输入[65535]以内的数值。
+BREAK
+
+;##############################################
+
+[@InPutString55]
+#IF
+CheckStringlength S55 > 16
+#ACT
+MESSAGEBOX 错误：最多支持16个字符的技能名称。
+BREAK
+
+#IF
+CheckStringlength S55 > 0
+#ACT
+CALCVAR GLOBAL 假人_ZDYJNMCD1 = <$STR(S55)>
+SAVEVAR GLOBAL 假人_ZDYJNMCD1 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 道士自定义技能一名称为：<$STR(S55)>
+GOTO @假人配置2
+BREAK
+
+[@InPutInteger55]
+#IF
+CHECKVAR GLOBAL 假人_ZDYJNMCD1 =
+#ACT
+MESSAGEBOX 错误：你还没有设置自定义技能一的名称。
+BREAK
+
+#IF
+EQUAL N55 0
+#ACT
+CALCVAR GLOBAL 假人_ZDYJNXLD1 = <$STR(N55)>
+SAVEVAR GLOBAL 假人_ZDYJNXLD1 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 你已经设置[<$GLOBAL(假人_ZDYJNMCD1)>]关闭，已禁止学习
+GOTO @假人配置2
+BREAK
+
+
+#IF
+SMALL N55 65535
+#ACT
+CALCVAR GLOBAL 假人_ZDYJNXLD1 = <$STR(N55)>
+SAVEVAR GLOBAL 假人_ZDYJNXLD1 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 你已经设置[<$GLOBAL(假人_ZDYJNMCD1)>]到达[<$STR(N55)>]级开始学习，如需关闭请设置：0
+GOTO @假人配置2
+#ELSEACT
+MESSAGEBOX 提示：建议输入[65535]以内的数值。
+BREAK
+
+
+[@InPutString56]
+#IF
+CheckStringlength S56 > 16
+#ACT
+MESSAGEBOX 错误：最多支持16个字符的技能名称。
+BREAK
+
+#IF
+CheckStringlength S56 > 0
+#ACT
+CALCVAR GLOBAL 假人_ZDYJNMCD2 = <$STR(S56)>
+SAVEVAR GLOBAL 假人_ZDYJNMCD2 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 道士自定义技能二名称为：<$STR(S56)>
+GOTO @假人配置2
+BREAK
+
+[@InPutInteger56]
+#IF
+CHECKVAR GLOBAL 假人_ZDYJNMCD2 =
+#ACT
+MESSAGEBOX 错误：你还没有设置自定义技能二的名称。
+BREAK
+
+#IF
+EQUAL N56 0
+#ACT
+CALCVAR GLOBAL 假人_ZDYJNXLD2 = <$STR(N56)>
+SAVEVAR GLOBAL 假人_ZDYJNXLD2 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 你已经设置[<$GLOBAL(假人_ZDYJNMCD2)>]关闭，已禁止学习
+GOTO @假人配置2
+BREAK
+
+#IF
+SMALL N56 65535
+#ACT
+CALCVAR GLOBAL 假人_ZDYJNXLD2 = <$STR(N56)>
+SAVEVAR GLOBAL 假人_ZDYJNXLD2 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 你已经设置[<$GLOBAL(假人_ZDYJNMCD2)>]到达[<$STR(N56)>]级开始学习，如需关闭请设置：0
+GOTO @假人配置2
+#ELSEACT
+MESSAGEBOX 提示：建议输入[65535]以内的数值。
+BREAK
+
+;#########################################################
+[@地图匹配]
+#IF
+CHECKVAR GLOBAL 假人_登录盟重 = 开启
+#ACT
+MOV S21 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S21 <ImgEx:2:9:1:-2>
+#IF
+CHECKVAR GLOBAL 假人_登录比奇 = 开启
+#ACT
+MOV S22 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S22 <ImgEx:2:9:1:-2>
+#IF
+CHECKVAR GLOBAL 假人_登录苍月 = 开启
+#ACT
+MOV S23 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S23 <ImgEx:2:9:1:-2>
+#IF
+CHECKVAR GLOBAL 假人_登录封魔 = 开启
+#ACT
+MOV S24 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S24 <ImgEx:2:9:1:-2>
+#IF
+CHECKVAR GLOBAL 假人_登录魔龙 = 开启
+#ACT
+MOV S25 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S25 <ImgEx:2:9:1:-2>
+#IF
+CHECKVAR GLOBAL 假人_登录白日 = 开启
+#ACT
+MOV S26 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S26 <ImgEx:2:9:1:-2>
+#IF
+CHECKVAR GLOBAL 假人_泡点开关 = 开启
+#ACT
+MOV S27 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S27 <ImgEx:2:9:1:-2>
+
+#IF
+#ACT
+MOV S31 <$GLOBAL(假人_抢水坐标X1)>
+MOV S32 <$GLOBAL(假人_抢水坐标Y1)>
+MOV S33 <$GLOBAL(假人_抢水坐标X2)>
+MOV S34 <$GLOBAL(假人_抢水坐标Y2)>
+MOV S35 <$GLOBAL(假人_计时器编号)>
+MOV S36 <$GLOBAL(假人_抢水点范围)>
+MOV S57 <$GLOBAL(假人_泡点地图)>
+
+;--------------显示界面------------------
+;-空格
+SetStringBlank 参数1 参数2 参数3 <$STR(S31)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S32)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S33)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S34)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S35)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S36)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S57)> 17  1
+;--------------------------------
+MOV S10 地图匹配
+OPENMERCHANTBIGDLG 9 0 1 0 0 0 0
+#IF
+CHECKVAR GLOBAL 假人_选登录器 = 13周年
+#SAY
+<ImgEx:1:9:413:-26/@exit><ImgEx:20:9:-47:29>\
+<ImgEx:11:9:-2:-9/@基本设置><ImgEx:13:9:-2:-9/@假人配置><ImgEx:14:9:-2:-9><ImgEx:17:9:-2:-9/@其他控制><ImgEx:19:9:-2:-9/@模拟攻沙><ImgEx:7:9:16:-2|7#点击刷新/@地图匹配>   <在线假人：/FCOLOR=250><$STR(I90)>\
+\ \
+<┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17><选择假人允许挂机安全区|7#未选择的地图假人不能挂机/FCOLOR=250><┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>\
+<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_登录盟重)>^/@是否登录盟重>  <ImgEx:4:9:43:14|250#状态：<$GLOBAL(假人_登录比奇)>^/@是否登录比奇>  <ImgEx:4:9:85:14|250#状态：<$GLOBAL(假人_登录苍月)>^/@是否登录苍月>　
+<ImgEx:4:9:127:14|250#状态：<$GLOBAL(假人_登录封魔)>^/@是否登录封魔>  <ImgEx:4:9:169:14|250#状态：<$GLOBAL(假人_登录魔龙)>^/@是否登录魔龙>  <ImgEx:4:9:211:14|250#状态：<$GLOBAL(假人_登录白日)>^/@是否登录白日>\
+<$STR(S21)> <盟重省/FCOLOR=103>  <$STR(S22)> <比奇城/FCOLOR=103>  <$STR(S23)> <苍月岛/FCOLOR=103>  <$STR(S24)> <封魔谷/FCOLOR=103>  <$STR(S25)> <魔龙城/FCOLOR=103>  <$STR(S26)> <白日门/FCOLOR=103>\
+<┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>\
+<ImgEx:4:9:1:14/@假人泡点>  <ImgEx:5:9:131:14><ImgEx:8:9:30:14|7#输入泡点地图ID/@@InPutString57(站在泡点地图内输入"="可自动识别)>　
+<ImgEx:6:9:87:14><ImgEx:9:9:44:14|7#小于<$GLOBAL(假人_泡点等级)>级的玩家才可进入/@@InPutInteger57>\
+<$STR(S27)> <假人泡点/FCOLOR=103>    <地图（ID）:/FCOLOR=103> <$STR(S57)> <禁止等级:/FCOLOR=103> <$GLOBAL(假人_泡点等级)>\
+　          <ImgEx:6:9:90:14><ImgEx:9:9:47:14|7#SetOnTimer　<$GLOBAL(假人_计时器编号)>^/@@InPutInteger25>     <ImgEx:6:9:143:14>\
+　              <计时器编号:/FCOLOR=103> <$STR(S35)>     <抢水点范围大小:/FCOLOR=103> <$STR(S36)> <加/@抢水范围+> <减/@抢水范围->\
+　                   <ImgEx:6:9:90:14><ImgEx:9:9:47:14|7#0为关闭/@@InPutInteger21>     <ImgEx:6:9:89:14><ImgEx:9:9:46:14|7#0为关闭/@@InPutInteger22>\
+<设置泡点抢水位置：/FCOLOR=254>[<站点一/FCOLOR=149>]    <坐标X:/FCOLOR=103> <$STR(S31)>     <坐标Y:/FCOLOR=103> <$STR(S32)> <前 往/@传送站点1>\
+　                   <ImgEx:6:9:90:14><ImgEx:9:9:47:14|7#0为关闭/@@InPutInteger23>     <ImgEx:6:9:89:14><ImgEx:9:9:46:14|7#0为关闭/@@InPutInteger24>\
+<设置泡点抢水位置：/FCOLOR=254>[<站点二/FCOLOR=149>]    <坐标X:/FCOLOR=103> <$STR(S33)>     <坐标Y:/FCOLOR=103> <$STR(S34)> <前 往/@传送站点2>\
+\ \
+<┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17><下一页/@地图匹配2><┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>
+#ELSESAY
+\ \
+\ \
+<ImgEx:1:9:435:-32/@exit><ImgEx:20:9:-25:29>\
+　<ImgEx:11:9:-2:-9/@基本设置><ImgEx:13:9:-2:-9/@假人配置><ImgEx:14:9:-2:-9><ImgEx:17:9:-2:-9/@其他控制><ImgEx:19:9:-2:-9/@模拟攻沙><ImgEx:7:9:16:-2|7#点击刷新/@地图匹配>   <在线假人：/FCOLOR=250><$STR(I90)>\
+\ \
+　<┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17><选择假人允许挂机安全区|7#未选择的地图假人不能挂机/FCOLOR=250><┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>\
+　<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_登录盟重)>^/@是否登录盟重>  <ImgEx:4:9:43:14|250#状态：<$GLOBAL(假人_登录比奇)>^/@是否登录比奇>  <ImgEx:4:9:85:14|250#状态：<$GLOBAL(假人_登录苍月)>^/@是否登录苍月>　
+<ImgEx:4:9:127:14|250#状态：<$GLOBAL(假人_登录封魔)>^/@是否登录封魔>  <ImgEx:4:9:169:14|250#状态：<$GLOBAL(假人_登录魔龙)>^/@是否登录魔龙>  <ImgEx:4:9:211:14|250#状态：<$GLOBAL(假人_登录白日)>^/@是否登录白日>\
+　<$STR(S21)> <盟重省/FCOLOR=103>  <$STR(S22)> <比奇城/FCOLOR=103>  <$STR(S23)> <苍月岛/FCOLOR=103>  <$STR(S24)> <封魔谷/FCOLOR=103>  <$STR(S25)> <魔龙城/FCOLOR=103>  <$STR(S26)> <白日门/FCOLOR=103>\
+　<┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>\
+　<ImgEx:4:9:1:14/@假人泡点>  <ImgEx:5:9:131:14><ImgEx:8:9:30:14|7#输入泡点地图ID/@@InPutString57(站在泡点地图内输入"="可自动识别)>　
+<ImgEx:6:9:87:14><ImgEx:9:9:44:14|7#小于<$GLOBAL(假人_泡点等级)>级的玩家才可进入/@@InPutInteger57>\
+　<$STR(S27)> <假人泡点/FCOLOR=103>    <地图（ID）:/FCOLOR=103> <$STR(S57)> <禁止等级:/FCOLOR=103> <$GLOBAL(假人_泡点等级)>\
+　            <ImgEx:6:9:90:14><ImgEx:9:9:47:14|7#SetOnTimer　<$GLOBAL(假人_计时器编号)>^/@@InPutInteger25>     <ImgEx:6:9:143:14>\
+　                <计时器编号:/FCOLOR=103> <$STR(S35)>     <抢水点范围大小:/FCOLOR=103> <$STR(S36)> <加/@抢水范围+> <减/@抢水范围->\
+　                     <ImgEx:6:9:90:14><ImgEx:9:9:47:14|7#0为关闭/@@InPutInteger21>     <ImgEx:6:9:89:14><ImgEx:9:9:46:14|7#0为关闭/@@InPutInteger22>\
+　<设置泡点抢水位置：/FCOLOR=254>[<站点一/FCOLOR=149>]    <坐标X:/FCOLOR=103> <$STR(S31)>     <坐标Y:/FCOLOR=103> <$STR(S32)> <前 往/@传送站点1>\
+　                     <ImgEx:6:9:90:14><ImgEx:9:9:47:14|7#0为关闭/@@InPutInteger23>     <ImgEx:6:9:89:14><ImgEx:9:9:46:14|7#0为关闭/@@InPutInteger24>\
+　<设置泡点抢水位置：/FCOLOR=254>[<站点二/FCOLOR=149>]    <坐标X:/FCOLOR=103> <$STR(S33)>     <坐标Y:/FCOLOR=103> <$STR(S34)> <前 往/@传送站点2>\
+\ \
+　<┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17><下一页/@地图匹配2><┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>
+
+[@假人泡点]
+#IF
+CHECKVAR GLOBAL 假人_泡点开关 = 关闭
+CHECKVAR GLOBAL 假人_泡点地图 =
+#ACT
+MESSAGEBOX 错误：你还没有设置泡点地图ID。
+BREAK
+
+#IF
+CHECKVAR GLOBAL 假人_泡点开关 = 开启
+#ACT
+CALCVAR GLOBAL 假人_泡点开关 = 关闭
+SAVEVAR GLOBAL 假人_泡点开关 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @地图匹配
+SENDMSG 7 255 233 假人泡点功能已关闭...
+#ELSEACT
+CALCVAR GLOBAL 假人_泡点开关 = 开启
+SAVEVAR GLOBAL 假人_泡点开关 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 假人泡点功能已开启...
+GOTO @地图匹配
+
+[@InPutInteger21]
+#IF
+CheckStringlength N21 > 4
+#ACT
+MESSAGEBOX 错误：你输入的字符超出了设定范围。
+BREAK
+#ELSEACT
+CALCVAR GLOBAL 假人_抢水坐标X1 = <$STR(N21)>
+SAVEVAR GLOBAL 假人_抢水坐标X1 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @地图匹配
+BREAK
+
+[@InPutInteger22]
+#IF
+CheckStringlength N22 > 4
+#ACT
+MESSAGEBOX 错误：你输入的字符超出了设定范围。
+BREAK
+#ELSEACT
+CALCVAR GLOBAL 假人_抢水坐标Y1 = <$STR(N22)>
+SAVEVAR GLOBAL 假人_抢水坐标Y1 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @地图匹配
+BREAK
+
+[@InPutInteger23]
+#IF
+CheckStringlength N23 > 4
+#ACT
+MESSAGEBOX 错误：你输入的字符超出了设定范围。
+BREAK
+#ELSEACT
+CALCVAR GLOBAL 假人_抢水坐标X2 = <$STR(N23)>
+SAVEVAR GLOBAL 假人_抢水坐标X2 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @地图匹配
+BREAK
+
+[@InPutInteger24]
+#IF
+CheckStringlength N24 > 4
+#ACT
+MESSAGEBOX 错误：你输入的字符超出了设定范围。
+BREAK
+#ELSEACT
+CALCVAR GLOBAL 假人_抢水坐标Y2 = <$STR(N24)>
+SAVEVAR GLOBAL 假人_抢水坐标Y2 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @地图匹配
+BREAK
+
+[@InPutInteger25]
+#IF
+CheckStringlength N25 > 4
+#ACT
+MESSAGEBOX 错误：你输入的字符超出了设定范围。
+BREAK
+#ELSEACT
+CALCVAR GLOBAL 假人_计时器编号 = <$STR(N25)>
+SAVEVAR GLOBAL 假人_计时器编号 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @地图匹配
+BREAK
+
+[@InPutInteger26]
+#IF
+CheckStringlength N26 > 4
+#ACT
+MESSAGEBOX 错误：你输入的字符超出了设定范围。
+BREAK
+#ELSEACT
+CALCVAR GLOBAL 假人_抢水点范围 = <$STR(N26)>
+SAVEVAR GLOBAL 假人_抢水点范围 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @地图匹配
+BREAK
+
+[@InPutString57]
+#IF
+CheckStringlength S57 > 16
+#ACT
+MESSAGEBOX 错误：最多支持16个字符的自定义输入。
+BREAK
+
+#IF
+CompareText S57 =
+#ACT
+CALCVAR GLOBAL 假人_泡点地图 = <$MAP>
+SAVEVAR GLOBAL 假人_泡点地图 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @地图匹配
+BREAK
+
+#IF
+CheckStringlength S57 > 0
+#ACT
+CALCVAR GLOBAL 假人_泡点地图 = <$STR(S57)>
+SAVEVAR GLOBAL 假人_泡点地图 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 你设置的假人泡点地图为：<$STR(S57)>
+GOTO @地图匹配
+BREAK
+
+[@InPutInteger57]
+#IF
+CHECKVAR GLOBAL 假人_泡点地图 =
+#ACT
+MESSAGEBOX 错误：请先设置好地图ID...
+BREAK
+
+#IF
+LARGE N57 65535
+#ACT
+MESSAGEBOX 错误：当前最高支持65535级...
+BREAK
+
+#IF
+LARGE N57 0
+#ACT
+CALCVAR GLOBAL 假人_泡点等级 = <$STR(N57)>
+SAVEVAR GLOBAL 假人_泡点等级 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 限制进入泡点地图的等级为：<$STR(N57)>]级。
+GOTO @地图匹配
+BREAK
+
+[@传送站点1]
+#IF
+CHECKVAR GLOBAL 假人_抢水坐标X1 > 0
+CHECKVAR GLOBAL 假人_抢水坐标Y1 > 0
+NOT CHECKVAR GLOBAL 假人_泡点地图 =
+#ACT
+MAPMOVE <$GLOBAL(假人_泡点地图)> <$GLOBAL(假人_抢水坐标X1)> <$GLOBAL(假人_抢水坐标Y1)>
+BREAK
+#ELSEACT
+MESSAGEBOX 请设置好正确地图ID以及坐标，否则功能无法正常运行。
+
+[@传送站点2]
+#IF
+CHECKVAR GLOBAL 假人_抢水坐标X2 > 0
+CHECKVAR GLOBAL 假人_抢水坐标Y2 > 0
+NOT CHECKVAR GLOBAL 假人_泡点地图 =
+#ACT
+MAPMOVE <$GLOBAL(假人_泡点地图)> <$GLOBAL(假人_抢水坐标X2)> <$GLOBAL(假人_抢水坐标Y2)>
+BREAK
+#ELSEACT
+MESSAGEBOX 请设置好正确地图ID以及坐标，否则功能无法正常运行。
+
+[@抢水范围+]
+#IF
+CHECKVAR GLOBAL 假人_抢水点范围 < 5
+#ACT
+CALCVAR GLOBAL 假人_抢水点范围 + 1
+SAVEVAR GLOBAL 假人_抢水点范围 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @地图匹配
+BREAK
+
+[@抢水范围-]
+#IF
+CHECKVAR GLOBAL 假人_抢水点范围 > 0
+#ACT
+CALCVAR GLOBAL 假人_抢水点范围 - 1
+SAVEVAR GLOBAL 假人_抢水点范围 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @地图匹配
+BREAK
+
+;------------------------------------------------
+
+[@地图匹配2]
+#IF
+CHECKVAR GLOBAL 假人_登录盟重 = 开启
+#ACT
+MOV S21 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S21 <ImgEx:2:9:1:-2>
+#IF
+CHECKVAR GLOBAL 假人_登录比奇 = 开启
+#ACT
+MOV S22 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S22 <ImgEx:2:9:1:-2>
+#IF
+CHECKVAR GLOBAL 假人_登录苍月 = 开启
+#ACT
+MOV S23 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S23 <ImgEx:2:9:1:-2>
+#IF
+CHECKVAR GLOBAL 假人_登录封魔 = 开启
+#ACT
+MOV S24 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S24 <ImgEx:2:9:1:-2>
+#IF
+CHECKVAR GLOBAL 假人_登录魔龙 = 开启
+#ACT
+MOV S25 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S25 <ImgEx:2:9:1:-2>
+#IF
+CHECKVAR GLOBAL 假人_登录白日 = 开启
+#ACT
+MOV S26 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S26 <ImgEx:2:9:1:-2>
+
+#IF
+#ACT
+MOV S58 <$GLOBAL(假人_CJDTCSLV)>
+MOV S59 <$GLOBAL(假人_ZJDTCSLV)>
+MOV S60 <$GLOBAL(假人_GJDTCSLV)>
+MOV S61 <$GLOBAL(假人_TJDTCSLV)>
+;--------------显示界面------------------
+;-空格
+SetStringBlank 参数1 参数2 参数3 <$STR(S58)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S59)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S60)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S61)> 7  1
+;--------------------------------
+OPENMERCHANTBIGDLG 9 0 1 0 0 0 0
+MOV S10 地图匹配2
+#IF
+CHECKVAR GLOBAL 假人_选登录器 = 13周年
+#SAY
+<ImgEx:1:9:413:-26/@exit><ImgEx:20:9:-47:29>\
+<ImgEx:11:9:-2:-9/@基本设置><ImgEx:13:9:-2:-9/@假人配置><ImgEx:14:9:-2:-9><ImgEx:17:9:-2:-9/@其他控制><ImgEx:19:9:-2:-9/@模拟攻沙><ImgEx:7:9:16:-2|7#点击刷新/@地图匹配>   <在线假人：/FCOLOR=250><$STR(I90)>\
+\ \
+<┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17><选择假人允许挂机安全区|7#未选择的地图假人不能挂机/FCOLOR=250><┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>\
+<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_登录盟重)>^/@是否登录盟重>  <ImgEx:4:9:43:14|250#状态：<$GLOBAL(假人_登录比奇)>^/@是否登录比奇>  <ImgEx:4:9:85:14|250#状态：<$GLOBAL(假人_登录苍月)>^/@是否登录苍月>　
+<ImgEx:4:9:127:14|250#状态：<$GLOBAL(假人_登录封魔)>^/@是否登录封魔>  <ImgEx:4:9:169:14|250#状态：<$GLOBAL(假人_登录魔龙)>^/@是否登录魔龙>  <ImgEx:4:9:211:14|250#状态：<$GLOBAL(假人_登录白日)>^/@是否登录白日>\
+<$STR(S21)> <盟重省/FCOLOR=103>  <$STR(S22)> <比奇城/FCOLOR=103>  <$STR(S23)> <苍月岛/FCOLOR=103>  <$STR(S24)> <封魔谷/FCOLOR=103>  <$STR(S25)> <魔龙城/FCOLOR=103>  <$STR(S26)> <白日门/FCOLOR=103>\
+<┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>\
+　     <ImgEx:6:9:138:14><ImgEx:9:9:97:14|7#到达<$GLOBAL(假人_CJDTCSLV)>级的玩家才可进入/@@InPutInteger58>\
+<设置/FCOLOR=254>[<初 级 地 图/FCOLOR=149>]  <进入等级≥:/FCOLOR=103> <$STR(S58)> <→/FCOLOR=58> <编辑地图列表：/FCOLOR=131> <添加/@@InPutString58(添加地图ID)>    <删除/@@InPutString59(删除地图ID)>\
+　     <ImgEx:6:9:138:14><ImgEx:9:9:97:14|7#到达<$GLOBAL(假人_ZJDTCSLV)>级的玩家才可进入/@@InPutInteger59>\
+<设置/FCOLOR=254>[<中 级 地 图/FCOLOR=149>]  <进入等级≥:/FCOLOR=103> <$STR(S59)> <→/FCOLOR=58> <编辑地图列表：/FCOLOR=131> <添加/@@InPutString60(添加地图ID)>    <删除/@@InPutString61(删除地图ID)>\
+　     <ImgEx:6:9:138:14><ImgEx:9:9:97:14|7#到达<$GLOBAL(假人_GJDTCSLV)>级的玩家才可进入/@@InPutInteger60>\
+<设置/FCOLOR=254>[<高 级 地 图/FCOLOR=149>]  <进入等级≥:/FCOLOR=103> <$STR(S60)> <→/FCOLOR=58> <编辑地图列表：/FCOLOR=131> <添加/@@InPutString62(添加地图ID)>    <删除/@@InPutString63(删除地图ID)>\
+　     <ImgEx:6:9:138:14><ImgEx:9:9:97:14|7#到达<$GLOBAL(假人_TJDTCSLV)>级的玩家才可进入/@@InPutInteger61>\
+<设置/FCOLOR=254>[<收 费 地 图/FCOLOR=149>]  <进入等级≥:/FCOLOR=103> <$STR(S61)> <→/FCOLOR=58> <编辑地图列表：/FCOLOR=131> <添加/@@InPutString64(添加地图ID)>    <删除/@@InPutString65(删除地图ID)>\
+\ \
+<┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17><上一页/@地图匹配><┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>
+#ELSESAY
+\ \
+\ \
+<ImgEx:1:9:435:-32/@exit><ImgEx:20:9:-25:29>\
+　<ImgEx:11:9:-2:-9/@基本设置><ImgEx:13:9:-2:-9/@假人配置><ImgEx:14:9:-2:-9><ImgEx:17:9:-2:-9/@其他控制><ImgEx:19:9:-2:-9/@模拟攻沙><ImgEx:7:9:16:-2|7#点击刷新/@地图匹配>   <在线假人：/FCOLOR=250><$STR(I90)>\
+\ \
+　<┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17><选择假人允许挂机安全区|7#未选择的地图假人不能挂机/FCOLOR=250><┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>\
+　<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_登录盟重)>^/@是否登录盟重>  <ImgEx:4:9:43:14|250#状态：<$GLOBAL(假人_登录比奇)>^/@是否登录比奇>  <ImgEx:4:9:85:14|250#状态：<$GLOBAL(假人_登录苍月)>^/@是否登录苍月>　
+<ImgEx:4:9:127:14|250#状态：<$GLOBAL(假人_登录封魔)>^/@是否登录封魔>  <ImgEx:4:9:169:14|250#状态：<$GLOBAL(假人_登录魔龙)>^/@是否登录魔龙>  <ImgEx:4:9:211:14|250#状态：<$GLOBAL(假人_登录白日)>^/@是否登录白日>\
+　<$STR(S21)> <盟重省/FCOLOR=103>  <$STR(S22)> <比奇城/FCOLOR=103>  <$STR(S23)> <苍月岛/FCOLOR=103>  <$STR(S24)> <封魔谷/FCOLOR=103>  <$STR(S25)> <魔龙城/FCOLOR=103>  <$STR(S26)> <白日门/FCOLOR=103>\
+　<┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>\
+　       <ImgEx:6:9:138:14><ImgEx:9:9:95:14|7#到达<$GLOBAL(假人_CJDTCSLV)>级的玩家才可进入/@@InPutInteger58>\
+　<设置/FCOLOR=254>[<初 级 地 图/FCOLOR=149>]  <进入等级≥:/FCOLOR=103> <$STR(S58)> <→/FCOLOR=58> <编辑地图列表：/FCOLOR=131> <添加/@@InPutString58(添加地图ID)>    <删除/@@InPutString59(删除地图ID)>\
+　     　<ImgEx:6:9:138:14><ImgEx:9:9:95:14|7#到达<$GLOBAL(假人_ZJDTCSLV)>级的玩家才可进入/@@InPutInteger59>\
+　<设置/FCOLOR=254>[<中 级 地 图/FCOLOR=149>]  <进入等级≥:/FCOLOR=103> <$STR(S59)> <→/FCOLOR=58> <编辑地图列表：/FCOLOR=131> <添加/@@InPutString60(添加地图ID)>    <删除/@@InPutString61(删除地图ID)>\
+　     　<ImgEx:6:9:138:14><ImgEx:9:9:95:14|7#到达<$GLOBAL(假人_GJDTCSLV)>级的玩家才可进入/@@InPutInteger60>\
+　<设置/FCOLOR=254>[<高 级 地 图/FCOLOR=149>]  <进入等级≥:/FCOLOR=103> <$STR(S60)> <→/FCOLOR=58> <编辑地图列表：/FCOLOR=131> <添加/@@InPutString62(添加地图ID)>    <删除/@@InPutString63(删除地图ID)>\
+　     　<ImgEx:6:9:138:14><ImgEx:9:9:95:14|7#到达<$GLOBAL(假人_TJDTCSLV)>级的玩家才可进入/@@InPutInteger61>\
+　<设置/FCOLOR=254>[<收 费 地 图/FCOLOR=149>]  <进入等级≥:/FCOLOR=103> <$STR(S61)> <→/FCOLOR=58> <编辑地图列表：/FCOLOR=131> <添加/@@InPutString64(添加地图ID)>    <删除/@@InPutString65(删除地图ID)>\
+\ \
+　<┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17><上一页/@地图匹配><┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>
+
+[@是否登录盟重]
+#IF
+CHECKVAR GLOBAL 假人_登录盟重 = 开启
+#ACT
+CALCVAR GLOBAL 假人_登录盟重 = 关闭
+SAVEVAR GLOBAL 假人_登录盟重 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @<$STR(S10)>
+#ELSEACT
+CALCVAR GLOBAL 假人_登录盟重 = 开启
+SAVEVAR GLOBAL 假人_登录盟重 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @<$STR(S10)>
+
+[@是否登录比奇]
+#IF
+CHECKVAR GLOBAL 假人_登录比奇 = 开启
+#ACT
+CALCVAR GLOBAL 假人_登录比奇 = 关闭
+SAVEVAR GLOBAL 假人_登录比奇 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @<$STR(S10)>
+#ELSEACT
+CALCVAR GLOBAL 假人_登录比奇 = 开启
+SAVEVAR GLOBAL 假人_登录比奇 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @<$STR(S10)>
+
+[@是否登录苍月]
+#IF
+CHECKVAR GLOBAL 假人_登录苍月 = 开启
+#ACT
+CALCVAR GLOBAL 假人_登录苍月 = 关闭
+SAVEVAR GLOBAL 假人_登录苍月 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @<$STR(S10)>
+#ELSEACT
+CALCVAR GLOBAL 假人_登录苍月 = 开启
+SAVEVAR GLOBAL 假人_登录苍月 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @<$STR(S10)>
+
+[@是否登录封魔]
+#IF
+CHECKVAR GLOBAL 假人_登录封魔 = 开启
+#ACT
+CALCVAR GLOBAL 假人_登录封魔 = 关闭
+SAVEVAR GLOBAL 假人_登录封魔 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @<$STR(S10)>
+#ELSEACT
+CALCVAR GLOBAL 假人_登录封魔 = 开启
+SAVEVAR GLOBAL 假人_登录封魔 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @<$STR(S10)>
+
+[@是否登录魔龙]
+#IF
+CHECKVAR GLOBAL 假人_登录魔龙 = 开启
+#ACT
+CALCVAR GLOBAL 假人_登录魔龙 = 关闭
+SAVEVAR GLOBAL 假人_登录魔龙 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @<$STR(S10)>
+#ELSEACT
+CALCVAR GLOBAL 假人_登录魔龙 = 开启
+SAVEVAR GLOBAL 假人_登录魔龙 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @<$STR(S10)>
+
+[@是否登录白日]
+#IF
+CHECKVAR GLOBAL 假人_登录白日 = 开启
+#ACT
+CALCVAR GLOBAL 假人_登录白日 = 关闭
+SAVEVAR GLOBAL 假人_登录白日 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @<$STR(S10)>
+#ELSEACT
+CALCVAR GLOBAL 假人_登录白日 = 开启
+SAVEVAR GLOBAL 假人_登录白日 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @<$STR(S10)>
+
+[@InPutInteger58]
+#IF
+LARGE N58 65535
+#ACT
+MESSAGEBOX 错误：当前最高支持65535级...
+BREAK
+
+#IF
+LARGE N58 0
+#ACT
+CALCVAR GLOBAL 假人_CJDTCSLV = <$STR(N58)>
+SAVEVAR GLOBAL 假人_CJDTCSLV ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @地图匹配2
+BREAK
+
+[@InPutInteger59]
+#IF
+LARGE N59 65535
+#ACT
+MESSAGEBOX 错误：当前最高支持65535级...
+BREAK
+
+#IF
+LARGE N59 0
+#ACT
+CALCVAR GLOBAL 假人_ZJDTCSLV = <$STR(N59)>
+SAVEVAR GLOBAL 假人_ZJDTCSLV ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @地图匹配2
+BREAK
+
+[@InPutInteger60]
+#IF
+LARGE N60 65535
+#ACT
+MESSAGEBOX 错误：当前最高支持65535级...
+BREAK
+
+#IF
+LARGE N60 0
+#ACT
+CALCVAR GLOBAL 假人_GJDTCSLV = <$STR(N60)>
+SAVEVAR GLOBAL 假人_GJDTCSLV ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @地图匹配2
+BREAK
+
+[@InPutInteger61]
+#IF
+LARGE N61 65535
+#ACT
+MESSAGEBOX 错误：当前最高支持65535级...
+BREAK
+
+#IF
+LARGE N61 0
+#ACT
+CALCVAR GLOBAL 假人_TJDTCSLV = <$STR(N61)>
+SAVEVAR GLOBAL 假人_TJDTCSLV ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @地图匹配2
+BREAK
+
+
+[@InPutString58]
+#IF
+CheckStringlength S58 > 20
+#ACT
+MESSAGEBOX 错误：最多可输入20个字符。
+BREAK
+#ELSEACT
+
+#IF
+CheckStringlength S58 > 0
+#ACT
+#ELSEACT
+BREAK
+
+#IF
+NOT CHECKTEXTLIST ..\QuestDiary\敏哥假人\假人地图\打怪地图_初级.txt <$STR(S58)>
+#ACT
+ADDTEXTLIST ..\QuestDiary\敏哥假人\假人地图\打怪地图_初级.txt <$STR(S58)>
+MESSAGEBOX 成功：[<$STR(S58)>]已添加到初级地图列表
+BREAK
+#ELSEACT
+MESSAGEBOX 失败：[<$STR(S58)>]已经在初级地图列表
+
+[@InPutString59]
+#IF
+CheckStringlength S59 > 20
+#ACT
+MESSAGEBOX 错误：最多可输入20个字符。
+BREAK
+#ELSEACT
+
+#IF
+CheckStringlength S59 > 0
+#ACT
+#ELSEACT
+BREAK
+
+#IF
+CHECKTEXTLIST ..\QuestDiary\敏哥假人\假人地图\打怪地图_初级.txt <$STR(S59)>
+#ACT
+DelTextList ..\QuestDiary\敏哥假人\假人地图\打怪地图_初级.txt <$STR(S59)>
+MESSAGEBOX 成功：[<$STR(S59)>]已从初级地图列表中删除
+BREAK
+#ELSEACT
+MESSAGEBOX 失败：[<$STR(S59)>]不在初级地图列表内
+
+[@InPutString60]
+#IF
+CheckStringlength S60 > 20
+#ACT
+MESSAGEBOX 错误：最多可输入20个字符。
+BREAK
+#ELSEACT
+
+#IF
+CheckStringlength S60 > 0
+#ACT
+#ELSEACT
+BREAK
+
+#IF
+NOT CHECKTEXTLIST ..\QuestDiary\敏哥假人\假人地图\打怪地图_中级.txt <$STR(S60)>
+#ACT
+ADDTEXTLIST ..\QuestDiary\敏哥假人\假人地图\打怪地图_中级.txt <$STR(S60)>
+MESSAGEBOX 成功：[<$STR(S60)>]已添加到中级地图列表
+BREAK
+#ELSEACT
+MESSAGEBOX 失败：[<$STR(S60)>]已经在中级地图列表
+
+[@InPutString61]
+#IF
+CheckStringlength S61 > 20
+#ACT
+MESSAGEBOX 错误：最多可输入20个字符。
+BREAK
+#ELSEACT
+
+#IF
+CheckStringlength S61 > 0
+#ACT
+#ELSEACT
+BREAK
+
+#IF
+CHECKTEXTLIST ..\QuestDiary\敏哥假人\假人地图\打怪地图_中级.txt <$STR(S61)>
+#ACT
+DelTextList ..\QuestDiary\敏哥假人\假人地图\打怪地图_中级.txt <$STR(S61)>
+MESSAGEBOX 成功：[<$STR(S61)>]已从中级地图列表中删除
+BREAK
+#ELSEACT
+MESSAGEBOX 失败：[<$STR(S61)>]不在中级地图列表内
+
+[@InPutString62]
+#IF
+CheckStringlength S62 > 20
+#ACT
+MESSAGEBOX 错误：最多可输入20个字符。
+BREAK
+#ELSEACT
+
+#IF
+CheckStringlength S62 > 0
+#ACT
+#ELSEACT
+BREAK
+
+#IF
+NOT CHECKTEXTLIST ..\QuestDiary\敏哥假人\假人地图\打怪地图_高级.txt <$STR(S62)>
+#ACT
+ADDTEXTLIST ..\QuestDiary\敏哥假人\假人地图\打怪地图_高级.txt <$STR(S62)>
+MESSAGEBOX 成功：[<$STR(S62)>]已添加到高级地图列表
+BREAK
+#ELSEACT
+MESSAGEBOX 失败：[<$STR(S62)>]已经在高级地图列表
+
+[@InPutString63]
+#IF
+CheckStringlength S63 > 20
+#ACT
+MESSAGEBOX 错误：最多可输入20个字符。
+BREAK
+#ELSEACT
+
+#IF
+CheckStringlength S63 > 0
+#ACT
+#ELSEACT
+BREAK
+
+#IF
+CHECKTEXTLIST ..\QuestDiary\敏哥假人\假人地图\打怪地图_高级.txt <$STR(S63)>
+#ACT
+DelTextList ..\QuestDiary\敏哥假人\假人地图\打怪地图_高级.txt <$STR(S63)>
+MESSAGEBOX 成功：[<$STR(S63)>]已从高级地图列表中删除
+BREAK
+#ELSEACT
+MESSAGEBOX 失败：[<$STR(S63)>]不在高级地图列表内
+
+[@InPutString64]
+#IF
+CheckStringlength S64 > 20
+#ACT
+MESSAGEBOX 错误：最多可输入20个字符。
+BREAK
+#ELSEACT
+
+#IF
+CheckStringlength S64 > 0
+#ACT
+#ELSEACT
+BREAK
+
+#IF
+NOT CHECKTEXTLIST ..\QuestDiary\敏哥假人\假人地图\打怪地图_收费.txt <$STR(S64)>
+#ACT
+ADDTEXTLIST ..\QuestDiary\敏哥假人\假人地图\打怪地图_收费.txt <$STR(S64)>
+MESSAGEBOX 成功：[<$STR(S64)>]已添加到收费地图列表
+BREAK
+#ELSEACT
+MESSAGEBOX 失败：[<$STR(S64)>]已经在收费地图列表
+
+[@InPutString65]
+#IF
+CheckStringlength S65 > 20
+#ACT
+MESSAGEBOX 错误：最多可输入20个字符。
+BREAK
+
+#IF
+CheckStringlength S65 > 0
+#ACT
+#ELSEACT
+BREAK
+
+#IF
+CHECKTEXTLIST ..\QuestDiary\敏哥假人\假人地图\打怪地图_收费.txt <$STR(S65)>
+#ACT
+DelTextList ..\QuestDiary\敏哥假人\假人地图\打怪地图_收费.txt <$STR(S65)>
+MESSAGEBOX 成功：[<$STR(S65)>]已从收费地图列表中删除
+BREAK
+#ELSEACT
+MESSAGEBOX 失败：[<$STR(S65)>]不在收费地图列表内
+
+;###################################################################
+
+[@其他控制]
+#IF
+#ACT
+MOV S66 <$GLOBAL(假人_来源地图)>
+MOV S67 <$GLOBAL(假人_目标地图)>
+MOV S68 <$GLOBAL(假人_目标坐标X)>
+MOV S69 <$GLOBAL(假人_目标坐标Y)>
+MOV S70 <$GLOBAL(假人_目标范围)>
+;--------------显示界面------------------
+;-空格
+SetStringBlank 参数1 参数2 参数3 <$STR(S66)> 17  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S67)> 17  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S68)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S69)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S70)> 7  1
+;--------------------------------
+OPENMERCHANTBIGDLG 9 0 1 0 0 0 0
+#IF
+CHECKVAR GLOBAL 假人_选登录器 = 13周年
+#SAY
+<ImgEx:1:9:413:-26/@exit><ImgEx:20:9:-47:29>\
+<ImgEx:11:9:-2:-9/@基本设置><ImgEx:13:9:-2:-9/@假人配置><ImgEx:15:9:-2:-9/@地图匹配><ImgEx:16:9:-2:-9><ImgEx:19:9:-2:-9/@模拟攻沙><ImgEx:7:9:16:-2|7#点击刷新/@其他控制>   <在线假人：/FCOLOR=250><$STR(I90)>\
+<┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>\
+<ImgEx:5:9:91:14><ImgEx:8:9:-10:14|7#输入“*”代表所有地图ID^7#输入“=”取人物当前地图/@@InPutString66>   <ImgEx:5:9:93:14><ImgEx:8:9:-8:14|7#输入“=”取人物当前地图与坐标/@@InPutString67>\
+<来源地图（ID）:/FCOLOR=103> <$STR(S66)>    <目标地图（ID）:/FCOLOR=103> <$STR(S67)>\
+<ImgEx:6:9:90:14><ImgEx:9:9:43:14|7#输入正确坐标/@@InPutInteger68>  <ImgEx:6:9:148:14><ImgEx:9:9:105:14|7#输入正确坐标/@@InPutInteger69>  <ImgEx:6:9:171:14><ImgEx:9:9:128:14|7#范围为[0]随机传送/@@InPutInteger70>\
+<目标地图坐标_X:/FCOLOR=103> <$STR(S68)>   <目标地图坐标_Y:/FCOLOR=103> <$STR(S69)>   <到达范围:/FCOLOR=103> <$STR(S70)>\
+<┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>\
+<召回城市:/FCOLOR=253> [{<$GLOBAL(假人_召回地图)>/FCOLOR=147}]  <盟重省/@召回盟重>  <比奇城/@召回比奇>  <白日门/@召回白日>  <苍月岛/@召回苍月>  <封魔谷/@召回封魔>  <魔龙城/@召回魔龙>\
+　         <ImgEx:9:9:1:-18|7#点击切换地图/@切换源地>\
+<瞬间转移:/FCOLOR=250> <将所有/FCOLOR=103>（来源地图）<转移至/FCOLOR=103>（目标地图）<→/FCOLOR=58> <正常转移|7#活动状态/@转移源地假人ZC>   <待命转移|7#挂机状态/@转移源地假人GJ>\
+　         <ImgEx:9:9:1:14|7#点击切换地图/@切换源地>\
+<行动控制:/FCOLOR=254> [{<$GLOBAL(假人_召回地图)>/FCOLOR=147}]  <立即原地暂停/@假人原地暂停>   <重新恢复启动/@假人恢复启动>\
+<┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>\
+<来源地图假人下线/@清理来源假人>   <目标地图假人下线/@清理目标假人>   <有行会假人下线/@清理有行会假人>   <无行会假人下线/@清理无行会假人>\
+　        <ImgEx:24:9:2:10>　    <ImgEx:24:9:6:10/@其他控制2>　    <ImgEx:24:9:10:10/@其他控制3>\
+　          <移动控制/FCOLOR=159>          <辅助设置/FCOLOR=255>          <行会控制/FCOLOR=255>
+#ELSESAY
+\ \
+\ \
+<ImgEx:1:9:435:-32/@exit><ImgEx:20:9:-25:29>\
+　<ImgEx:11:9:-2:-9/@基本设置><ImgEx:13:9:-2:-9/@假人配置><ImgEx:15:9:-2:-9/@地图匹配><ImgEx:16:9:-2:-9><ImgEx:19:9:-2:-9/@模拟攻沙><ImgEx:7:9:16:-2|7#点击刷新/@其他控制>   <在线假人：/FCOLOR=250><$STR(I90)>\
+　<┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>\
+　<ImgEx:5:9:91:14><ImgEx:8:9:-10:14|7#输入“*”代表所有地图ID^7#输入“=”取人物当前地图/@@InPutString66>   <ImgEx:5:9:93:14><ImgEx:8:9:-8:14|7#输入“=”取人物当前地图与坐标/@@InPutString67>\
+　<来源地图（ID）:/FCOLOR=103> <$STR(S66)>    <目标地图（ID）:/FCOLOR=103> <$STR(S67)>\
+　<ImgEx:6:9:90:14><ImgEx:9:9:43:14|7#输入正确坐标/@@InPutInteger68>  <ImgEx:6:9:148:14><ImgEx:9:9:105:14|7#输入正确坐标/@@InPutInteger69>  <ImgEx:6:9:171:14><ImgEx:9:9:128:14|7#范围为[0]随机传送/@@InPutInteger70>\
+　<目标地图坐标_X:/FCOLOR=103> <$STR(S68)>   <目标地图坐标_Y:/FCOLOR=103> <$STR(S69)>   <到达范围:/FCOLOR=103> <$STR(S70)>\
+　<┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>\
+　<召回城市:/FCOLOR=253> [{<$GLOBAL(假人_召回地图)>/FCOLOR=147}]  <盟重省/@召回盟重>  <比奇城/@召回比奇>  <白日门/@召回白日>  <苍月岛/@召回苍月>  <封魔谷/@召回封魔>  <魔龙城/@召回魔龙>\
+　         　<ImgEx:9:9:1:-18|7#点击切换地图/@切换源地>\
+　<瞬间转移:/FCOLOR=250> <将所有/FCOLOR=103>（来源地图）<转移至/FCOLOR=103>（目标地图）<→/FCOLOR=58> <正常转移|7#活动状态/@转移源地假人ZC>   <待命转移|7#挂机状态/@转移源地假人GJ>\
+　         　<ImgEx:9:9:1:14|7#点击切换地图/@切换源地>\
+　<行动控制:/FCOLOR=254> [{<$GLOBAL(假人_召回地图)>/FCOLOR=147}]  <立即原地暂停/@假人原地暂停>   <重新恢复启动/@假人恢复启动>\
+　<┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>\
+　<来源地图假人下线/@清理来源假人>   <目标地图假人下线/@清理目标假人>   <有行会假人下线/@清理有行会假人>   <无行会假人下线/@清理无行会假人>\
+　        　<ImgEx:24:9:2:10>　    <ImgEx:24:9:6:10/@其他控制2>　    <ImgEx:24:9:10:10/@其他控制3>\
+　          　<移动控制/FCOLOR=159>          <辅助设置/FCOLOR=255>          <行会控制/FCOLOR=255>
+
+
+
+[@InPutString66]
+#IF
+CheckStringlength S66 > 16
+#ACT
+MESSAGEBOX 错误：最多可输入16个字符。
+BREAK
+
+#IF
+CompareText S66 =
+#ACT
+CALCVAR GLOBAL 假人_来源地图 = <$MAP>
+SAVEVAR GLOBAL 假人_来源地图 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制
+BREAK
+
+#IF
+CheckStringlength S66 > 0
+#ACT
+CALCVAR GLOBAL 假人_来源地图 = <$STR(S66)>
+SAVEVAR GLOBAL 假人_来源地图 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 你已经设置来源地图地图ID为：<$STR(S66)>
+GOTO @其他控制
+BREAK
+
+[@InPutString67]
+#IF
+CheckStringlength S67 > 16
+#ACT
+MESSAGEBOX 错误：最多可输入16个字符。
+BREAK
+
+#IF
+CompareText S67 =
+#ACT
+CALCVAR GLOBAL 假人_目标地图 = <$MAP>
+SAVEVAR GLOBAL 假人_目标地图 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_目标坐标X = <$X>
+SAVEVAR GLOBAL 假人_目标坐标X ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_目标坐标Y = <$Y>
+SAVEVAR GLOBAL 假人_目标坐标Y ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 目标地图ID为：<$MAP>，坐标X为：<$X>，坐标Y为：<$Y>
+GOTO @其他控制
+BREAK
+
+#IF
+CheckStringlength S67 > 0
+#ACT
+CALCVAR GLOBAL 假人_目标地图 = <$STR(S67)>
+SAVEVAR GLOBAL 假人_目标地图 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 你已经设置目标地图地图ID为：<$STR(S67)>
+GOTO @其他控制
+BREAK
+
+[@InPutInteger68]
+#IF
+CheckStringlength N68 > 4
+#ACT
+MESSAGEBOX 错误：最多可输入4个字符。
+BREAK
+
+#IF
+LARGE N68 0
+#ACT
+CALCVAR GLOBAL 假人_目标坐标X = <$STR(N68)>
+SAVEVAR GLOBAL 假人_目标坐标X ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制
+BREAK
+
+[@InPutInteger69]
+#IF
+CheckStringlength N69 > 4
+#ACT
+MESSAGEBOX 错误：最多可输入4个字符。
+BREAK
+
+#IF
+LARGE N69 0
+#ACT
+CALCVAR GLOBAL 假人_目标坐标Y = <$STR(N69)>
+SAVEVAR GLOBAL 假人_目标坐标Y ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制
+BREAK
+
+[@InPutInteger70]
+#IF
+LARGE N70 500
+#ACT
+MESSAGEBOX 提示：你设置的范围过大。
+#ELSEACT
+CALCVAR GLOBAL 假人_目标范围 = <$STR(N70)>
+SAVEVAR GLOBAL 假人_目标范围 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制
+BREAK
+
+[@切换源地]
+#IF
+CHECKVAR GLOBAL 假人_召回地图 = 来源地图
+#ACT
+CALCVAR GLOBAL 假人_召回地图 = 目标地图
+SAVEVAR GLOBAL 假人_召回地图 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制
+#ELSEACT
+CALCVAR GLOBAL 假人_召回地图 = 来源地图
+SAVEVAR GLOBAL 假人_召回地图 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制
+
+;----------------------------
+[@召回盟重]
+#IF
+CHECKVAR GLOBAL 假人_召回地图 = 来源地图
+#ACT
+GOTO @召回盟重LY
+BREAK
+
+#IF
+CHECKVAR GLOBAL 假人_召回地图 = 目标地图
+#ACT
+GOTO @召回盟重MB
+BREAK
+
+#ELSEACT
+MESSAGEBOX 错误：没有识别到地图信息，请还原默认配置。
+
+[@召回盟重LY]
+#IF
+CHECKVAR GLOBAL 假人_来源地图 = *
+#ACT
+GOTO @召回全部盟重LY
+#ELSEACT
+GOTO @召回指定盟重LY
+
+[@召回全部盟重LY]
+#IF
+CHECKDUMMYCOUNT > 0
+#ACT
+Gmexecute 开始提问 @假人传送土城
+SENDMSG 7 255 233 提示：所有地图的假人已经全部召回盟重省
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：当前没有假人可召回。
+
+[@召回指定盟重LY]
+#IF
+CHECKMAPDUMMYCOUNT <$GLOBAL(假人_来源地图)> > 0
+#ACT
+Gmexecute 开始提问 @假人_LY_土城
+SENDMSG 7 255 233 提示：[<$GLOBAL(假人_来源地图)>]地图的假人已经全部召回盟重省
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：当前没有假人可召回。
+
+[@召回盟重MB]
+#IF
+CHECKMAPDUMMYCOUNT <$GLOBAL(假人_目标地图)> > 0
+#ACT
+Gmexecute 开始提问 @假人_MB_土城
+SENDMSG 7 255 233 提示：[<$GLOBAL(假人_目标地图)>]地图的假人已经全部召回盟重省
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：目标地图当前没有假人可召回。
+
+;----------------------------
+[@召回比奇]
+#IF
+CHECKVAR GLOBAL 假人_召回地图 = 来源地图
+#ACT
+GOTO @召回比奇LY
+BREAK
+
+#IF
+CHECKVAR GLOBAL 假人_召回地图 = 目标地图
+#ACT
+GOTO @召回比奇MB
+BREAK
+
+#ELSEACT
+MESSAGEBOX 错误：没有识别到地图信息，请还原默认配置。
+
+[@召回比奇LY]
+#IF
+CHECKVAR GLOBAL 假人_来源地图 = *
+#ACT
+GOTO @召回全部比奇LY
+#ELSEACT
+GOTO @召回指定比奇LY
+
+[@召回全部比奇LY]
+#IF
+CHECKDUMMYCOUNT > 0
+#ACT
+Gmexecute 开始提问 @假人传送比奇
+SENDMSG 7 255 233 提示：所有地图的假人已经全部召回比奇城
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：当前没有假人可召回。
+
+[@召回指定比奇LY]
+#IF
+CHECKMAPDUMMYCOUNT <$GLOBAL(假人_来源地图)> > 0
+#ACT
+Gmexecute 开始提问 @假人_LY_比奇
+SENDMSG 7 255 233 提示：[<$GLOBAL(假人_来源地图)>]地图的假人已经全部召回比奇城
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：当前没有假人可召回。
+
+[@召回比奇MB]
+#IF
+CHECKMAPDUMMYCOUNT <$GLOBAL(假人_目标地图)> > 0
+#ACT
+Gmexecute 开始提问 @假人_MB_比奇
+SENDMSG 7 255 233 提示：[<$GLOBAL(假人_目标地图)>]地图的假人已经全部召回比奇城
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：目标地图当前没有假人可召回。
+
+;----------------------------
+[@召回白日]
+#IF
+CHECKVAR GLOBAL 假人_召回地图 = 来源地图
+#ACT
+GOTO @召回白日LY
+BREAK
+
+#IF
+CHECKVAR GLOBAL 假人_召回地图 = 目标地图
+#ACT
+GOTO @召回白日MB
+BREAK
+
+#ELSEACT
+MESSAGEBOX 错误：没有识别到地图信息，请还原默认配置。
+
+[@召回白日LY]
+#IF
+CHECKVAR GLOBAL 假人_来源地图 = *
+#ACT
+GOTO @召回全部白日LY
+#ELSEACT
+GOTO @召回指定白日LY
+
+[@召回全部白日LY]
+#IF
+CHECKDUMMYCOUNT > 0
+#ACT
+Gmexecute 开始提问 @假人传送白日
+SENDMSG 7 255 233 提示：所有地图的假人已经全部召回白日门
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：当前没有假人可召回。
+
+[@召回指定白日LY]
+#IF
+CHECKMAPDUMMYCOUNT <$GLOBAL(假人_来源地图)> > 0
+#ACT
+Gmexecute 开始提问 @假人_LY_白日
+SENDMSG 7 255 233 提示：[<$GLOBAL(假人_来源地图)>]地图的假人已经全部召回白日门
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：当前没有假人可召回。
+
+[@召回白日MB]
+#IF
+CHECKMAPDUMMYCOUNT <$GLOBAL(假人_目标地图)> > 0
+#ACT
+Gmexecute 开始提问 @假人_MB_白日
+SENDMSG 7 255 233 提示：[<$GLOBAL(假人_目标地图)>]地图的假人已经全部召回白日门
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：目标地图当前没有假人可召回。
+
+;----------------------------
+[@召回苍月]
+#IF
+CHECKVAR GLOBAL 假人_召回地图 = 来源地图
+#ACT
+GOTO @召回苍月LY
+BREAK
+
+#IF
+CHECKVAR GLOBAL 假人_召回地图 = 目标地图
+#ACT
+GOTO @召回苍月MB
+BREAK
+
+#ELSEACT
+MESSAGEBOX 错误：没有识别到地图信息，请还原默认配置。
+
+[@召回苍月LY]
+#IF
+CHECKVAR GLOBAL 假人_来源地图 = *
+#ACT
+GOTO @召回全部苍月LY
+#ELSEACT
+GOTO @召回指定苍月LY
+
+[@召回全部苍月LY]
+#IF
+CHECKDUMMYCOUNT > 0
+#ACT
+Gmexecute 开始提问 @假人传送苍月
+SENDMSG 7 255 233 提示：所有地图的假人已经全部召回苍月岛
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：当前没有假人可召回。
+
+[@召回指定苍月LY]
+#IF
+CHECKMAPDUMMYCOUNT <$GLOBAL(假人_来源地图)> > 0
+#ACT
+Gmexecute 开始提问 @假人_LY_苍月
+SENDMSG 7 255 233 提示：[<$GLOBAL(假人_来源地图)>]地图的假人已经全部召回苍月岛
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：当前没有假人可召回。
+
+[@召回苍月MB]
+#IF
+CHECKMAPDUMMYCOUNT <$GLOBAL(假人_目标地图)> > 0
+#ACT
+Gmexecute 开始提问 @假人_MB_苍月
+SENDMSG 7 255 233 提示：[<$GLOBAL(假人_目标地图)>]地图的假人已经全部召回苍月岛
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：目标地图当前没有假人可召回。
+
+;----------------------------
+[@召回封魔]
+#IF
+CHECKVAR GLOBAL 假人_召回地图 = 来源地图
+#ACT
+GOTO @召回封魔LY
+BREAK
+
+#IF
+CHECKVAR GLOBAL 假人_召回地图 = 目标地图
+#ACT
+GOTO @召回封魔MB
+BREAK
+
+#ELSEACT
+MESSAGEBOX 错误：没有识别到地图信息，请还原默认配置。
+
+[@召回封魔LY]
+#IF
+CHECKVAR GLOBAL 假人_来源地图 = *
+#ACT
+GOTO @召回全部封魔LY
+#ELSEACT
+GOTO @召回指定封魔LY
+
+[@召回全部封魔LY]
+#IF
+CHECKDUMMYCOUNT > 0
+#ACT
+Gmexecute 开始提问 @假人传送封魔
+SENDMSG 7 255 233 提示：所有地图的假人已经全部召回封魔谷
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：当前没有假人可召回。
+
+[@召回指定封魔LY]
+#IF
+CHECKMAPDUMMYCOUNT <$GLOBAL(假人_来源地图)> > 0
+#ACT
+Gmexecute 开始提问 @假人_LY_封魔
+SENDMSG 7 255 233 提示：[<$GLOBAL(假人_来源地图)>]地图的假人已经全部召回封魔谷
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：当前没有假人可召回。
+
+[@召回封魔MB]
+#IF
+CHECKMAPDUMMYCOUNT <$GLOBAL(假人_目标地图)> > 0
+#ACT
+Gmexecute 开始提问 @假人_MB_封魔
+SENDMSG 7 255 233 提示：[<$GLOBAL(假人_目标地图)>]地图的假人已经全部召回封魔谷
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：目标地图当前没有假人可召回。
+
+;----------------------------
+[@召回魔龙]
+#IF
+CHECKVAR GLOBAL 假人_召回地图 = 来源地图
+#ACT
+GOTO @召回魔龙LY
+BREAK
+
+#IF
+CHECKVAR GLOBAL 假人_召回地图 = 目标地图
+#ACT
+GOTO @召回魔龙MB
+BREAK
+
+#ELSEACT
+MESSAGEBOX 错误：没有识别到地图信息，请还原默认配置。
+
+[@召回魔龙LY]
+#IF
+CHECKVAR GLOBAL 假人_来源地图 = *
+#ACT
+GOTO @召回全部魔龙LY
+#ELSEACT
+GOTO @召回指定魔龙LY
+
+[@召回全部魔龙LY]
+#IF
+CHECKDUMMYCOUNT > 0
+#ACT
+Gmexecute 开始提问 @假人传送魔龙
+SENDMSG 7 255 233 提示：所有地图的假人已经全部召回魔龙城
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：当前没有假人可召回。
+
+[@召回指定魔龙LY]
+#IF
+CHECKMAPDUMMYCOUNT <$GLOBAL(假人_来源地图)> > 0
+#ACT
+Gmexecute 开始提问 @假人_LY_魔龙
+SENDMSG 7 255 233 提示：[<$GLOBAL(假人_来源地图)>]地图的假人已经全部召回魔龙城
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：当前没有假人可召回。
+
+[@召回魔龙MB]
+#IF
+CHECKMAPDUMMYCOUNT <$GLOBAL(假人_目标地图)> > 0
+#ACT
+Gmexecute 开始提问 @假人_MB_魔龙
+SENDMSG 7 255 233 提示：[<$GLOBAL(假人_目标地图)>]地图的假人已经全部召回魔龙城
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：目标地图当前没有假人可召回。
+
+;-------------------假人转移-------------------
+[@转移源地假人ZC]
+#IF
+CHECKVAR GLOBAL 假人_来源地图 = *
+#ACT
+GOTO @转移全部假人ZC
+#ELSEACT
+GOTO @转移指定假人ZC
+
+[@转移全部假人ZC]
+#IF
+CHECKDUMMYCOUNT > 0
+#ACT
+Gmexecute 开始提问 @假人转移至目标ZC
+SENDMSG 7 255 233 提示：所有地图的假人已经全部转移至目标地图[<$GLOBAL(假人_目标地图)>]（<$GLOBAL(假人_目标坐标X)>，<$GLOBAL(假人_目标坐标Y)>）范围：<$GLOBAL(假人_目标范围)>处
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：当前没有假人可转移。
+
+[@转移指定假人ZC]
+#IF
+CHECKMAPDUMMYCOUNT <$GLOBAL(假人_来源地图)> > 0
+#ACT
+Gmexecute 开始提问 @假人转移至目标ZC
+SENDMSG 7 255 233 提示：来源地图[<$GLOBAL(假人_来源地图)>]的假人已经全部转移至目标地图[<$GLOBAL(假人_目标地图)>]（<$GLOBAL(假人_目标坐标X)>，<$GLOBAL(假人_目标坐标Y)>）范围：<$GLOBAL(假人_目标范围)>处
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：检测到来源地图[<$GLOBAL(假人_来源地图)>]当前没有假人可转移。
+
+[@转移源地假人GJ]
+#IF
+CHECKVAR GLOBAL 假人_来源地图 = *
+#ACT
+GOTO @转移全部假人GJ
+#ELSEACT
+GOTO @转移指定假人GJ
+
+[@转移全部假人GJ]
+#IF
+CHECKDUMMYCOUNT > 0
+#ACT
+Gmexecute 开始提问 @假人转移至目标GJ
+SENDMSG 7 255 233 提示：所有地图的假人已经全部转移至目标地图[<$GLOBAL(假人_目标地图)>]（<$GLOBAL(假人_目标坐标X)>，<$GLOBAL(假人_目标坐标Y)>）范围：<$GLOBAL(假人_目标范围)>处
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：当前没有假人可转移。
+
+[@转移指定假人GJ]
+#IF
+CHECKMAPDUMMYCOUNT <$GLOBAL(假人_来源地图)> > 0
+#ACT
+Gmexecute 开始提问 @假人转移至目标GJ
+SENDMSG 7 255 233 提示：来源地图[<$GLOBAL(假人_来源地图)>]的假人已经全部转移至目标地图[<$GLOBAL(假人_目标地图)>]（<$GLOBAL(假人_目标坐标X)>，<$GLOBAL(假人_目标坐标Y)>）范围：<$GLOBAL(假人_目标范围)>处
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：检测到来源地图[<$GLOBAL(假人_来源地图)>]当前没有假人可转移。
+
+;-------------------假人清理-------------------
+[@清理来源假人]
+#IF
+CHECKVAR GLOBAL 假人_来源地图 = *
+#ACT
+GOTO @清理全部假人LY
+#ELSEACT
+GOTO @清理指定假人LY
+
+[@清理全部假人LY]
+#IF
+CHECKDUMMYCOUNT > 0
+#ACT
+MOV I91 0
+Gmexecute 开始提问 @清理假人LY
+SENDMSG 7 255 233 提示：所有地图的假人已经全部下线
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：服务器当前没有假人可清理。
+
+[@清理指定假人LY]
+#IF
+CHECKMAPDUMMYCOUNT <$GLOBAL(假人_来源地图)> > 0
+#ACT
+Gmexecute 开始提问 @清理假人LY
+SENDMSG 7 255 233 提示：来源地图[<$GLOBAL(假人_来源地图)>]的假人已经全部下线
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：来源地图[<$GLOBAL(假人_来源地图)>]当前没有假人可清理。
+
+[@清理目标假人]
+#IF
+CHECKMAPDUMMYCOUNT <$GLOBAL(假人_目标地图)> > 0
+#ACT
+Gmexecute 开始提问 @清理假人MB
+SENDMSG 7 255 233 提示：目标地图[<$GLOBAL(假人_目标地图)>]的假人已经全部下线
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：目标地图[<$GLOBAL(假人_目标地图)>]当前没有假人可清理。
+
+[@清理有行会假人]
+#IF
+CHECKDUMMYCOUNT > 0
+#ACT
+Gmexecute 开始提问 @有会假人下线
+SENDMSG 7 255 233 提示：所有已经入会的假人已经全部下线
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：服务器当前没有假人可清理。
+
+[@清理无行会假人]
+#IF
+CHECKDUMMYCOUNT > 0
+#ACT
+Gmexecute 开始提问 @无会假人下线
+SENDMSG 7 255 233 提示：所有没有入会的假人已经全部下线
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：服务器当前没有假人可清理。
+
+;-------------------行动控制-------------------
+[@假人原地暂停]
+#IF
+CHECKVAR GLOBAL 假人_召回地图 = 来源地图
+#ACT
+GOTO @暂停假人LY
+BREAK
+
+#IF
+CHECKVAR GLOBAL 假人_召回地图 = 目标地图
+#ACT
+GOTO @暂停假人MB
+BREAK
+
+#ELSEACT
+MESSAGEBOX 错误：没有识别到地图信息，请还原默认配置。
+
+[@暂停假人LY]
+#IF
+CHECKVAR GLOBAL 假人_来源地图 = *
+#ACT
+GOTO @暂停全部假人LY
+#ELSEACT
+GOTO @暂停指定假人LY
+
+[@暂停全部假人LY]
+#IF
+CHECKDUMMYCOUNT > 0
+#ACT
+Gmexecute 开始提问 @暂停假人_LY
+SENDMSG 7 255 233 提示：所有地图的假人已经全部原地暂停
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：服务器当前没有发现假人。
+
+[@暂停指定假人LY]
+#IF
+CHECKMAPDUMMYCOUNT <$GLOBAL(假人_来源地图)> > 0
+#ACT
+Gmexecute 开始提问 @暂停假人_LY
+SENDMSG 7 255 233 提示：来源地图[<$GLOBAL(假人_来源地图)>]的假人已经全部原地暂停
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：来源地图[<$GLOBAL(假人_来源地图)>]当前没有发现假人。
+
+[@暂停假人MB]
+#IF
+CHECKMAPDUMMYCOUNT <$GLOBAL(假人_目标地图)> > 0
+#ACT
+Gmexecute 开始提问 @暂停假人_MB
+SENDMSG 7 255 233 提示：目标地图[<$GLOBAL(假人_目标地图)>]的假人已经全部原地暂停
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：目标地图[<$GLOBAL(假人_目标地图)>]当前没有发现假人。
+
+[@假人恢复启动]
+#IF
+CHECKVAR GLOBAL 假人_召回地图 = 来源地图
+#ACT
+GOTO @启动假人LY
+BREAK
+
+#IF
+CHECKVAR GLOBAL 假人_召回地图 = 目标地图
+#ACT
+GOTO @启动假人MB
+BREAK
+
+#ELSEACT
+MESSAGEBOX 错误：没有识别到地图信息，请还原默认配置。
+
+[@启动假人LY]
+#IF
+CHECKVAR GLOBAL 假人_来源地图 = *
+#ACT
+GOTO @启动全部假人LY
+#ELSEACT
+GOTO @启动指定假人LY
+
+[@启动全部假人LY]
+#IF
+CHECKDUMMYCOUNT > 0
+#ACT
+Gmexecute 开始提问 @启动假人_LY
+SENDMSG 7 255 233 提示：所有地图的假人已经全部恢复启动
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：服务器当前没有发现假人。
+
+[@启动指定假人LY]
+#IF
+CHECKMAPDUMMYCOUNT <$GLOBAL(假人_来源地图)> > 0
+#ACT
+Gmexecute 开始提问 @启动假人_LY
+SENDMSG 7 255 233 提示：来源地图[<$GLOBAL(假人_来源地图)>]的假人已经全部恢复启动
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：来源地图[<$GLOBAL(假人_来源地图)>]当前没有发现假人。
+
+[@启动假人MB]
+#IF
+CHECKMAPDUMMYCOUNT <$GLOBAL(假人_目标地图)> > 0
+#ACT
+Gmexecute 开始提问 @启动假人_MB
+SENDMSG 7 255 233 提示：目标地图[<$GLOBAL(假人_目标地图)>]的假人已经全部恢复启动
+BREAK
+#ELSEACT
+MESSAGEBOX 提示：目标地图[<$GLOBAL(假人_目标地图)>]当前没有发现假人。
+
+;####################################################
+
+[@其他控制2]
+#IF
+CHECKVAR GLOBAL 假人_在线回收 = 开启
+#ACT
+MOV S20 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S20 <ImgEx:2:9:1:-2>
+#IF
+CHECKVAR GLOBAL 假人_同步攻城 = 开启
+#ACT
+MOV S21 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S21 <ImgEx:2:9:1:-2>
+#IF
+CHECKVAR GLOBAL 假人_装备自换 = 开启
+#ACT
+MOV S22 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S22 <ImgEx:2:9:1:-2>
+#IF
+CHECKVAR GLOBAL 假人_随机喊话 = 开启
+#ACT
+MOV S23 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S23 <ImgEx:2:9:1:-2>
+#IF
+CHECKVAR GLOBAL 假人_追杀真人 = 开启
+#ACT
+MOV S24 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S24 <ImgEx:2:9:1:-2>
+#IF
+CHECKVAR GLOBAL 假人_自充会员 = 开启
+#ACT
+MOV S25 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S25 <ImgEx:2:9:1:-2>
+
+#IF
+#ACT
+MOV S71 <$GLOBAL(假人_喊话几率)>
+MOV S72 <$GLOBAL(假人_追杀等级)>
+MOV S73 <$GLOBAL(假人_追杀几率)>
+MOV S74 <$GLOBAL(假人_自充等级)>
+MOV S75 <$GLOBAL(假人_充值几率)>
+MOV S76 <$GLOBAL(假人_会员名额)>
+MOV S77 <$GLOBAL(假人_元宝比例)>
+MOV S78 <$GLOBAL(假人_积分比例)>
+MOV S79 <$GLOBAL(假人_喊话等级)>
+;--------------显示界面------------------
+;-空格
+SetStringBlank 参数1 参数2 参数3 <$STR(S71)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S72)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S73)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S74)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S75)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S76)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S77)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S78)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S79)> 7  1
+;--------------------------------
+OPENMERCHANTBIGDLG 9 0 1 0 0 0 0
+#IF
+CHECKVAR GLOBAL 假人_选登录器 = 13周年
+#SAY
+<ImgEx:1:9:413:-26/@exit><ImgEx:20:9:-47:29>\
+<ImgEx:11:9:-2:-9/@基本设置><ImgEx:13:9:-2:-9/@假人配置><ImgEx:15:9:-2:-9/@地图匹配><ImgEx:16:9:-2:-9><ImgEx:19:9:-2:-9/@模拟攻沙><ImgEx:7:9:16:-2|7#点击刷新/@其他控制2>   <在线假人：/FCOLOR=250><$STR(I90)>\
+<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_同步攻城)>^7#1、开启同步攻城以后需关闭攻城总开关^7#2、设置好模拟攻沙里面的进攻地点即可/@同步攻城>  <ImgEx:4:9:199:14|250#状态：<$GLOBAL(假人_在线回收)>^/@假人回收>　
+<ImgEx:6:9:311:14><ImgEx:9:9:271:14|7#数字越大越频繁/@@InPutInteger80>\
+<$STR(S21)> <同步攻城/FCOLOR=103> (<同步服务器攻城时间/FCOLOR=160>)     <$STR(S20)> <在线回收/FCOLOR=103>   <回收频率:/FCOLOR=103> <$GLOBAL(假人_回收频率)>\
+<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_装备自换)>^/@装备自换>\
+<$STR(S22)> <假人自换装备/FCOLOR=103> (<完全模拟真人操作，可识别装备属性/FCOLOR=160>)  [<功能介绍|7#1、假人拾到装备后会自动佩戴到身上^7#2、假人自动判断拾到的装备属性好坏>]\
+<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_随机喊话)>^/@随机喊话> <ImgEx:6:9:144:14><ImgEx:9:9:101:14|7#符合等级才喊话/@@InPutInteger79> <ImgEx:9:9:166:14><ImgEx:6:9:123:14|7#建议设置100以上的数字/@@InPutInteger71>\
+<$STR(S23)> <在线随机喊话/FCOLOR=103>   <喊话等级:/FCOLOR=103> <$STR(S79)>  <喊话几率:/FCOLOR=103> <$STR(S71)>(<对英雄无效/FCOLOR=160>)\
+<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_追杀真人)>^/@追杀真人> <ImgEx:6:9:144:14><ImgEx:9:9:101:14|7#小于目标等级的真人不会被追踪/@@InPutInteger72> <ImgEx:6:9:166:14>
+<ImgEx:9:9:125:14|7#1、在安全区里的玩家不会被追踪^7#2、没有怪物的地图禁止假人追踪^7#3、追踪几率越小则追踪人数越多/@@InPutInteger73>\
+<$STR(S24)> <在线追踪真人/FCOLOR=103>   <目标等级:/FCOLOR=103> <$STR(S72)>  <追踪几率:/FCOLOR=103> <$STR(S73)> <添加过滤地图|7#被过滤的地图禁止假人追踪/@@InPutString73>\
+<┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>\
+<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_自充会员)>^/@假人会员> <ImgEx:6:9:144:14><ImgEx:9:9:101:14|7#符合等级才能充值/@@InPutInteger74> <ImgEx:6:9:166:14>
+<ImgEx:9:9:125:14|7#建议200以上数值^7#需配合假人数设置/@@InPutInteger75> <ImgEx:6:9:163:14><ImgEx:9:9:122:14|7#假人会员的名额上限^7#是会员帐号可继续充值^7#其他人也能充小量元宝/@@InPutInteger76>\
+<$STR(S25)> <假人自充会员/FCOLOR=103>   <授权等级:/FCOLOR=103> <$STR(S74)>  <充值几率:/FCOLOR=103> <$STR(S75)> <名 额:/FCOLOR=103> <$STR(S76)>\
+　                 <ImgEx:6:9:54:14><ImgEx:9:9:11:14|7#1：<$GLOBAL(假人_元宝比例)>/@@InPutInteger77> <ImgEx:6:9:76:14><ImgEx:9:9:33:14|7#1：<$GLOBAL(假人_积分比例)>/@@InPutInteger78>\
+设置假人充值比例： <元宝比例:/FCOLOR=103> <$STR(S77)>  <积分比例:/FCOLOR=103> <$STR(S78)>(<同步充值平台/FCOLOR=160>)\
+　        <ImgEx:24:9:2:10/@其他控制>　    <ImgEx:24:9:6:10>　    <ImgEx:24:9:10:10/@其他控制3>\
+　          <移动控制/FCOLOR=255>          <辅助设置/FCOLOR=159>          <行会控制/FCOLOR=255>
+#ELSESAY
+\ \
+\ \
+<ImgEx:1:9:435:-32/@exit><ImgEx:20:9:-25:29>\
+　<ImgEx:11:9:-2:-9/@基本设置><ImgEx:13:9:-2:-9/@假人配置><ImgEx:15:9:-2:-9/@地图匹配><ImgEx:16:9:-2:-9><ImgEx:19:9:-2:-9/@模拟攻沙><ImgEx:7:9:16:-2|7#点击刷新/@其他控制2>   <在线假人：/FCOLOR=250><$STR(I90)>\
+　<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_同步攻城)>^7#1、开启同步攻城以后需关闭攻城总开关^7#2、设置好模拟攻沙里面的进攻地点即可/@同步攻城>  <ImgEx:4:9:199:14|250#状态：<$GLOBAL(假人_在线回收)>^/@假人回收>　
+<ImgEx:6:9:311:14><ImgEx:9:9:271:14|7#数字越大越频繁/@@InPutInteger80>\
+　<$STR(S21)> <同步攻城/FCOLOR=103> (<同步服务器攻城时间/FCOLOR=160>)     <$STR(S20)> <在线回收/FCOLOR=103>   <回收频率:/FCOLOR=103> <$GLOBAL(假人_回收频率)>\
+　<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_装备自换)>^/@装备自换>\
+　<$STR(S22)> <假人自换装备/FCOLOR=103> (<完全模拟真人操作，可识别装备属性/FCOLOR=160>)  [<功能介绍|7#1、假人拾到装备后会自动佩戴到身上^7#2、假人自动判断拾到的装备属性好坏>]\
+　<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_随机喊话)>^/@随机喊话> <ImgEx:6:9:144:14><ImgEx:9:9:101:14|7#符合等级才喊话/@@InPutInteger79> <ImgEx:9:9:166:14><ImgEx:6:9:123:14|7#建议设置100以上的数字/@@InPutInteger71>\
+　<$STR(S23)> <在线随机喊话/FCOLOR=103>   <喊话等级:/FCOLOR=103> <$STR(S79)>  <喊话几率:/FCOLOR=103> <$STR(S71)>(<对英雄无效/FCOLOR=160>)\
+　<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_追杀真人)>^/@追杀真人> <ImgEx:6:9:144:14><ImgEx:9:9:101:14|7#小于目标等级的真人不会被追踪/@@InPutInteger72> <ImgEx:6:9:166:14>
+<ImgEx:9:9:123:14|7#1、在安全区里的玩家不会被追踪^7#2、没有怪物的地图禁止假人追踪^7#3、追踪几率越小则追踪人数越多/@@InPutInteger73>\
+　<$STR(S24)> <在线追踪真人/FCOLOR=103>   <目标等级:/FCOLOR=103> <$STR(S72)>  <追踪几率:/FCOLOR=103> <$STR(S73)> <添加过滤地图|7#被过滤的地图禁止假人追踪/@@InPutString73>\
+　<┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>\
+　<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_自充会员)>^/@假人会员> <ImgEx:6:9:144:14><ImgEx:9:9:101:14|7#符合等级才能充值/@@InPutInteger74> <ImgEx:6:9:166:14>
+<ImgEx:9:9:125:14|7#建议200以上数值^7#需配合假人数设置/@@InPutInteger75> <ImgEx:6:9:163:14><ImgEx:9:9:122:14|7#假人会员的名额上限^7#是会员帐号可继续充值^7#其他人也能充小量元宝/@@InPutInteger76>\
+　<$STR(S25)> <假人自充会员/FCOLOR=103>   <授权等级:/FCOLOR=103> <$STR(S74)>  <充值几率:/FCOLOR=103> <$STR(S75)> <名 额:/FCOLOR=103> <$STR(S76)>\
+　                 　<ImgEx:6:9:54:14><ImgEx:9:9:11:14|7#1：<$GLOBAL(假人_元宝比例)>/@@InPutInteger77> <ImgEx:6:9:76:14><ImgEx:9:9:33:14|7#1：<$GLOBAL(假人_积分比例)>/@@InPutInteger78>\
+　设置假人充值比例： <元宝比例:/FCOLOR=103> <$STR(S77)>  <积分比例:/FCOLOR=103> <$STR(S78)>(<同步充值平台/FCOLOR=160>)\
+　        　<ImgEx:24:9:2:10/@其他控制>　    <ImgEx:24:9:6:10>　    <ImgEx:24:9:10:10/@其他控制3>\
+　          　<移动控制/FCOLOR=255>          <辅助设置/FCOLOR=159>          <行会控制/FCOLOR=255>
+
+[@同步攻城]
+#IF
+CHECKVAR GLOBAL 假人_攻城开关 = 开启
+#ACT
+MESSAGEBOX 提示：你已经开启了攻城总开关，请到模拟攻沙处关闭。
+BREAK
+
+#IF
+CHECKVAR GLOBAL 假人_同步攻城 = 开启
+#ACT
+CALCVAR GLOBAL 假人_同步攻城 = 关闭
+SAVEVAR GLOBAL 假人_同步攻城 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制2
+#ELSEACT
+CALCVAR GLOBAL 假人_同步攻城 = 开启
+SAVEVAR GLOBAL 假人_同步攻城 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制2
+
+[@假人回收]
+#IF
+CHECKVAR GLOBAL 假人_在线回收 = 开启
+#ACT
+CALCVAR GLOBAL 假人_在线回收 = 关闭
+SAVEVAR GLOBAL 假人_在线回收 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制2
+#ELSEACT
+CALCVAR GLOBAL 假人_在线回收 = 开启
+SAVEVAR GLOBAL 假人_在线回收 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制2
+
+[@装备自换]
+#IF
+CHECKVAR GLOBAL 假人_装备自换 = 开启
+#ACT
+CALCVAR GLOBAL 假人_装备自换 = 关闭
+SAVEVAR GLOBAL 假人_装备自换 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制2
+#ELSEACT
+CALCVAR GLOBAL 假人_装备自换 = 开启
+SAVEVAR GLOBAL 假人_装备自换 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制2
+
+[@随机喊话]
+#IF
+CHECKVAR GLOBAL 假人_随机喊话 = 开启
+#ACT
+CALCVAR GLOBAL 假人_随机喊话 = 关闭
+SAVEVAR GLOBAL 假人_随机喊话 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制2
+#ELSEACT
+CALCVAR GLOBAL 假人_随机喊话 = 开启
+SAVEVAR GLOBAL 假人_随机喊话 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制2
+
+[@InPutInteger71]
+#IF
+CheckStringlength N71 > 4
+#ACT
+MESSAGEBOX 错误：你输入的数值过大。
+BREAK
+
+#IF
+LARGE N71 0
+#ACT
+CALCVAR GLOBAL 假人_喊话几率 = <$STR(N71)>
+SAVEVAR GLOBAL 假人_喊话几率 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制2
+BREAK
+
+[@追杀真人]
+#IF
+CHECKVAR GLOBAL 假人_追杀真人 = 开启
+#ACT
+MOV I94 0
+CALCVAR GLOBAL 假人_追杀真人 = 关闭
+SAVEVAR GLOBAL 假人_追杀真人 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制2
+#ELSEACT
+CALCVAR GLOBAL 假人_追杀真人 = 开启
+SAVEVAR GLOBAL 假人_追杀真人 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制2
+
+[@假人会员]
+#IF
+CHECKVAR GLOBAL 假人_自充会员 = 关闭
+CHECKVAR GLOBAL 假人_元宝比例 < 1
+CHECKVAR GLOBAL 假人_积分比例 < 1
+#ACT
+MESSAGEBOX 错误：请先设置好充值比例再来开启。
+BREAK
+
+#IF
+CHECKVAR GLOBAL 假人_自充会员 = 开启
+#ACT
+CALCVAR GLOBAL 假人_自充会员 = 关闭
+SAVEVAR GLOBAL 假人_自充会员 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制2
+#ELSEACT
+CALCVAR GLOBAL 假人_自充会员 = 开启
+SAVEVAR GLOBAL 假人_自充会员 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制2
+
+[@InPutInteger72]
+#IF
+LARGE N72 65535
+#ACT
+MESSAGEBOX 错误：你输入的数值过大。
+BREAK
+
+#IF
+LARGE N72 0
+#ACT
+CALCVAR GLOBAL 假人_追杀等级 = <$STR(N72)>
+SAVEVAR GLOBAL 假人_追杀等级 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制2
+BREAK
+
+[@InPutInteger73]
+#IF
+CheckStringlength N73 > 4
+#ACT
+MESSAGEBOX 错误：你输入的数值过大。
+BREAK
+
+#IF
+LARGE N73 0
+#ACT
+CALCVAR GLOBAL 假人_追杀几率 = <$STR(N73)>
+SAVEVAR GLOBAL 假人_追杀几率 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制2
+BREAK
+
+[@InPutString73]
+#IF
+CheckStringlength S73 > 20
+#ACT
+MESSAGEBOX 错误：最多可输入20个字符。
+BREAK
+#ELSEACT
+
+#IF
+CheckStringlength S73 > 0
+#ACT
+#ELSEACT
+BREAK
+
+#IF
+NOT CHECKTEXTLIST ..\QuestDiary\敏哥假人\假人地图\禁止追踪地图.txt <$STR(S73)>
+#ACT
+ADDTEXTLIST ..\QuestDiary\敏哥假人\假人地图\禁止追踪地图.txt <$STR(S73)>
+MESSAGEBOX 成功：[<$STR(S73)>]已添加到禁止追踪地图列表
+BREAK
+#ELSEACT
+MESSAGEBOX 失败：[<$STR(S73)>]已经在禁止追踪地图列表
+
+[@InPutInteger74]
+#IF
+CheckStringlength N74 > 5
+#ACT
+MESSAGEBOX 错误：你输入的数值过大。
+BREAK
+
+#IF
+LARGE N74 0
+#ACT
+CALCVAR GLOBAL 假人_自充等级 = <$STR(N74)>
+SAVEVAR GLOBAL 假人_自充等级 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制2
+BREAK
+
+[@InPutInteger75]
+#IF
+CheckStringlength N75 > 4
+#ACT
+MESSAGEBOX 错误：你输入的数值过大。
+BREAK
+
+#IF
+LARGE N75 0
+#ACT
+CALCVAR GLOBAL 假人_充值几率 = <$STR(N75)>
+SAVEVAR GLOBAL 假人_充值几率 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制2
+BREAK
+
+[@InPutInteger76]
+#IF
+CheckStringlength N76 > 3
+#ACT
+MESSAGEBOX 错误：你输入的数值过大。
+BREAK
+
+#IF
+LARGE N76 0
+#ACT
+CALCVAR GLOBAL 假人_会员名额 = <$STR(N76)>
+SAVEVAR GLOBAL 假人_会员名额 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制2
+BREAK
+
+[@InPutInteger77]
+#IF
+CheckStringlength N77 > 6
+#ACT
+MESSAGEBOX 错误：你输入的数值过大。
+BREAK
+
+#IF
+LARGE N77 0
+#ACT
+CALCVAR GLOBAL 假人_元宝比例 = <$STR(N77)>
+SAVEVAR GLOBAL 假人_元宝比例 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制2
+MESSAGEBOX 你当前设置的元宝比例为（1：<$STR(N77)>）
+BREAK
+
+[@InPutInteger78]
+#IF
+CheckStringlength N78 > 4
+#ACT
+MESSAGEBOX 错误：你输入的数值过大。
+BREAK
+
+#IF
+LARGE N78 0
+#ACT
+CALCVAR GLOBAL 假人_积分比例 = <$STR(N78)>
+SAVEVAR GLOBAL 假人_积分比例 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制2
+MESSAGEBOX 你当前设置的积分比例为（1：<$STR(N78)>）
+BREAK
+
+[@InPutInteger79]
+#IF
+CheckStringlength N79 > 5
+#ACT
+MESSAGEBOX 错误：你输入的数值过大。
+BREAK
+
+#IF
+LARGE N79 0
+#ACT
+CALCVAR GLOBAL 假人_喊话等级 = <$STR(N79)>
+SAVEVAR GLOBAL 假人_喊话等级 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制2
+BREAK
+
+[@InPutInteger80]
+#IF
+SMALL N80 40
+LARGE N80 10
+#ACT
+CALCVAR GLOBAL 假人_回收频率 = <$STR(N80)>
+SAVEVAR GLOBAL 假人_回收频率 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制2
+BREAK
+#ELSEACT
+MESSAGEBOX 错误：请输入10-40之间的数值。
+
+;=============================================================
+[@其他控制3]
+#IF
+CHECKVAR GLOBAL 假人_自建行会 = 开启
+#ACT
+MOV S21 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S21 <ImgEx:2:9:1:-2>
+#IF
+CHECKVAR GLOBAL 假人_入会开关 = 开启
+#ACT
+MOV S22 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S22 <ImgEx:2:9:1:-2>
+#IF
+CHECKVAR GLOBAL 假人_加入真会 = 开启
+#ACT
+MOV S23 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S23 <ImgEx:2:9:1:-2>
+
+#IF
+#ACT
+MOV S91 <$GLOBAL(假人_掌门等级)>
+MOV S92 <$GLOBAL(假人_行会数量)>
+MOV S93 <$GLOBAL(假人_入会等级)>
+MOV S94 <$GLOBAL(假人_入会几率)>
+;--------------显示界面------------------
+;-空格
+SetStringBlank 参数1 参数2 参数3 <$STR(S91)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S92)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S93)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S94)> 7  1
+;--------------------------------
+OPENMERCHANTBIGDLG 9 0 1 0 0 0 0
+#IF
+CHECKVAR GLOBAL 假人_选登录器 = 13周年
+#SAY
+<ImgEx:1:9:413:-26/@exit><ImgEx:20:9:-47:29>\
+<ImgEx:11:9:-2:-9/@基本设置><ImgEx:13:9:-2:-9/@假人配置><ImgEx:15:9:-2:-9/@地图匹配><ImgEx:16:9:-2:-9><ImgEx:19:9:-2:-9/@模拟攻沙><ImgEx:7:9:16:-2|7#点击刷新/@其他控制2>   <在线假人：/FCOLOR=250><$STR(I90)>\
+<┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>\
+<假人可以自己创建行会，你只要提前在行会列表里面添加好行会名称即可，假人/FCOLOR=254>\
+<到达条件后随机抽取列表里面行会名称创建行会,名字越多越好,行会数量可限制/FCOLOR=116>\
+<也可以让假人加入真人行会，如果禁止加入的行会名称可以添加到过滤列表内。/FCOLOR=249>\
+<┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>\
+【<创建假人专属行会/@@InPutString41(请输入行会名称)>】    【<在线假人即时入会|7#即时入会不受等级限制^7#被过滤的行会不能加入/@假人即时入会>】     【<立刻踢出指定行会/@@InPutString43>】\
+<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_自建行会)>^/@自建行会>      <ImgEx:6:9:131:14><ImgEx:9:9:88:14|7#允许建会等级/@@InPutInteger91>   <ImgEx:6:9:141:14><ImgEx:9:9:99:14|7#最多建会数量/@@InPutInteger92>\
+<$STR(S21)> <假人自建行会/FCOLOR=103>      <掌门等级:/FCOLOR=103> <$STR(S91)>  <行会数量:/FCOLOR=103> <$STR(S92)>(<上限行会数/FCOLOR=160>)\
+<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_入会开关)>^/@入会开关>      <ImgEx:6:9:131:14><ImgEx:9:9:88:14|7#到达等级方可入会/@@InPutInteger93>   <ImgEx:6:9:141:14><ImgEx:9:9:99:14|7#入会成功率/@@InPutInteger94>\
+<$STR(S22)> <在线随机入会/FCOLOR=103>      <入会等级:/FCOLOR=103> <$STR(S93)>  <成功几率:/FCOLOR=103> <$STR(S94)>(<越小越容易/FCOLOR=160>)\
+<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_加入真会)>^7#开启后假人可随机加入玩家创建的行会/@加入真会>\
+<$STR(S23)> <允许加入真人行会/FCOLOR=103>  <添加过滤行会/@@InPutString42(输入行会名称)>   <删除过滤行会/@@InPutString42(输入行会名称)>   <查看过滤列表/@查看过滤行会>\
+\ \
+　        <ImgEx:24:9:2:10/@其他控制>　    <ImgEx:24:9:6:10/@其他控制2>　    <ImgEx:24:9:10:10>\
+　          <移动控制/FCOLOR=255>          <辅助设置/FCOLOR=255>          <行会控制/FCOLOR=159>
+#ELSESAY
+\ \
+\ \
+<ImgEx:1:9:435:-32/@exit><ImgEx:20:9:-25:29>\
+　<ImgEx:11:9:-2:-9/@基本设置><ImgEx:13:9:-2:-9/@假人配置><ImgEx:15:9:-2:-9/@地图匹配><ImgEx:16:9:-2:-9><ImgEx:19:9:-2:-9/@模拟攻沙><ImgEx:7:9:16:-2|7#点击刷新/@其他控制2>   <在线假人：/FCOLOR=250><$STR(I90)>\
+　<┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>\
+　<假人可以自己创建行会，你只要提前在行会列表里面添加好行会名称即可，假人/FCOLOR=254>\
+　<到达条件后随机抽取列表里面行会名称创建行会,名字越多越好,行会数量可限制/FCOLOR=116>\
+　<也可以让假人加入真人行会，如果禁止加入的行会名称可以添加到过滤列表内。/FCOLOR=249>\
+　<┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈/FCOLOR=17>\
+　【<创建假人专属行会/@@InPutString41(请输入行会名称)>】    【<在线假人即时入会|7#即时入会不受等级限制^7#被过滤的行会不能加入/@假人即时入会>】     【<立刻踢出指定行会/@@InPutString43>】\
+　<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_自建行会)>^/@自建行会>      <ImgEx:6:9:131:14><ImgEx:9:9:88:14|7#允许建会等级/@@InPutInteger91>   <ImgEx:6:9:141:14><ImgEx:9:9:99:14|7#最多建会数量/@@InPutInteger92>\
+　<$STR(S21)> <假人自建行会/FCOLOR=103>      <掌门等级:/FCOLOR=103> <$STR(S91)>  <行会数量:/FCOLOR=103> <$STR(S92)>(<上限行会数/FCOLOR=160>)\
+　<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_入会开关)>^/@入会开关>      <ImgEx:6:9:131:14><ImgEx:9:9:88:14|7#到达等级方可入会/@@InPutInteger93>   <ImgEx:6:9:141:14><ImgEx:9:9:99:14|7#入会成功率/@@InPutInteger94>\
+　<$STR(S22)> <在线随机入会/FCOLOR=103>      <入会等级:/FCOLOR=103> <$STR(S93)>  <成功几率:/FCOLOR=103> <$STR(S94)>(<越小越容易/FCOLOR=160>)\
+　<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_加入真会)>^7#开启后假人可随机加入玩家创建的行会/@加入真会>\
+　<$STR(S23)> <允许加入真人行会/FCOLOR=103>  <添加过滤行会/@@InPutString42(输入行会名称)>   <删除过滤行会/@@InPutString42(输入行会名称)>   <查看过滤列表/@查看过滤行会>\
+\ \
+　        　<ImgEx:24:9:2:10/@其他控制>　    <ImgEx:24:9:6:10/@其他控制2>　    <ImgEx:24:9:10:10>\
+　          　<移动控制/FCOLOR=255>          <辅助设置/FCOLOR=255>          <行会控制/FCOLOR=159>
+
+
+[@InPutInteger91]
+#IF
+LARGE N91 65535
+#ACT
+MESSAGEBOX 提示：建议输入[65535]以内的数值。
+BREAK
+
+#IF
+LARGE N91 0
+#ACT
+CALCVAR GLOBAL 假人_掌门等级 = <$STR(N91)>
+SAVEVAR GLOBAL 假人_掌门等级 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制3
+BREAK
+
+[@InPutInteger92]
+#IF
+LARGE N92 10
+#ACT
+MESSAGEBOX 提示：面前最多支持创建10个行会。
+BREAK
+
+#IF
+LARGE N92 0
+#ACT
+CALCVAR GLOBAL 假人_行会数量 = <$STR(N92)>
+SAVEVAR GLOBAL 假人_行会数量 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制3
+BREAK
+
+[@InPutInteger93]
+#IF
+LARGE N93 65535
+#ACT
+MESSAGEBOX 提示：建议输入[65535]以内的数值。
+BREAK
+
+#IF
+LARGE N93 0
+#ACT
+CALCVAR GLOBAL 假人_入会等级 = <$STR(N93)>
+SAVEVAR GLOBAL 假人_入会等级 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制3
+BREAK
+
+[@InPutInteger94]
+#IF
+CheckStringlength N94 > 4
+#ACT
+MESSAGEBOX 提示：几率过高假人无法加入行会。
+BREAK
+
+#IF
+LARGE N94 0
+#ACT
+CALCVAR GLOBAL 假人_入会几率 = <$STR(N94)>
+SAVEVAR GLOBAL 假人_入会几率 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制3
+BREAK
+
+[@自建行会]
+#IF
+CHECKVAR GLOBAL 假人_自建行会 = 开启
+#ACT
+CALCVAR GLOBAL 假人_自建行会 = 关闭
+SAVEVAR GLOBAL 假人_自建行会 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制3
+#ELSEACT
+CALCVAR GLOBAL 假人_自建行会 = 开启
+SAVEVAR GLOBAL 假人_自建行会 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制3
+
+[@入会开关]
+#IF
+CHECKVAR GLOBAL 假人_入会开关 = 开启
+#ACT
+CALCVAR GLOBAL 假人_入会开关 = 关闭
+SAVEVAR GLOBAL 假人_入会开关 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制3
+#ELSEACT
+CALCVAR GLOBAL 假人_入会开关 = 开启
+SAVEVAR GLOBAL 假人_入会开关 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制3
+
+[@加入真会]
+#IF
+CHECKVAR GLOBAL 假人_加入真会 = 开启
+#ACT
+CALCVAR GLOBAL 假人_加入真会 = 关闭
+SAVEVAR GLOBAL 假人_加入真会 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制3
+#ELSEACT
+CALCVAR GLOBAL 假人_加入真会 = 开启
+SAVEVAR GLOBAL 假人_加入真会 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @其他控制3
+
+[@假人即时入会]
+#IF
+CHECKDUMMYCOUNT > 0
+#ACT
+GETRANDOMLINETEXT ..\QuestDiary\敏哥假人\假人行会\真假综合行会.txt S11
+#ELSEACT
+MESSAGEBOX 提示：当前没有假人在线。
+BREAK
+
+#IF
+EQUAL S11
+#ACT
+MESSAGEBOX 提示：没有发现可加入的行会。
+#ELSEACT
+Gmexecute 开始提问 @假人即时入会
+SENDMSG 7 255 233 提示：部分假人已经加入行会。
+BREAK
+
+
+[@InPutString41]
+#IF
+CheckStringlength S41 < 4
+#ACT
+MESSAGEBOX 行会名字过短,创建行会失败！！！
+BREAK
+
+#IF
+CheckStringlength S41 > 20
+#ACT
+MESSAGEBOX 行会名字过长,创建行会失败！！！
+BREAK
+
+#IF
+HAVEGUILD
+#ACT
+MESSAGEBOX 你已经加入其他行会。
+BREAK
+
+#IF
+NOT CHECKTEXTLIST ..\QuestDiary\敏哥假人\假人行会\真假综合行会.txt <$STR(S41)>
+#ACT
+AddGuild <$STR(S41)> <$USERNAME>
+ADDGUILDLIST ..\QuestDiary\敏哥假人\假人行会\假人专属行会.txt
+ADDGUILDLIST ..\QuestDiary\敏哥假人\假人行会\真假综合行会.txt
+MESSAGEBOX 恭喜：你创建假人行会[<$STR(S41)>]成功。
+#ELSEACT
+MESSAGEBOX 错误：行会[<$STR(S41)>]已经存在
+GOTO @其他控制3
+BREAK
+
+[@InPutString42]
+#IF
+CheckStringlength S42 > 0
+#ACT
+#ELSEACT
+BREAK
+
+#IF
+CHECKTEXTLIST ..\QuestDiary\敏哥假人\假人行会\假人过滤行会.txt <$STR(S42)>
+#ACT
+MESSAGEBOX 过滤行会列表已经存在：[<$STR(S42)>]
+BREAK
+
+#IF
+CHECKTEXTLIST ..\QuestDiary\敏哥假人\假人行会\真假综合行会.txt <$STR(S42)>
+#ACT
+ADDTEXTLIST ..\QuestDiary\敏哥假人\假人行会\假人过滤行会.txt <$STR(S42)>
+SENDMSG 7 255 233 提示：添加成功，[<$STR(S42)>]行会已经被过滤。
+#ELSEACT
+MESSAGEBOX 错误：行会[<$STR(S42)>]不存在
+GOTO @其他控制3
+BREAK
+
+[@查看过滤行会]
+#IF
+#ACT
+MOV S11
+MOV S12
+MOV S13
+MOV S14
+MOV S15
+GetRandomText ..\QuestDiary\敏哥假人\假人行会\假人过滤行会.txt S11 0
+GetRandomText ..\QuestDiary\敏哥假人\假人行会\假人过滤行会.txt S12 1
+GetRandomText ..\QuestDiary\敏哥假人\假人行会\假人过滤行会.txt S13 2
+GetRandomText ..\QuestDiary\敏哥假人\假人行会\假人过滤行会.txt S14 3
+GetRandomText ..\QuestDiary\敏哥假人\假人行会\假人过滤行会.txt S15 4
+#IF
+EQUAL S11
+#ACT
+SENDMSG 7 255 233 没有查询到假人行会过滤列表的信息...
+BREAK
+#ELSEACT
+#IF
+NOT EQUAL S11
+#ACT
+SENDMSG 7 255 233 {过滤行会①|255:0:1}：{<$STR(S11)>|250:0:1}
+#IF
+NOT EQUAL S12
+#ACT
+SENDMSG 7 255 233 {过滤行会②|255:0:1}：{<$STR(S12)>|250:0:1}
+#IF
+NOT EQUAL S13
+#ACT
+SENDMSG 7 255 233 {过滤行会③|255:0:1}：{<$STR(S13)>|250:0:1}
+#IF
+NOT EQUAL S14
+#ACT
+SENDMSG 7 255 233 {过滤行会④|255:0:1}：{<$STR(S14)>|250:0:1}
+#IF
+NOT EQUAL S15
+#ACT
+SENDMSG 7 255 233 {过滤行会⑤|255:0:1}：{<$STR(S15)>|250:0:1}
+#IF
+#ACT
+SENDMSG 7 255 233 查询已完成...最高支持查询5个信息。
+
+[@InPutString43]
+#IF
+CheckStringlength S43 > 0
+#ACT
+#ELSEACT
+BREAK
+
+#IF
+CHECKTEXTLIST ..\QuestDiary\敏哥假人\假人行会\真假综合行会.txt <$STR(S43)>
+#ACT
+CALCVAR GLOBAL 假人_离开行会 = <$STR(S43)>
+Gmexecute 开始提问 @假人退出行会
+MESSAGEBOX 提示：[<$STR(S43)>]行会的假人已经全部退会。
+#ELSEACT
+MESSAGEBOX 错误：行会[<$STR(S43)>]不存在
+BREAK
+
+;####################################################
+
+[@模拟攻沙]
+#IF
+CHECKVAR GLOBAL 假人_攻城开关 = 开启
+#ACT
+MOV S20 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S20 <ImgEx:2:9:1:-2>
+#IF
+CHECKVAR GLOBAL 假人_进攻点A = 开启
+#ACT
+MOV S21 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S21 <ImgEx:2:9:1:-2>
+#IF
+CHECKVAR GLOBAL 假人_进攻点B = 开启
+#ACT
+MOV S22 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S22 <ImgEx:2:9:1:-2>
+#IF
+CHECKVAR GLOBAL 假人_进攻点C = 开启
+#ACT
+MOV S23 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S23 <ImgEx:2:9:1:-2>
+#IF
+CHECKVAR GLOBAL 假人_进攻皇宫 = 开启
+#ACT
+MOV S24 <ImgEx:3:9:1:-2>
+#ELSEACT
+MOV S24 <ImgEx:2:9:1:-2>
+
+#IF
+#ACT
+MOV S80 <$GLOBAL(假人_沙皇宫ID)>
+MOV S81 <$GLOBAL(假人_进攻点AX)>
+MOV S82 <$GLOBAL(假人_进攻点AY)>
+MOV S83 <$GLOBAL(假人_进攻点AF)>
+MOV S84 <$GLOBAL(假人_进攻点BX)>
+MOV S85 <$GLOBAL(假人_进攻点BY)>
+MOV S86 <$GLOBAL(假人_进攻点BF)>
+MOV S87 <$GLOBAL(假人_进攻点CX)>
+MOV S88 <$GLOBAL(假人_进攻点CY)>
+MOV S89 <$GLOBAL(假人_进攻点CF)>
+MOV S90 <$GLOBAL(假人_攻城等级)>
+;--------------显示界面------------------
+;-空格
+SetStringBlank 参数1 参数2 参数3 <$STR(S80)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S81)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S82)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S83)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S84)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S85)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S86)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S87)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S88)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S89)> 7  1
+SetStringBlank 参数1 参数2 参数3 <$STR(S90)> 7  1
+;--------------------------------
+OPENMERCHANTBIGDLG 9 0 1 0 0 0 0
+#IF
+CHECKVAR GLOBAL 假人_选登录器 = 13周年
+#SAY
+<ImgEx:1:9:413:-26/@exit><ImgEx:20:9:-47:29>\
+<ImgEx:11:9:-2:-9/@基本设置><ImgEx:13:9:-2:-9/@假人配置><ImgEx:15:9:-2:-9/@地图匹配><ImgEx:17:9:-2:-9/@其他控制><ImgEx:18:9:-2:-9><ImgEx:7:9:16:-2|7#点击刷新/@模拟攻沙>   <在线假人：/FCOLOR=250><$STR(I90)>\
+\ \
+<本假人系统通过高度优化，即使同时开启4个进攻点也不会对引擎有任何不良反映/FCOLOR=254>\
+<如果同时开启4个进攻地点，务必开启自动登录器假人，设置登录间隔在15秒以内/FCOLOR=116>\
+<注 意：同时开启的进攻点越少，战斗越激烈，最好是根据登录的假人数量而选择/FCOLOR=249>\
+<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_攻城开关)>^/@攻城开关> <ImgEx:6:9:108:14><ImgEx:9:9:61:14|7#攻城等级要求/@@InPutInteger90> <ImgEx:6:9:226:14>\
+<$STR(S20)> <攻城总开关/FCOLOR=239>  <等 级:/FCOLOR=103> <$STR(S90)>    <是否允许无行会成员参加:/FCOLOR=103> <$GLOBAL(假人_攻沙行会)>    <更改/@选择对象>\
+<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_进攻点A)>^/@进攻点A> <ImgEx:6:9:108:14><ImgEx:9:9:61:14|7#输入正确坐标/@@InPutInteger81> <ImgEx:6:9:112:14><ImgEx:9:9:65:14|7#输入正确坐标/@@InPutInteger82>　
+<ImgEx:6:9:128:14><ImgEx:9:9:81:14|7#输入落点范围/@@InPutInteger83>\
+<$STR(S21)> <进攻地点-A/FCOLOR=103>  <坐标X:/FCOLOR=103> <$STR(S81)>  <坐标Y:/FCOLOR=103> <$STR(S82)>  <落点范围:/FCOLOR=103> <$STR(S83)> <快填|7#快速填写当前坐标/@快填1>\
+<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_进攻点B)>^/@进攻点B> <ImgEx:6:9:108:14><ImgEx:9:9:61:14|7#输入正确坐标/@@InPutInteger84> <ImgEx:6:9:112:14><ImgEx:9:9:65:14|7#输入正确坐标/@@InPutInteger85>　
+<ImgEx:6:9:128:14><ImgEx:9:9:81:14|7#输入落点范围/@@InPutInteger86>\
+<$STR(S22)> <进攻地点-B/FCOLOR=103>  <坐标X:/FCOLOR=103> <$STR(S84)>  <坐标Y:/FCOLOR=103> <$STR(S85)>  <落点范围:/FCOLOR=103> <$STR(S86)> <快填|7#快速填写当前坐标/@快填2>\
+<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_进攻点C)>^/@进攻点C> <ImgEx:6:9:108:14><ImgEx:9:9:61:14|7#输入正确坐标/@@InPutInteger87> <ImgEx:6:9:112:14><ImgEx:9:9:65:14|7#输入正确坐标/@@InPutInteger88>　
+<ImgEx:6:9:128:14><ImgEx:9:9:81:14|7#输入落点范围/@@InPutInteger89>\
+<$STR(S23)> <进攻地点-C/FCOLOR=103>  <坐标X:/FCOLOR=103> <$STR(S87)>  <坐标Y:/FCOLOR=103> <$STR(S88)>  <落点范围:/FCOLOR=103> <$STR(S89)> <快填|7#快速填写当前坐标/@快填3>\
+<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_进攻皇宫)>^/@进攻皇宫> <ImgEx:5:9:175:14|7#新沙巴克皇宫ID:New0150^7#老沙巴克皇宫ID:0150^>\
+<$STR(S24)> <进攻沙皇宫/FCOLOR=103>  <沙巴克皇宫（ID）:/FCOLOR=103> <$STR(S80)>          <→/FCOLOR=58> <切换/@选择皇宫>\
+#ELSESAY
+\ \
+\ \
+<ImgEx:1:9:435:-32/@exit><ImgEx:20:9:-25:29>\
+　<ImgEx:11:9:-2:-9/@基本设置><ImgEx:13:9:-2:-9/@假人配置><ImgEx:15:9:-2:-9/@地图匹配><ImgEx:17:9:-2:-9/@其他控制><ImgEx:18:9:-2:-9><ImgEx:7:9:16:-2|7#点击刷新/@模拟攻沙>   <在线假人：/FCOLOR=250><$STR(I90)>\
+\ \
+　<本假人系统通过高度优化，即使同时开启4个进攻点也不会对引擎有任何不良反映/FCOLOR=254>\
+　<如果同时开启4个进攻地点，务必开启自动登录器假人，设置登录间隔在15秒以内/FCOLOR=116>\
+　<注 意：同时开启的进攻点越少，战斗越激烈，最好是根据登录的假人数量而选择/FCOLOR=249>\
+　<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_攻城开关)>^/@攻城开关> <ImgEx:6:9:108:14><ImgEx:9:9:61:14|7#攻城等级要求/@@InPutInteger90> <ImgEx:6:9:226:14>\
+　<$STR(S20)> <攻城总开关/FCOLOR=239>  <等 级:/FCOLOR=103> <$STR(S90)>    <是否允许无行会成员参加:/FCOLOR=103> <$GLOBAL(假人_攻沙行会)>    <更改/@选择对象>\
+　<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_进攻点A)>^/@进攻点A> <ImgEx:6:9:108:14><ImgEx:9:9:61:14|7#输入正确坐标/@@InPutInteger81> <ImgEx:6:9:112:14><ImgEx:9:9:65:14|7#输入正确坐标/@@InPutInteger82>　
+<ImgEx:6:9:128:14><ImgEx:9:9:81:14|7#输入落点范围/@@InPutInteger83>\
+　<$STR(S21)> <进攻地点-A/FCOLOR=103>  <坐标X:/FCOLOR=103> <$STR(S81)>  <坐标Y:/FCOLOR=103> <$STR(S82)>  <落点范围:/FCOLOR=103> <$STR(S83)> <快填|7#快速填写当前坐标/@快填1>\
+　<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_进攻点B)>^/@进攻点B> <ImgEx:6:9:108:14><ImgEx:9:9:61:14|7#输入正确坐标/@@InPutInteger84> <ImgEx:6:9:112:14><ImgEx:9:9:65:14|7#输入正确坐标/@@InPutInteger85>　
+<ImgEx:6:9:128:14><ImgEx:9:9:81:14|7#输入落点范围/@@InPutInteger86>\
+　<$STR(S22)> <进攻地点-B/FCOLOR=103>  <坐标X:/FCOLOR=103> <$STR(S84)>  <坐标Y:/FCOLOR=103> <$STR(S85)>  <落点范围:/FCOLOR=103> <$STR(S86)> <快填|7#快速填写当前坐标/@快填2>\
+　<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_进攻点C)>^/@进攻点C> <ImgEx:6:9:108:14><ImgEx:9:9:61:14|7#输入正确坐标/@@InPutInteger87> <ImgEx:6:9:112:14><ImgEx:9:9:65:14|7#输入正确坐标/@@InPutInteger88>　
+<ImgEx:6:9:128:14><ImgEx:9:9:81:14|7#输入落点范围/@@InPutInteger89>\
+　<$STR(S23)> <进攻地点-C/FCOLOR=103>  <坐标X:/FCOLOR=103> <$STR(S87)>  <坐标Y:/FCOLOR=103> <$STR(S88)>  <落点范围:/FCOLOR=103> <$STR(S89)> <快填|7#快速填写当前坐标/@快填3>\
+　<ImgEx:4:9:1:14|250#状态：<$GLOBAL(假人_进攻皇宫)>^/@进攻皇宫> <ImgEx:5:9:175:14|7#新沙巴克皇宫ID:New0150^7#老沙巴克皇宫ID:0150^>\
+　<$STR(S24)> <进攻沙皇宫/FCOLOR=103>  <沙巴克皇宫（ID）:/FCOLOR=103> <$STR(S80)>          <→/FCOLOR=58> <切换/@选择皇宫>\
+
+[@攻城开关]
+#IF
+CHECKVAR GLOBAL 假人_攻城开关 = 开启
+#ACT
+CALCVAR GLOBAL 假人_攻城开关 = 关闭
+SAVEVAR GLOBAL 假人_攻城开关 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @模拟攻沙
+BREAK
+
+#IF
+CHECKUNDERWAR 沙巴克
+#ACT
+CALCVAR GLOBAL 假人_攻城开关 = 开启
+SAVEVAR GLOBAL 假人_攻城开关 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_同步攻城 = 关闭
+SAVEVAR GLOBAL 假人_同步攻城 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @模拟攻沙
+#ELSEACT
+MESSAGEBOX 现在不是攻城期间，不能启动假人攻城。\　\你可以在其他控制选项里选择同步攻城。
+BREAK
+
+[@选择对象]
+#IF
+CHECKVAR GLOBAL 假人_攻沙行会 = 允许
+#ACT
+CALCVAR GLOBAL 假人_攻沙行会 = 禁止
+SAVEVAR GLOBAL 假人_攻沙行会 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @模拟攻沙
+#ELSEACT
+CALCVAR GLOBAL 假人_攻沙行会 = 允许
+SAVEVAR GLOBAL 假人_攻沙行会 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @模拟攻沙
+
+[@选择皇宫]
+#IF
+CHECKVAR GLOBAL 假人_沙皇宫ID = New0150
+#ACT
+CALCVAR GLOBAL 假人_沙皇宫ID = 0150
+SAVEVAR GLOBAL 假人_沙皇宫ID ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 你已切换为沙巴克皇宫-[老]
+GOTO @模拟攻沙
+#ELSEACT
+CALCVAR GLOBAL 假人_沙皇宫ID = New0150
+SAVEVAR GLOBAL 假人_沙皇宫ID ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 你已切换为沙巴克皇宫-[新]
+GOTO @模拟攻沙
+
+[@进攻点A]
+#IF
+CHECKVAR GLOBAL 假人_进攻点A = 开启
+#ACT
+CALCVAR GLOBAL 假人_进攻点A = 关闭
+SAVEVAR GLOBAL 假人_进攻点A ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @模拟攻沙
+#ELSEACT
+CALCVAR GLOBAL 假人_进攻点A = 开启
+SAVEVAR GLOBAL 假人_进攻点A ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @模拟攻沙
+
+[@进攻点B]
+#IF
+CHECKVAR GLOBAL 假人_进攻点B = 开启
+#ACT
+CALCVAR GLOBAL 假人_进攻点B = 关闭
+SAVEVAR GLOBAL 假人_进攻点B ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @模拟攻沙
+#ELSEACT
+CALCVAR GLOBAL 假人_进攻点B = 开启
+SAVEVAR GLOBAL 假人_进攻点B ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @模拟攻沙
+
+[@进攻点C]
+#IF
+CHECKVAR GLOBAL 假人_进攻点C = 开启
+#ACT
+CALCVAR GLOBAL 假人_进攻点C = 关闭
+SAVEVAR GLOBAL 假人_进攻点C ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @模拟攻沙
+#ELSEACT
+CALCVAR GLOBAL 假人_进攻点C = 开启
+SAVEVAR GLOBAL 假人_进攻点C ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @模拟攻沙
+
+[@进攻皇宫]
+#IF
+CHECKVAR GLOBAL 假人_进攻皇宫 = 开启
+#ACT
+CALCVAR GLOBAL 假人_进攻皇宫 = 关闭
+SAVEVAR GLOBAL 假人_进攻皇宫 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @模拟攻沙
+#ELSEACT
+CALCVAR GLOBAL 假人_进攻皇宫 = 开启
+SAVEVAR GLOBAL 假人_进攻皇宫 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @模拟攻沙
+
+[@InPutInteger81]
+#IF
+CheckStringlength N81 > 4
+#ACT
+MESSAGEBOX 错误：你输入的字符超出了设定范围。
+BREAK
+
+#IF
+LARGE N81 0
+#ACT
+CALCVAR GLOBAL 假人_进攻点AX = <$STR(N81)>
+SAVEVAR GLOBAL 假人_进攻点AX ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @模拟攻沙
+BREAK
+
+[@InPutInteger82]
+#IF
+CheckStringlength N82 > 4
+#ACT
+MESSAGEBOX 错误：你输入的字符超出了设定范围。
+BREAK
+
+#IF
+LARGE N82 0
+#ACT
+CALCVAR GLOBAL 假人_进攻点AY = <$STR(N82)>
+SAVEVAR GLOBAL 假人_进攻点AY ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @模拟攻沙
+BREAK
+
+[@InPutInteger83]
+#IF
+CheckStringlength N83 > 4
+#ACT
+MESSAGEBOX 错误：你输入的字符超出了设定范围。
+BREAK
+
+#IF
+LARGE N83 0
+#ACT
+CALCVAR GLOBAL 假人_进攻点AF = <$STR(N83)>
+SAVEVAR GLOBAL 假人_进攻点AF ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @模拟攻沙
+BREAK
+
+[@快填1]
+#IF
+ISONMAP 3
+#ACT
+CALCVAR GLOBAL 假人_进攻点AX = <$X>
+SAVEVAR GLOBAL 假人_进攻点AX ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_进攻点AY = <$Y>
+SAVEVAR GLOBAL 假人_进攻点AY ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @模拟攻沙
+BREAK
+#ELSEACT
+MESSAGEBOX 错误：只能在盟重省才能获得坐标。
+
+[@InPutInteger84]
+#IF
+CheckStringlength N84 > 4
+#ACT
+MESSAGEBOX 错误：你输入的字符超出了设定范围。
+BREAK
+
+#IF
+LARGE N84 0
+#ACT
+CALCVAR GLOBAL 假人_进攻点BX = <$STR(N84)>
+SAVEVAR GLOBAL 假人_进攻点BX ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @模拟攻沙
+BREAK
+
+[@InPutInteger85]
+#IF
+CheckStringlength N85 > 4
+#ACT
+MESSAGEBOX 错误：你输入的字符超出了设定范围。
+BREAK
+
+#IF
+LARGE N85 0
+#ACT
+CALCVAR GLOBAL 假人_进攻点BY = <$STR(N85)>
+SAVEVAR GLOBAL 假人_进攻点BY ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @模拟攻沙
+BREAK
+
+[@InPutInteger86]
+#IF
+CheckStringlength N86 > 4
+#ACT
+MESSAGEBOX 错误：你输入的字符超出了设定范围。
+BREAK
+
+#IF
+LARGE N86 0
+#ACT
+CALCVAR GLOBAL 假人_进攻点BF = <$STR(N86)>
+SAVEVAR GLOBAL 假人_进攻点BF ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @模拟攻沙
+BREAK
+
+[@快填2]
+#IF
+ISONMAP 3
+#ACT
+CALCVAR GLOBAL 假人_进攻点BX = <$X>
+SAVEVAR GLOBAL 假人_进攻点BX ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_进攻点BY = <$Y>
+SAVEVAR GLOBAL 假人_进攻点BY ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @模拟攻沙
+BREAK
+#ELSEACT
+MESSAGEBOX 错误：只能在盟重省才能获得坐标。
+
+[@InPutInteger87]
+#IF
+CheckStringlength N87 > 4
+#ACT
+MESSAGEBOX 错误：你输入的字符超出了设定范围。
+BREAK
+
+#IF
+LARGE N87 0
+#ACT
+CALCVAR GLOBAL 假人_进攻点CX = <$STR(N87)>
+SAVEVAR GLOBAL 假人_进攻点CX ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @模拟攻沙
+BREAK
+
+[@InPutInteger88]
+#IF
+CheckStringlength N88 > 4
+#ACT
+MESSAGEBOX 错误：你输入的字符超出了设定范围。
+BREAK
+
+#IF
+LARGE N88 0
+#ACT
+CALCVAR GLOBAL 假人_进攻点CY = <$STR(N88)>
+SAVEVAR GLOBAL 假人_进攻点CY ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @模拟攻沙
+BREAK
+
+[@InPutInteger89]
+#IF
+CheckStringlength N89 > 4
+#ACT
+MESSAGEBOX 错误：你输入的字符超出了设定范围。
+BREAK
+
+#IF
+LARGE N89 0
+#ACT
+CALCVAR GLOBAL 假人_进攻点CF = <$STR(N89)>
+SAVEVAR GLOBAL 假人_进攻点CF ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @模拟攻沙
+BREAK
+
+[@快填3]
+#IF
+ISONMAP 3
+#ACT
+CALCVAR GLOBAL 假人_进攻点CX = <$X>
+SAVEVAR GLOBAL 假人_进攻点CX ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_进攻点CY = <$Y>
+SAVEVAR GLOBAL 假人_进攻点CY ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @模拟攻沙
+BREAK
+#ELSEACT
+MESSAGEBOX 错误：只能在盟重省才能获得坐标。
+
+[@InPutInteger90]
+#IF
+LARGE N90 65535
+#ACT
+MESSAGEBOX 错误：当前最高支持65535级...
+BREAK
+
+#IF
+LARGE N90 0
+#ACT
+CALCVAR GLOBAL 假人_攻城等级 = <$STR(N90)>
+SAVEVAR GLOBAL 假人_攻城等级 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+GOTO @模拟攻沙
+BREAK
+
+;###########################################
+[@初始化假人]
+#IF
+ISADMIN
+#ACT
+MessageBox 你确定初始化控制台数据吗？ @确定初始化假人 @取消
+
+[@确定初始化假人]
+#IF
+ISADMIN
+#ACT
+CLOSE
+CLOSEMERCHANTBIGDLG
+CALCVAR GLOBAL 假人_选登录器 =
+SAVEVAR GLOBAL 假人_选登录器 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 250 249 系统正在为你初始化假人设置，请稍等……
+DELAYGOTO 1000 @假人预设
+
+[@延迟初始变量]
+#IF
+ISADMIN
+#ACT
+CALCVAR GLOBAL 假人_仿真登录 = 关闭
+SAVEVAR GLOBAL 假人_仿真登录 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_新手地图 =
+SAVEVAR GLOBAL 假人_新手地图 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_定时登录 = 关闭
+SAVEVAR GLOBAL 假人_定时登录 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_自充会员 = 关闭
+SAVEVAR GLOBAL 假人_自充会员 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_装备自补 = 开启
+SAVEVAR GLOBAL 假人_装备自补 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_装备自换 = 开启
+SAVEVAR GLOBAL 假人_装备自换 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_随机喊话 = 开启
+SAVEVAR GLOBAL 假人_随机喊话 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_喊话等级 = 35
+SAVEVAR GLOBAL 假人_喊话等级 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_追杀真人 = 开启
+SAVEVAR GLOBAL 假人_追杀真人 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_追杀地点 =
+SAVEVAR GLOBAL 假人_追杀地点 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_上线挂机 = 关闭
+SAVEVAR GLOBAL 假人_上线挂机 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_加入会员 = 关闭
+SAVEVAR GLOBAL 假人_加入会员 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_同步攻城 = 关闭
+SAVEVAR GLOBAL 假人_同步攻城 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_攻城开关 = 关闭
+SAVEVAR GLOBAL 假人_攻城开关 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_沙皇宫ID = 0150
+SAVEVAR GLOBAL 假人_沙皇宫ID ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_进攻点A = 关闭
+SAVEVAR GLOBAL 假人_进攻点A ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_进攻点B = 关闭
+SAVEVAR GLOBAL 假人_进攻点B ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_进攻点C = 关闭
+SAVEVAR GLOBAL 假人_进攻点C ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_进攻皇宫 = 关闭
+SAVEVAR GLOBAL 假人_进攻皇宫 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_攻沙行会 = 允许
+SAVEVAR GLOBAL 假人_攻沙行会 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_召回地图 = 来源地图
+SAVEVAR GLOBAL 假人_召回地图 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_来源地图 = *
+SAVEVAR GLOBAL 假人_来源地图 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_目标地图 = 3
+SAVEVAR GLOBAL 假人_目标地图 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_登录盟重 = 开启
+SAVEVAR GLOBAL 假人_登录盟重 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_登录比奇 = 开启
+SAVEVAR GLOBAL 假人_登录比奇 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_登录苍月 = 开启
+SAVEVAR GLOBAL 假人_登录苍月 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_登录封魔 = 开启
+SAVEVAR GLOBAL 假人_登录封魔 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_登录魔龙 = 开启
+SAVEVAR GLOBAL 假人_登录魔龙 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_登录白日 = 开启
+SAVEVAR GLOBAL 假人_登录白日 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_佩戴盾牌 = 关闭
+SAVEVAR GLOBAL 假人_佩戴盾牌 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_佩戴军鼓 = 关闭
+SAVEVAR GLOBAL 假人_佩戴军鼓 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_佩戴马牌 = 关闭
+SAVEVAR GLOBAL 假人_佩戴马牌 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_护体神盾 = 关闭
+SAVEVAR GLOBAL 假人_护体神盾 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_分身术 = 关闭
+SAVEVAR GLOBAL 假人_分身术 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_倚天辟地 = 关闭
+SAVEVAR GLOBAL 假人_倚天辟地 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_上线挂机 = 关闭
+SAVEVAR GLOBAL 假人_上线挂机 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_入会开关 = 开启
+SAVEVAR GLOBAL 假人_入会开关 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_加入真会 = 关闭
+SAVEVAR GLOBAL 假人_加入真会 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_入会等级 = 30
+SAVEVAR GLOBAL 假人_入会等级 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_装备级别 = 1
+SAVEVAR GLOBAL 假人_装备级别 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_自建行会 = 关闭
+SAVEVAR GLOBAL 假人_自建行会 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_随机杀怪 = 开启
+SAVEVAR GLOBAL 假人_随机杀怪 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_登录地图 = 3
+SAVEVAR GLOBAL 假人_登录地图 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_泡点开关 = 关闭
+SAVEVAR GLOBAL 假人_泡点开关 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_泡点地图 =
+SAVEVAR GLOBAL 假人_泡点地图 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_登录间隔 = 10
+SAVEVAR GLOBAL 假人_登录间隔 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_攻击模式 = 0
+SAVEVAR GLOBAL 假人_攻击模式 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_登录范围 = 5
+SAVEVAR GLOBAL 假人_登录范围 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_登录数量 = 10
+SAVEVAR GLOBAL 假人_登录数量 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_登录总数 = 80
+SAVEVAR GLOBAL 假人_登录总数 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_登录坐标X = 330
+SAVEVAR GLOBAL 假人_登录坐标X ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_登录坐标Y = 330
+SAVEVAR GLOBAL 假人_登录坐标Y ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_活动频率 = 10
+SAVEVAR GLOBAL 假人_活动频率 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_召唤英雄 = 0
+SAVEVAR GLOBAL 假人_召唤英雄 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_自动捡物 = 1
+SAVEVAR GLOBAL 假人_自动捡物 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_说话几率 = 300
+SAVEVAR GLOBAL 假人_说话几率 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_装备掉落 = 1
+SAVEVAR GLOBAL 假人_装备掉落 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_掉装几率 = 50
+SAVEVAR GLOBAL 假人_掉装几率 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_包裹掉落 = 1
+SAVEVAR GLOBAL 假人_包裹掉落 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_极品机率 = 20
+SAVEVAR GLOBAL 假人_极品机率 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_元素机率 = 35
+SAVEVAR GLOBAL 假人_元素机率 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_ZDYJNXLZ1 = 999
+SAVEVAR GLOBAL 假人_ZDYJNXLZ1 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_ZDYJNXLZ2 = 999
+SAVEVAR GLOBAL 假人_ZDYJNXLZ2 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_ZDYJNXLF1 = 999
+SAVEVAR GLOBAL 假人_ZDYJNXLF1 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_ZDYJNXLF2 = 999
+SAVEVAR GLOBAL 假人_ZDYJNXLF2 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_ZDYJNXLD1 = 999
+SAVEVAR GLOBAL 假人_ZDYJNXLD1 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_ZDYJNXLD2 = 999
+SAVEVAR GLOBAL 假人_ZDYJNXLD2 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_泡点等级 = 120
+SAVEVAR GLOBAL 假人_泡点等级 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_CJDTCSLV = 15
+SAVEVAR GLOBAL 假人_CJDTCSLV ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_ZJDTCSLV = 36
+SAVEVAR GLOBAL 假人_ZJDTCSLV ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_GJDTCSLV = 50
+SAVEVAR GLOBAL 假人_GJDTCSLV ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_TJDTCSLV = 80
+SAVEVAR GLOBAL 假人_TJDTCSLV ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_在线回收 = 开启
+SAVEVAR GLOBAL 假人_在线回收 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_回收频率 = 15
+SAVEVAR GLOBAL 假人_回收频率 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_喊话几率 = 150
+SAVEVAR GLOBAL 假人_喊话几率 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_追杀等级 = 35
+SAVEVAR GLOBAL 假人_追杀等级 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_追杀几率 = 110
+SAVEVAR GLOBAL 假人_追杀几率 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_自充等级 = 30
+SAVEVAR GLOBAL 假人_自充等级 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_充值几率 = 200
+SAVEVAR GLOBAL 假人_充值几率 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_会员名额 = 15
+SAVEVAR GLOBAL 假人_会员名额 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_登录日期 = <$DAY>
+SAVEVAR GLOBAL 假人_登录日期 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_登录小时 = <$HOUR>
+SAVEVAR GLOBAL 假人_登录小时 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_登录分钟 = <$MINUTE>
+SAVEVAR GLOBAL 假人_登录分钟 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_运行时长 = 0
+SAVEVAR GLOBAL 假人_运行时长 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_掌门等级 = 30
+SAVEVAR GLOBAL 假人_掌门等级 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_行会数量 = 5
+SAVEVAR GLOBAL 假人_行会数量 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+CALCVAR GLOBAL 假人_入会几率 = 100
+SAVEVAR GLOBAL 假人_入会几率 ..\QuestDiary\敏哥假人\假人数据\全局数据Save.txt
+SENDMSG 7 255 233 假人系统已还原默认设置...
+DELAYGOTO 1 @假人预设
+}

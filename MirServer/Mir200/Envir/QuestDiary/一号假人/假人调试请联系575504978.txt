@@ -1,0 +1,748 @@
+[@一号控制-A]
+{
+#IF
+ISDUMMY
+CHECKLEVELEX > 40
+check [370] 0
+check [37] 0
+small G397 10
+#ACT
+INC G397 1
+set [370] 1
+SetOffTimer 210
+SetOffTimer 91
+SetOffTimer 211
+
+
+#IF
+ISDUMMY
+CHECKLEVELEX > 100
+check [936] 0
+#ACT
+SET [936] 1
+USEBONUSPOINT 4 + 50
+USEBONUSPOINT 1 + 200
+USEBONUSPOINT 6 + 5000
+
+#IF
+Random 3
+ISONMAP KQDDS
+#ACT
+movr p3 16 27
+movr p4 12 31
+GotoNow <$STR(P3)> <$STR(P4)>
+
+
+
+#IF
+ISDUMMY
+Random 5
+ISONMAP KQDDS
+#ACT
+CHANGEATTATCKMODE 6
+movr p1 284 291
+movr p2 612 618
+MAPMOVE 0 <$STR(P1)> <$STR(P2)>
+
+#IF
+Random 5
+NOT ISONMAP KQDDS
+CHECKLEVELEX < 35
+CHECKSLAVECOUNT < 1
+#ACT
+RECALLMOB 新手宝宝 1 20000  1
+
+
+#IF
+ISDUMMY
+Random 5
+CHECKLEVELEX < 30
+CHECKSLAVECOUNT = 1
+ISONMAP 0
+#ACT
+CHANGEATTATCKMODE 6
+mapmove 0139 20 22
+Param1 0139
+Param2 20
+Param3 22
+Param1 0139
+Param2 20
+Param3 22
+MonGen 鹿 10 100
+MonGen 鹿 10 100
+MonGen 鹿 10 100
+MonGen 稻草人 10 100
+MonGen 稻草人 10 100
+MonGen 稻草人 20 100
+MonGen 稻草人 20 100
+MonGen 稻草人 10 100
+MonGen 稻草人 20 100
+MonGen 稻草人 10 100
+MonGen 稻草人 10 100
+MonGen 多钩猫 10 100
+MonGen 半兽人 20 100
+MonGen 钉耙猫 10 100
+MAP 0139
+DUMMYSTART
+;==============================================================================================================================新人出生
+
+;==============================================================================================================================进入土城
+#IF
+IsOnMap 0
+CHECKLEVELEX < 30
+CHECKLEVELEX > 19
+#ACT
+MAP D401
+DUMMYSTART
+#IF
+CHECKLEVELEX < 32
+CheckHumInRange 3 330 330 10
+Random 3
+#ACT
+DUMMYSTOP
+MOVR P7 322 340
+MOVR P8 324 339
+GotoNow <$STR(P7)> <$STR(P8)>
+
+;==============================================================================================================================土城移动：需添加检查开区分钟增加移动机率
+#IF
+Random 20
+CheckHumInRange 3 330 330 10
+check [370] 0
+#ACT
+
+
+MOVR P7 322 340
+MOVR P8 324 339
+GotoNow <$STR(P7)> <$STR(P8)>
+
+#IF
+RANDOM 80
+CheckHumInRange 3 330 330 25
+#ACT
+MOVR P7 322 340
+MOVR P8 321 339
+GotoNow <$STR(P7)> <$STR(P8)>
+
+
+;==============================================================================================================================领取礼包
+#IF
+Random 2
+check [1000] 0
+check [370] 0
+ISONMAP 3
+#ACT
+SET [1000] 1
+Set [65] 1
+SENDMSG 7 〖提示〗验证成功，恭喜您获得加群礼包.获得了寒风神符·初始+寒风宝石·初级！！
+GuildNoticeMsg 21 0 〖提示〗玩家{“<$USERNAME>”|222:0:1}成功入群并获得{“寒风神符·初始+寒风宝石·初级”|151:0:1}，官方QQ群号：{834076595|254:0:1}
+
+
+;==============================================================================================================================召唤宝宝
+
+;==============================================================================================================================开始打怪
+
+#IF
+Random 350
+check [370] 0
+not HAVEGUILD
+CHECKLEVELEX > 39
+SMALL G417 3
+#ACT
+GetRandomText ..\QuestDiary\名称.txt S33
+inc G417 1
+mov G364 0
+MOVR A92 8 33
+AddGuild <$STR(S33)> <$USERNAME>
+mov A78 <$STR(S33)>
+
+
+#IF
+Random 30
+CHECKLEVELEX > 30
+not HAVEGUILD
+check [370] 0
+SMALL G364 <$STR(A92)>
+#ACT
+INC G364 1
+AddGuildMember <$STR(A78)> <$USERNAME> 
+
+
+
+
+#IF
+Random 230
+CHECKLEVELEX > 30
+not HAVEGUILD
+check [370] 0
+SMALL G461 <$STR(G413)>
+#ACT
+INC G461 1
+AddGuildMember <$STR(A50)> <$USERNAME> 
+
+
+
+
+
+#IF
+Random 5
+check [370] 0
+CHECKUNDERWAR 沙巴克
+NOT CheckHumInRange 3 620 270 50
+ISDUMMY
+#ACT
+CHANGEATTATCKMODE 5
+MOVR P18 620 648
+MOVR P29 266 395
+MAPMOVE 3 <$STR(P18)> <$STR(P29)>
+DUMMYSTART
+BREAK
+
+#IF
+Random 15
+check [370] 0
+CHECKLEVELEX > 41
+CHECKUNDERWAR 沙巴克
+NOT ISONMAP 0150
+ISDUMMY
+#ACT
+CHANGEATTATCKMODE 5
+MOVR P19 20 38
+MOVR P30 36 52
+MAPMOVE 0150 <$STR(P19)> <$STR(P30)>
+
+DUMMYSTART
+BREAK
+
+
+#IF
+RANDOM 50
+check [370] 0
+CheckHumInRange 3 620 270 50
+NOT CHECKUNDERWAR 沙巴克
+#ACT
+DUMMYSTOP
+MOVR P1 322 340
+MOVR P2 324 339
+MAPMOVE 3 <$STR(P1)> <$STR(P2)>
+SetOffTimer 91
+SetOnTimer 210 10
+
+
+#IF
+NOT CHECKUNDERWAR 沙巴克
+ISONMAP 0150
+Random 50
+check [370] 0
+#ACT
+DUMMYSTOP
+MOVR P1 322 340
+MOVR P2 324 339
+MAPMOVE 3 <$STR(P1)> <$STR(P2)>
+SetOffTimer 91
+SetOnTimer 210 10
+
+
+
+
+
+#IF
+RANDOM 15
+check [370] 0
+EQUAL G442 1
+CHECKLEVELEX > 30
+CheckRangeMonCount 3 357 337 10 = 1
+#ACT
+CHANGEATTATCKMODE 5
+mapmove 3  353 333
+GuildNoticeMsg 1 210  [%s]前卫土城争夺树妖宝藏去了,树妖是会掉落很多珍宝的！！
+GuildNoticeMsg 1 210  [%s]前卫土城争夺树妖宝藏去了,树妖是会掉落很多珍宝的！！
+SetOnTimer 98 30
+DUMMYSTART
+BREAK
+
+
+
+
+#IF
+RANDOM 15
+check [370] 0
+CHECKLEVELEX > 30
+CHECKMAPDUMMYCOUNT jyj < 80
+CheckMonMap jyj 1
+#ACT
+CHANGEATTATCKMODE 5
+mapmove jyj 23 21
+GuildNoticeMsg 1 210  [%s]前卫经验地图击杀经验鸡去了,每只鸡获得1万高额经验
+GuildNoticeMsg 1 210  [%s]前卫经验地图击杀经验鸡去了,每只鸡获得1万高额经验！
+SetOnTimer 98 30
+DUMMYSTART
+BREAK
+
+
+
+
+#IF
+RANDOM 15
+check [370] 0
+EQUAL G429 1
+CHECKLEVELEX > 30
+CHECKMAPDUMMYCOUNT hhz3 < 80
+CheckMonMap hhz3 1
+#ACT
+CHANGEATTATCKMODE 5
+Map hhz3
+SENDMSG 1 玩家<$USERNAME>前往无限BOSS地图击杀BOSS去了。
+SENDMSG 1 玩家<$USERNAME>前往无限BOSS地图击杀BOSS去了。
+SetOnTimer 98 30
+DUMMYSTART
+BREAK
+
+
+
+#IF
+RANDOM 5
+check [370] 0
+CHECKLEVELEX > 30
+CHECKMAPDUMMYCOUNT EM001 < 80
+CheckMonMap EM001 1
+#ACT
+CHANGEATTATCKMODE 5
+Map EM001
+SENDMSG 1 玩家<$USERNAME>前往无限BOSS地图击杀BOSS去了。
+SENDMSG 1 玩家<$USERNAME>前往无限BOSS地图击杀BOSS去了。
+SetOnTimer 98 3
+DUMMYSTART
+BREAK
+
+
+#IF
+RANDOM 15
+EQUAL A159 开启
+check [370] 0
+HAVEGUILD
+CHECKLEVELEX > 30
+CHECKMAPDUMMYCOUNT XEM001 < 80
+#ACT
+CHANGEATTATCKMODE 5
+MAPMOVE XEM001 15 14 3
+SETONTIMER 159 1
+SetHumAttackMode 5 3600
+SENDMSG 1 玩家<$USERNAME>前往激情战场获取奖励去了。里面的人员注意啦。
+SENDMSG 1 玩家<$USERNAME>前往激情战场获取奖励去了。里面的人员注意啦。
+SetOnTimer 98 300
+DUMMYSTART
+BREAK
+
+
+
+
+
+
+#IF
+Random 10
+check [1000] 1
+check [370] 0
+ISDUMMY
+CHECKMAPDUMMYCOUNT 3 > 10
+CheckHumInRange 3 330 330 13
+#ACT
+MOVR P12 320 339
+MOVR P13 333 339
+GotoNow <$STR(P12)> <$STR(P13)>
+#CALL [\一号假人\自定义功能\假人地图.txt] @假人地图选择
+;==============================================================================================================================升级奖励
+
+#IF
+CHECKLEVELEX > 25
+check [370] 0
+Random 10
+CheckHumInRange 3 330 330 10
+SMALL G259 30
+check [37] 0
+#ACT
+
+#CALL [\一号假人\自定义功能\假人充值.txt] @开始充值A
+
+
+
+#IF
+Random 150
+check [370] 0
+CheckHumInRange 3 330 330 13
+CHECKLEVELEX > 30
+checkgold > 49999
+#ACT
+#CALL [\一号假人\自定义功能\金币捐献.txt] @金币捐献1
+
+
+#IF
+Random 10
+check [370] 0
+CheckHumInRange 3 330 330 13
+CHECKLEVELEX > 30
+check [391] 0
+CHECK [004] 0
+CHECKGAMEGOLD > 19
+SMALL G449 2
+#ACT
+#CALL [\一号假人\自定义功能\捐献.txt] @捐献1
+
+
+;==============================================================================================================================自动转生
+
+
+
+#IF
+Random 130
+check [370] 0
+CHECKLEVELEX > 20
+#ACT
+GetRandomText ..\QuestDiary\一号假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S12 12
+DelTextList ..\QuestDiary\一号假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S12)>
+AddTextListEx ..\QuestDiary\一号假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt Level=<$LEVEL> 12
+
+
+#IF
+Random 960
+check [370] 0
+CHECKLEVELEX > 39
+CHECKLEVELEX < 60
+#ACT
+CHANGELEVEL + 1
+GetRandomText ..\QuestDiary\一号假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt S12 12
+DelTextList ..\QuestDiary\一号假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt <$STR(S12)>
+AddTextListEx ..\QuestDiary\一号假人\假人配置\人物_<$HUMAN(假人_职业)>\<$USERNAME>.txt Level=<$LEVEL> 12
+
+;==============================================================================================================================假人充值
+
+;=====================================================购买会员
+#IF
+CHECKLEVELEX > 25
+CHECKGAMEGIRD > 29
+Random 6
+check [370] 0
+CheckHumInRange 3 330 330 10
+#ACT
+
+DELAYGOTO 8000 @购买会员
+;=====================================================会员转生
+#IF
+CHECKRENEWLEVEL = 0
+CHECKLEVELEX > 164
+check [370] 0
+Random 1
+CheckHumInRange XMZC 104 94 10
+#ACT
+MOVR P12 96 105
+MOVR P13 88 94
+GotoNow <$STR(P12)> <$STR(P13)>
+DELAYGOTO 5000 @会员转生
+
+#IF
+CHECKRENEWLEVEL = 1
+CHECKLEVELEX > 64
+Random 1
+CheckHumInRange XMZC 104 94 10
+#ACT
+MOVR P12 96 105
+MOVR P13 88 94
+GotoNow <$STR(P12)> <$STR(P13)>
+DELAYGOTO 5000 @会员转生
+
+#IF
+CHECKRENEWLEVEL = 2
+CHECKLEVELEX > 64
+Random 6
+CheckHumInRange XMZC 104 94 10
+#ACT
+MOVR P12 96 105
+MOVR P13 88 94
+GotoNow <$STR(P12)> <$STR(P13)>
+DELAYGOTO 5000 @会员转生
+
+#IF
+
+CHECKRENEWLEVEL = 3
+CHECKLEVELEX > 69
+Random 500
+CheckHumInRange XMZC 104 94 10
+#ACT
+MOVR P12 96 105
+MOVR P13 88 94
+GotoNow <$STR(P12)> <$STR(P13)>
+DELAYGOTO 5000 @会员转生
+
+
+
+#IF
+
+CHECKRENEWLEVEL = 4
+CHECKLEVELEX > 89
+Random 160
+CheckHumInRange XMZC 104 94 10
+#ACT
+MOVR P12 96 105
+MOVR P13 88 94
+GotoNow <$STR(P12)> <$STR(P13)>
+DELAYGOTO 5000 @会员转生
+
+#IF
+
+CHECKRENEWLEVEL = 5
+CHECKLEVELEX > 89
+Random 600
+CheckHumInRange XMZC 104 94 10
+#ACT
+MOVR P12 96 105
+MOVR P13 88 94
+GotoNow <$STR(P12)> <$STR(P13)>
+DELAYGOTO 5000 @会员转生
+
+#IF
+
+CHECKRENEWLEVEL = 6
+CHECKLEVELEX > 95
+Random 600
+CheckHumInRange XMZC 104 94 10
+#ACT
+MOVR P12 96 105
+MOVR P13 88 94
+GotoNow <$STR(P12)> <$STR(P13)>
+DELAYGOTO 5000 @会员转生
+
+
+#IF
+
+CHECKRENEWLEVEL = 7
+CHECKLEVELEX > 100
+Random 600
+CheckHumInRange XMZC 104 94 10
+#ACT
+MOVR P12 96 105
+MOVR P13 88 94
+GotoNow <$STR(P12)> <$STR(P13)>
+DELAYGOTO 5000 @会员转生
+
+
+#IF
+
+CHECKRENEWLEVEL = 8
+CHECKLEVELEX > 110
+Random 600
+CheckHumInRange XMZC 104 94 10
+#ACT
+MOVR P12 96 105
+MOVR P13 88 94
+GotoNow <$STR(P12)> <$STR(P13)>
+DELAYGOTO 5000 @会员转生
+
+
+
+
+
+
+
+[@购买会员]
+#if
+CHECKGAMEGIRD > 7
+check [252] 0
+#act
+SET [252] 1
+give 金币 1000000
+GuildNoticeMsg 151 58 首充礼包ぐ：恭喜玩家「%s」打开首充礼包！
+
+#if
+CHECK [004] 0
+CHECK [003] 1
+CHECKGAMEGIRD > 199
+EQUAL U18 3
+#act
+INC U18 1
+set [004]  1
+SET [003] 0
+take  钻石赞助斗笠 1
+take 寒风宝石·高级 1
+give  神豪赞助斗笠 1
+give 寒风宝石·终级 1
+AutoTakeOnItem 神豪赞助斗笠 13
+AutoTakeOnItem 寒风宝石·终级 12
+GuildNoticeMsg 151 58 赞助大师ぐ：恭喜玩家「%s」成功达到充值领取[神豪赞助斗笠]一个,感谢「%s」的赞助！
+break
+
+
+#if
+CHECK [003] 0
+CHECK [002] 1
+CHECKGAMEGIRD > 99
+EQUAL U18 2
+#act
+AutoTakeOffItem 13
+AutoTakeOffItem 12
+INC U18 1
+set [003] 1
+SET [002] 0
+take 寒风宝石·中级 1
+take  白金赞助斗笠 1
+give  钻石赞助斗笠 1
+give 寒风宝石·高级 1
+AutoTakeOnItem 钻石赞助斗笠 13
+AutoTakeOnItem 寒风宝石·高级 12
+GuildNoticeMsg 151 58 赞助大师ぐ：恭喜玩家「%s」成功达到充值领取[钻石赞助斗笠]一个,感谢「%s」的赞助！
+break
+
+
+#if
+CHECK [002] 0
+CHECK [001] 1
+CHECKGAMEGIRD > 49
+checkitem 黄金赞助斗笠 1
+EQUAL U18 1
+#act
+AutoTakeOffItem 13
+AutoTakeOffItem 12
+INC U18 1
+set [002] 1
+SET [001] 0
+take  黄金赞助斗笠 1
+give  白金赞助斗笠 1
+give 寒风宝石·中级
+AutoTakeOnItem 白金赞助斗笠 13
+AutoTakeOnItem 寒风宝石·中级 12
+GuildNoticeMsg 151 58 赞助大师ぐ：恭喜玩家「%s」成功达到充值领取[白金赞助斗笠]一个,感谢「%s」的赞助！
+break
+
+
+#if
+CHECK [001] 0
+CHECK [002] 0
+CHECKGAMEGIRD > 29
+EQUAL U18 0
+#act
+AutoTakeOffItem 13
+INC U18 1
+set [001] 1
+give  黄金赞助斗笠 1
+AutoTakeOnItem 黄金赞助斗笠 13
+goto @发送赞助项链
+GuildNoticeMsg 151 58 赞助大师ぐ：恭喜玩家「%s」成功达到充值领取[黄金赞助斗笠]一个,感谢「%s」的赞助！
+break
+
+
+[@发送赞助项链]
+#if
+checkjob warrior
+#act
+ADDSKILL 烈火剑法 3
+#if
+checkjob wizard
+#act
+ADDSKILL 魔法盾 3
+ADDSKILL 冰咆哮 3
+#IF
+checkjob taoist
+#act
+ADDSKILL 召唤神兽 3
+[@发屠龙]
+#if
+checkjob warrior
+#act
+AutoTakeOffItem 1
+give 屠龙 1
+AutoTakeOnItem 屠龙 1
+#if
+checkjob wizard
+#act
+AutoTakeOffItem 1
+give 嗜魂法杖 1
+AutoTakeOnItem 嗜魂法杖 1
+#IF
+checkjob taoist
+#act
+AutoTakeOffItem 1
+give 霸者之刃 1
+AutoTakeOnItem 霸者之刃 1
+
+
+
+
+
+
+[@会员转生]
+#IF
+#ACT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
