@@ -43,9 +43,6 @@
     </div>
   </div>
   <div id="splash">
-    <!-- <div class="progress-bar stripes">
-      <span style="width: 0%"></span>
-    </div> -->
   </div>
 <!-- Polyfills bundle. -->
 <script src="src/polyfills.bundle.js" charset="utf-8"> </script>
@@ -57,15 +54,19 @@
 <script src="src/import-map.json" type="systemjs-importmap" charset="utf-8"> </script>
 
 <script>
-    System.import('./index.js').catch(function(err) { console.error(err); })
-    window.electron = require('electron');
-</script>
-<!-- <script type="text/javascript">
-  (function() {
-    var splash = document.getElementById('splash');
-    splash.style.display = 'block';
-  })();
-</script> -->
+    System.import('./index.js').catch(function(err) {
+        console.error('Cocos H5 startup failed:', err);
+    });
 
+    // Electron API is available only in an Electron preload/renderer context.
+    // A normal Chrome/Edge browser has no CommonJS require() function.
+    if (typeof require === 'function') {
+        try {
+            window.electron = require('electron');
+        } catch (err) {
+            console.warn('Electron API unavailable:', err);
+        }
+    }
+</script>
 </body>
 </html>
