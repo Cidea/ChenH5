@@ -1,0 +1,27 @@
+{
+  "frames":{
+    "001195.png":{
+      "frame":{
+        "h":85,
+        "idx":0,
+        "w":102,
+        "x":0,
+        "y":0,
+        "offsetx":-29,
+        "offsety":-23
+      },
+      "sourceSize":{
+        "h":85,
+        "w":102
+      },
+      "spriteSourceSize":{
+        "x":0,
+        "y":0
+      }
+    }
+  },
+  "meta":{
+    "image":"001195.png",
+    "prefix":"data/wingeffect_x/001195/"
+  }
+}
