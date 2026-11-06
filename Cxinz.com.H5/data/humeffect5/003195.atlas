@@ -1,0 +1,27 @@
+{
+  "frames":{
+    "003195.png":{
+      "frame":{
+        "h":260,
+        "idx":0,
+        "w":278,
+        "x":0,
+        "y":0,
+        "offsetx":-122,
+        "offsety":-208
+      },
+      "sourceSize":{
+        "h":260,
+        "w":278
+      },
+      "spriteSourceSize":{
+        "x":0,
+        "y":0
+      }
+    }
+  },
+  "meta":{
+    "image":"003195.png",
+    "prefix":"data/humeffect5/003195/"
+  }
+}

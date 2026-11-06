@@ -1,0 +1,21 @@
+﻿{
+    "titleDirectoryArray":[
+       {
+         "titleContent":"游戏公告",
+       "newTitle":true          
+        }     
+
+    ],
+    "noticeContentArray":[    
+      [
+        { "positionX":150,"positionY": 10,"fontSize":20,"colorValue":80,"content": "【龙之霸业】" },
+	{ "positionX":0,"positionY": 30,"fontSize":20,"colorValue":249,"content": "三端互通,随时随地畅玩,火爆异常!" },
+	{ "positionX":0,"positionY": 50,"fontSize":20,"colorValue":249,"content": "开区时间10点、14点、18点、20点、24点" },
+	{ "positionX":0,"positionY": 70,"fontSize":20,"colorValue":249,"content": "开区第二天16点30合区" },
+	{ "positionX":0,"positionY": 90,"fontSize":20,"colorValue":249,"content": "海量广告宣传,保证人气火爆，稳定三线!" },
+	{ "positionX":0,"positionY": 110,"fontSize":20,"colorValue":249,"content": "公平公正稳定开放 纯散人 长久更新" },
+	{ "positionX":0,"positionY": 130,"fontSize":20,"colorValue":249,"content": "一切靠打,元宝装备请自行定价交易，时间为王" }
+      ]
+    ] 
+}
+
