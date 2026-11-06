@@ -1,0 +1,27 @@
+{
+  "frames":{
+    "002720.png":{
+      "frame":{
+        "h":284,
+        "idx":0,
+        "w":356,
+        "x":0,
+        "y":0,
+        "offsetx":-146,
+        "offsety":-117
+      },
+      "sourceSize":{
+        "h":284,
+        "w":356
+      },
+      "spriteSourceSize":{
+        "x":0,
+        "y":0
+      }
+    }
+  },
+  "meta":{
+    "image":"002720.png",
+    "prefix":"data/npc/002720/"
+  }
+}

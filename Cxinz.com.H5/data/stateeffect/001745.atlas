@@ -1,0 +1,27 @@
+{
+  "frames":{
+    "001745.png":{
+      "frame":{
+        "h":334,
+        "idx":0,
+        "w":264,
+        "x":0,
+        "y":0,
+        "offsetx":-124,
+        "offsety":-159
+      },
+      "sourceSize":{
+        "h":334,
+        "w":264
+      },
+      "spriteSourceSize":{
+        "x":0,
+        "y":0
+      }
+    }
+  },
+  "meta":{
+    "image":"001745.png",
+    "prefix":"data/stateeffect/001745/"
+  }
+}

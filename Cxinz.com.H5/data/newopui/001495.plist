@@ -1,0 +1,973 @@
+<?xml version="1.0" ?>
+<!DOCTYPE plist
+  PUBLIC '-//Apple Computer//DTD PLIST 1.0//EN'
+  'http://www.apple.com/DTDs/PropertyList-1.0.dtd'>
+<plist version="1.0">
+	
+
+	<dict>
+		
+
+		<key>frames</key>
+		
+
+		<dict>
+			
+
+			<key>001495.png</key>
+			
+
+			<dict>
+				
+
+				<key>aliases</key>
+				
+
+				<array/>
+				
+
+				<key>spriteOffset</key>
+				
+
+				<string>{0,0}</string>
+				
+
+				<key>spriteSize</key>
+				
+
+				<string>{475,277}</string>
+				
+
+				<key>spriteSourceSize</key>
+				
+
+				<string>{475,277}</string>
+				
+
+				<key>textureRect</key>
+				
+
+				<string>{{0,0},{475,277}}</string>
+				
+
+				<key>textureRotated</key>
+				
+
+				<false/>
+				
+
+			</dict>
+			
+
+			<key>001500.png</key>
+			
+
+			<dict>
+				
+
+				<key>aliases</key>
+				
+
+				<array/>
+				
+
+				<key>spriteOffset</key>
+				
+
+				<string>{0,0}</string>
+				
+
+				<key>spriteSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>spriteSourceSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>textureRect</key>
+				
+
+				<string>{{300,277},{60,60}}</string>
+				
+
+				<key>textureRotated</key>
+				
+
+				<false/>
+				
+
+			</dict>
+			
+
+			<key>001501.png</key>
+			
+
+			<dict>
+				
+
+				<key>aliases</key>
+				
+
+				<array/>
+				
+
+				<key>spriteOffset</key>
+				
+
+				<string>{0,0}</string>
+				
+
+				<key>spriteSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>spriteSourceSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>textureRect</key>
+				
+
+				<string>{{300,337},{60,60}}</string>
+				
+
+				<key>textureRotated</key>
+				
+
+				<false/>
+				
+
+			</dict>
+			
+
+			<key>001502.png</key>
+			
+
+			<dict>
+				
+
+				<key>aliases</key>
+				
+
+				<array/>
+				
+
+				<key>spriteOffset</key>
+				
+
+				<string>{0,0}</string>
+				
+
+				<key>spriteSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>spriteSourceSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>textureRect</key>
+				
+
+				<string>{{0,377},{60,60}}</string>
+				
+
+				<key>textureRotated</key>
+				
+
+				<false/>
+				
+
+			</dict>
+			
+
+			<key>001503.png</key>
+			
+
+			<dict>
+				
+
+				<key>aliases</key>
+				
+
+				<array/>
+				
+
+				<key>spriteOffset</key>
+				
+
+				<string>{0,0}</string>
+				
+
+				<key>spriteSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>spriteSourceSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>textureRect</key>
+				
+
+				<string>{{60,377},{60,60}}</string>
+				
+
+				<key>textureRotated</key>
+				
+
+				<false/>
+				
+
+			</dict>
+			
+
+			<key>001504.png</key>
+			
+
+			<dict>
+				
+
+				<key>aliases</key>
+				
+
+				<array/>
+				
+
+				<key>spriteOffset</key>
+				
+
+				<string>{0,0}</string>
+				
+
+				<key>spriteSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>spriteSourceSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>textureRect</key>
+				
+
+				<string>{{120,377},{60,60}}</string>
+				
+
+				<key>textureRotated</key>
+				
+
+				<false/>
+				
+
+			</dict>
+			
+
+			<key>001505.png</key>
+			
+
+			<dict>
+				
+
+				<key>aliases</key>
+				
+
+				<array/>
+				
+
+				<key>spriteOffset</key>
+				
+
+				<string>{0,0}</string>
+				
+
+				<key>spriteSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>spriteSourceSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>textureRect</key>
+				
+
+				<string>{{180,377},{60,60}}</string>
+				
+
+				<key>textureRotated</key>
+				
+
+				<false/>
+				
+
+			</dict>
+			
+
+			<key>001510.png</key>
+			
+
+			<dict>
+				
+
+				<key>aliases</key>
+				
+
+				<array/>
+				
+
+				<key>spriteOffset</key>
+				
+
+				<string>{0,0}</string>
+				
+
+				<key>spriteSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>spriteSourceSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>textureRect</key>
+				
+
+				<string>{{240,377},{60,60}}</string>
+				
+
+				<key>textureRotated</key>
+				
+
+				<false/>
+				
+
+			</dict>
+			
+
+			<key>001512.png</key>
+			
+
+			<dict>
+				
+
+				<key>aliases</key>
+				
+
+				<array/>
+				
+
+				<key>spriteOffset</key>
+				
+
+				<string>{0,0}</string>
+				
+
+				<key>spriteSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>spriteSourceSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>textureRect</key>
+				
+
+				<string>{{360,337},{60,60}}</string>
+				
+
+				<key>textureRotated</key>
+				
+
+				<false/>
+				
+
+			</dict>
+			
+
+			<key>001513.png</key>
+			
+
+			<dict>
+				
+
+				<key>aliases</key>
+				
+
+				<array/>
+				
+
+				<key>spriteOffset</key>
+				
+
+				<string>{0,0}</string>
+				
+
+				<key>spriteSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>spriteSourceSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>textureRect</key>
+				
+
+				<string>{{360,277},{60,60}}</string>
+				
+
+				<key>textureRotated</key>
+				
+
+				<false/>
+				
+
+			</dict>
+			
+
+			<key>001514.png</key>
+			
+
+			<dict>
+				
+
+				<key>aliases</key>
+				
+
+				<array/>
+				
+
+				<key>spriteOffset</key>
+				
+
+				<string>{0,0}</string>
+				
+
+				<key>spriteSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>spriteSourceSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>textureRect</key>
+				
+
+				<string>{{420,277},{60,60}}</string>
+				
+
+				<key>textureRotated</key>
+				
+
+				<false/>
+				
+
+			</dict>
+			
+
+			<key>001515.png</key>
+			
+
+			<dict>
+				
+
+				<key>aliases</key>
+				
+
+				<array/>
+				
+
+				<key>spriteOffset</key>
+				
+
+				<string>{0,0}</string>
+				
+
+				<key>spriteSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>spriteSourceSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>textureRect</key>
+				
+
+				<string>{{475,0},{60,60}}</string>
+				
+
+				<key>textureRotated</key>
+				
+
+				<false/>
+				
+
+			</dict>
+			
+
+			<key>001520.png</key>
+			
+
+			<dict>
+				
+
+				<key>aliases</key>
+				
+
+				<array/>
+				
+
+				<key>spriteOffset</key>
+				
+
+				<string>{0,0}</string>
+				
+
+				<key>spriteSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>spriteSourceSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>textureRect</key>
+				
+
+				<string>{{475,60},{60,60}}</string>
+				
+
+				<key>textureRotated</key>
+				
+
+				<false/>
+				
+
+			</dict>
+			
+
+			<key>001521.png</key>
+			
+
+			<dict>
+				
+
+				<key>aliases</key>
+				
+
+				<array/>
+				
+
+				<key>spriteOffset</key>
+				
+
+				<string>{0,0}</string>
+				
+
+				<key>spriteSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>spriteSourceSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>textureRect</key>
+				
+
+				<string>{{475,120},{60,60}}</string>
+				
+
+				<key>textureRotated</key>
+				
+
+				<false/>
+				
+
+			</dict>
+			
+
+			<key>001522.png</key>
+			
+
+			<dict>
+				
+
+				<key>aliases</key>
+				
+
+				<array/>
+				
+
+				<key>spriteOffset</key>
+				
+
+				<string>{0,0}</string>
+				
+
+				<key>spriteSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>spriteSourceSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>textureRect</key>
+				
+
+				<string>{{475,180},{60,60}}</string>
+				
+
+				<key>textureRotated</key>
+				
+
+				<false/>
+				
+
+			</dict>
+			
+
+			<key>001523.png</key>
+			
+
+			<dict>
+				
+
+				<key>aliases</key>
+				
+
+				<array/>
+				
+
+				<key>spriteOffset</key>
+				
+
+				<string>{0,0}</string>
+				
+
+				<key>spriteSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>spriteSourceSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>textureRect</key>
+				
+
+				<string>{{420,337},{60,60}}</string>
+				
+
+				<key>textureRotated</key>
+				
+
+				<false/>
+				
+
+			</dict>
+			
+
+			<key>001524.png</key>
+			
+
+			<dict>
+				
+
+				<key>aliases</key>
+				
+
+				<array/>
+				
+
+				<key>spriteOffset</key>
+				
+
+				<string>{0,0}</string>
+				
+
+				<key>spriteSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>spriteSourceSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>textureRect</key>
+				
+
+				<string>{{480,337},{60,60}}</string>
+				
+
+				<key>textureRotated</key>
+				
+
+				<false/>
+				
+
+			</dict>
+			
+
+			<key>001525.png</key>
+			
+
+			<dict>
+				
+
+				<key>aliases</key>
+				
+
+				<array/>
+				
+
+				<key>spriteOffset</key>
+				
+
+				<string>{0,0}</string>
+				
+
+				<key>spriteSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>spriteSourceSize</key>
+				
+
+				<string>{60,60}</string>
+				
+
+				<key>textureRect</key>
+				
+
+				<string>{{535,0},{60,60}}</string>
+				
+
+				<key>textureRotated</key>
+				
+
+				<false/>
+				
+
+			</dict>
+			
+
+			<key>001530.png</key>
+			
+
+			<dict>
+				
+
+				<key>aliases</key>
+				
+
+				<array/>
+				
+
+				<key>spriteOffset</key>
+				
+
+				<string>{0,0}</string>
+				
+
+				<key>spriteSize</key>
+				
+
+				<string>{150,100}</string>
+				
+
+				<key>spriteSourceSize</key>
+				
+
+				<string>{150,100}</string>
+				
+
+				<key>textureRect</key>
+				
+
+				<string>{{0,277},{150,100}}</string>
+				
+
+				<key>textureRotated</key>
+				
+
+				<false/>
+				
+
+			</dict>
+			
+
+			<key>001531.png</key>
+			
+
+			<dict>
+				
+
+				<key>aliases</key>
+				
+
+				<array/>
+				
+
+				<key>spriteOffset</key>
+				
+
+				<string>{0,0}</string>
+				
+
+				<key>spriteSize</key>
+				
+
+				<string>{150,100}</string>
+				
+
+				<key>spriteSourceSize</key>
+				
+
+				<string>{150,100}</string>
+				
+
+				<key>textureRect</key>
+				
+
+				<string>{{150,277},{150,100}}</string>
+				
+
+				<key>textureRotated</key>
+				
+
+				<false/>
+				
+
+			</dict>
+			
+
+		</dict>
+		
+
+		<key>metadata</key>
+		
+
+		<dict>
+			
+
+			<key>format</key>
+			
+
+			<integer>3</integer>
+			
+
+			<key>pixelFormat</key>
+			
+
+			<string>RGBA8888</string>
+			
+
+			<key>premultiplyAlpha</key>
+			
+
+			<false/>
+			
+
+			<key>realTextureFileName</key>
+			
+
+			<string>001495.png</string>
+			
+
+			<key>size</key>
+			
+
+			<string>{595,437}</string>
+			
+
+			<key>smartupdate</key>
+			
+
+			<string>$TexturePacker:SmartUpdate:b62c1b61551396198ae83a2f38f619e1:2599dd36c75fea6cdeedb26f89f8eacd:ea92b5d310d58b0e00b5b278ef2ea069$</string>
+			<key>textureFileName</key>
+			
+
+			<string>001495.png</string>
+			
+
+		</dict>
+		
+
+
+	</dict>
+	
+
+</plist>

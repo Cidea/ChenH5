@@ -1,0 +1,27 @@
+{
+  "frames":{
+    "003832.png":{
+      "frame":{
+        "h":474,
+        "idx":0,
+        "w":742,
+        "x":0,
+        "y":0,
+        "offsetx":-373,
+        "offsety":-239
+      },
+      "sourceSize":{
+        "h":474,
+        "w":742
+      },
+      "spriteSourceSize":{
+        "x":0,
+        "y":0
+      }
+    }
+  },
+  "meta":{
+    "image":"003832.png",
+    "prefix":"data/ui1/003832/"
+  }
+}

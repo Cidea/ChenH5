@@ -1,0 +1,27 @@
+{
+  "frames":{
+    "000790.png":{
+      "frame":{
+        "h":422,
+        "idx":0,
+        "w":530,
+        "x":0,
+        "y":0,
+        "offsetx":0,
+        "offsety":0
+      },
+      "sourceSize":{
+        "h":422,
+        "w":530
+      },
+      "spriteSourceSize":{
+        "x":0,
+        "y":0
+      }
+    }
+  },
+  "meta":{
+    "image":"000790.png",
+    "prefix":"data/ui3/000790/"
+  }
+}

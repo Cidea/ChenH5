@@ -1,0 +1,27 @@
+{
+  "frames":{
+    "000690.png":{
+      "frame":{
+        "h":556,
+        "idx":0,
+        "w":658,
+        "x":0,
+        "y":0,
+        "offsetx":0,
+        "offsety":0
+      },
+      "sourceSize":{
+        "h":556,
+        "w":658
+      },
+      "spriteSourceSize":{
+        "x":0,
+        "y":0
+      }
+    }
+  },
+  "meta":{
+    "image":"000690.png",
+    "prefix":"data/newopui/000690/"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "frames":{
+    "003803.png":{
+      "frame":{
+        "h":280,
+        "idx":0,
+        "w":321,
+        "x":0,
+        "y":0,
+        "offsetx":-67,
+        "offsety":-133
+      },
+      "sourceSize":{
+        "h":280,
+        "w":321
+      },
+      "spriteSourceSize":{
+        "x":0,
+        "y":0
+      }
+    }
+  },
+  "meta":{
+    "image":"003803.png",
+    "prefix":"data/stateitem/003803/"
+  }
+}

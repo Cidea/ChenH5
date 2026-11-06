@@ -1,0 +1,27 @@
+{
+  "frames":{
+    "000424.png":{
+      "frame":{
+        "h":512,
+        "idx":0,
+        "w":832,
+        "x":0,
+        "y":0,
+        "offsetx":-375,
+        "offsety":-167
+      },
+      "sourceSize":{
+        "h":512,
+        "w":832
+      },
+      "spriteSourceSize":{
+        "x":0,
+        "y":0
+      }
+    }
+  },
+  "meta":{
+    "image":"000424.png",
+    "prefix":"data/nselect/000424/"
+  }
+}

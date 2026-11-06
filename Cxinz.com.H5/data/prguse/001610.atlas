@@ -1,0 +1,27 @@
+{
+  "frames":{
+    "001610.png":{
+      "frame":{
+        "h":335,
+        "idx":0,
+        "w":540,
+        "x":0,
+        "y":0,
+        "offsetx":0,
+        "offsety":0
+      },
+      "sourceSize":{
+        "h":335,
+        "w":540
+      },
+      "spriteSourceSize":{
+        "x":0,
+        "y":0
+      }
+    }
+  },
+  "meta":{
+    "image":"001610.png",
+    "prefix":"data/prguse/001610/"
+  }
+}

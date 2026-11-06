@@ -1,0 +1,27 @@
+{
+  "frames":{
+    "000495.png":{
+      "frame":{
+        "h":512,
+        "idx":0,
+        "w":512,
+        "x":0,
+        "y":0,
+        "offsetx":-257,
+        "offsety":-145
+      },
+      "sourceSize":{
+        "h":512,
+        "w":512
+      },
+      "spriteSourceSize":{
+        "x":0,
+        "y":0
+      }
+    }
+  },
+  "meta":{
+    "image":"000495.png",
+    "prefix":"data/moneffect/000495/"
+  }
+}
