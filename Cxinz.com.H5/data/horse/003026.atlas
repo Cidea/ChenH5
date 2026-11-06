@@ -1,0 +1,27 @@
+{
+  "frames":{
+    "003026.png":{
+      "frame":{
+        "h":255,
+        "idx":0,
+        "w":260,
+        "x":0,
+        "y":0,
+        "offsetx":-117,
+        "offsety":-190
+      },
+      "sourceSize":{
+        "h":255,
+        "w":260
+      },
+      "spriteSourceSize":{
+        "x":0,
+        "y":0
+      }
+    }
+  },
+  "meta":{
+    "image":"003026.png",
+    "prefix":"data/horse/003026/"
+  }
+}

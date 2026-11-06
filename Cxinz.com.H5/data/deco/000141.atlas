@@ -1,0 +1,27 @@
+{
+  "frames":{
+    "000141.png":{
+      "frame":{
+        "h":427,
+        "idx":0,
+        "w":368,
+        "x":0,
+        "y":0,
+        "offsetx":-190,
+        "offsety":-258
+      },
+      "sourceSize":{
+        "h":427,
+        "w":368
+      },
+      "spriteSourceSize":{
+        "x":0,
+        "y":0
+      }
+    }
+  },
+  "meta":{
+    "image":"000141.png",
+    "prefix":"data/deco/000141/"
+  }
+}

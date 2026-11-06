@@ -1,0 +1,27 @@
+{
+  "frames":{
+    "000024.png":{
+      "frame":{
+        "h":600,
+        "idx":0,
+        "w":800,
+        "x":0,
+        "y":0,
+        "offsetx":0,
+        "offsety":0
+      },
+      "sourceSize":{
+        "h":600,
+        "w":800
+      },
+      "spriteSourceSize":{
+        "x":0,
+        "y":0
+      }
+    }
+  },
+  "meta":{
+    "image":"000024.png",
+    "prefix":"data/effect_ex/000024/"
+  }
+}

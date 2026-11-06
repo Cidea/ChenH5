@@ -1,0 +1,27 @@
+{
+  "frames":{
+    "000011.png":{
+      "frame":{
+        "h":640,
+        "idx":0,
+        "w":640,
+        "x":0,
+        "y":0,
+        "offsetx":-121,
+        "offsety":-130
+      },
+      "sourceSize":{
+        "h":640,
+        "w":640
+      },
+      "spriteSourceSize":{
+        "x":0,
+        "y":0
+      }
+    }
+  },
+  "meta":{
+    "image":"000011.png",
+    "prefix":"data/chrsel/000011/"
+  }
+}

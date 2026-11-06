@@ -1,0 +1,27 @@
+{
+  "frames":{
+    "000422.png":{
+      "frame":{
+        "h":1291,
+        "idx":0,
+        "w":424,
+        "x":0,
+        "y":0,
+        "offsetx":-279,
+        "offsety":-1215
+      },
+      "sourceSize":{
+        "h":1291,
+        "w":424
+      },
+      "spriteSourceSize":{
+        "x":0,
+        "y":0
+      }
+    }
+  },
+  "meta":{
+    "image":"000422.png",
+    "prefix":"data/dragon/000422/"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "frames":{
+    "000413.png":{
+      "frame":{
+        "h":261,
+        "idx":0,
+        "w":381,
+        "x":0,
+        "y":0,
+        "offsetx":-165,
+        "offsety":-178
+      },
+      "sourceSize":{
+        "h":261,
+        "w":381
+      },
+      "spriteSourceSize":{
+        "x":0,
+        "y":0
+      }
+    }
+  },
+  "meta":{
+    "image":"000413.png",
+    "prefix":"data/dbsj/000413/"
+  }
+}
