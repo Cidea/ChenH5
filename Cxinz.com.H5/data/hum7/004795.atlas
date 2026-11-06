@@ -1,0 +1,27 @@
+{
+  "frames":{
+    "004795.png":{
+      "frame":{
+        "h":107,
+        "idx":0,
+        "w":129,
+        "x":0,
+        "y":0,
+        "offsetx":-72,
+        "offsety":-63
+      },
+      "sourceSize":{
+        "h":107,
+        "w":129
+      },
+      "spriteSourceSize":{
+        "x":0,
+        "y":0
+      }
+    }
+  },
+  "meta":{
+    "image":"004795.png",
+    "prefix":"data/hum7/004795/"
+  }
+}
