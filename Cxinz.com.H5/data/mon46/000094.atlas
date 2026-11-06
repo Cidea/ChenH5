@@ -1,0 +1,27 @@
+{
+  "frames":{
+    "000094.png":{
+      "frame":{
+        "h":294,
+        "idx":0,
+        "w":320,
+        "x":0,
+        "y":0,
+        "offsetx":-173,
+        "offsety":-160
+      },
+      "sourceSize":{
+        "h":294,
+        "w":320
+      },
+      "spriteSourceSize":{
+        "x":0,
+        "y":0
+      }
+    }
+  },
+  "meta":{
+    "image":"000094.png",
+    "prefix":"data/mon46/000094/"
+  }
+}

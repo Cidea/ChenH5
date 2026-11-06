@@ -1,0 +1,27 @@
+{
+  "frames":{
+    "001220.png":{
+      "frame":{
+        "h":347,
+        "idx":0,
+        "w":406,
+        "x":0,
+        "y":2,
+        "offsetx":-164,
+        "offsety":-218
+      },
+      "sourceSize":{
+        "h":347,
+        "w":406
+      },
+      "spriteSourceSize":{
+        "x":0,
+        "y":0
+      }
+    }
+  },
+  "meta":{
+    "image":"001216.png",
+    "prefix":"data/mon35/001216/"
+  }
+}
