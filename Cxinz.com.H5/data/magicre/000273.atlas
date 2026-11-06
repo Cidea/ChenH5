@@ -1,0 +1,27 @@
+{
+  "frames":{
+    "000273.png":{
+      "frame":{
+        "h":457,
+        "idx":0,
+        "w":522,
+        "x":0,
+        "y":0,
+        "offsetx":-124,
+        "offsety":-135
+      },
+      "sourceSize":{
+        "h":457,
+        "w":522
+      },
+      "spriteSourceSize":{
+        "x":0,
+        "y":0
+      }
+    }
+  },
+  "meta":{
+    "image":"000273.png",
+    "prefix":"data/magicre/000273/"
+  }
+}

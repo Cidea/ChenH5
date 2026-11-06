@@ -1,0 +1,27 @@
+{
+  "frames":{
+    "000102.png":{
+      "frame":{
+        "h":499,
+        "idx":0,
+        "w":752,
+        "x":0,
+        "y":0,
+        "offsetx":-296,
+        "offsety":-266
+      },
+      "sourceSize":{
+        "h":499,
+        "w":752
+      },
+      "spriteSourceSize":{
+        "x":0,
+        "y":0
+      }
+    }
+  },
+  "meta":{
+    "image":"000102.png",
+    "prefix":"data/mmap/000102/"
+  }
+}

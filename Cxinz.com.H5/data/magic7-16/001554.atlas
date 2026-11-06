@@ -1,0 +1,27 @@
+{
+  "frames":{
+    "001554.png":{
+      "frame":{
+        "h":189,
+        "idx":0,
+        "w":558,
+        "x":0,
+        "y":0,
+        "offsetx":-542,
+        "offsety":-87
+      },
+      "sourceSize":{
+        "h":189,
+        "w":558
+      },
+      "spriteSourceSize":{
+        "x":0,
+        "y":0
+      }
+    }
+  },
+  "meta":{
+    "image":"001554.png",
+    "prefix":"data/magic7-16/001554/"
+  }
+}

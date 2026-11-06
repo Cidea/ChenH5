@@ -1,0 +1,27 @@
+{
+  "frames":{
+    "001151.png":{
+      "frame":{
+        "h":281,
+        "idx":0,
+        "w":348,
+        "x":0,
+        "y":0,
+        "offsetx":-167,
+        "offsety":-162
+      },
+      "sourceSize":{
+        "h":281,
+        "w":348
+      },
+      "spriteSourceSize":{
+        "x":0,
+        "y":0
+      }
+    }
+  },
+  "meta":{
+    "image":"001151.png",
+    "prefix":"data/magicns/001151/"
+  }
+}

@@ -1,0 +1,208 @@
+<?xml version="1.0" ?>
+<!DOCTYPE plist
+  PUBLIC '-//Apple Computer//DTD PLIST 1.0//EN'
+  'http://www.apple.com/DTDs/PropertyList-1.0.dtd'>
+<plist version="1.0">
+	
+
+	<dict>
+		
+
+		<key>frames</key>
+		
+
+		<dict>
+			
+
+			<key>002555.png</key>
+			
+
+			<dict>
+				
+
+				<key>aliases</key>
+				
+
+				<array/>
+				
+
+				<key>spriteOffset</key>
+				
+
+				<string>{-183,-105}</string>
+				
+
+				<key>spriteSize</key>
+				
+
+				<string>{512,173}</string>
+				
+
+				<key>spriteSourceSize</key>
+				
+
+				<string>{512,173}</string>
+				
+
+				<key>textureRect</key>
+				
+
+				<string>{{0,0},{512,173}}</string>
+				
+
+				<key>textureRotated</key>
+				
+
+				<false/>
+				
+
+			</dict>
+			
+
+			<key>002556.png</key>
+			
+
+			<dict>
+				
+
+				<key>aliases</key>
+				
+
+				<array/>
+				
+
+				<key>spriteOffset</key>
+				
+
+				<string>{-177,-103}</string>
+				
+
+				<key>spriteSize</key>
+				
+
+				<string>{496,169}</string>
+				
+
+				<key>spriteSourceSize</key>
+				
+
+				<string>{496,169}</string>
+				
+
+				<key>textureRect</key>
+				
+
+				<string>{{0,173},{496,169}}</string>
+				
+
+				<key>textureRotated</key>
+				
+
+				<false/>
+				
+
+			</dict>
+			
+
+			<key>002557.png</key>
+			
+
+			<dict>
+				
+
+				<key>aliases</key>
+				
+
+				<array/>
+				
+
+				<key>spriteOffset</key>
+				
+
+				<string>{-126,-100}</string>
+				
+
+				<key>spriteSize</key>
+				
+
+				<string>{476,164}</string>
+				
+
+				<key>spriteSourceSize</key>
+				
+
+				<string>{476,164}</string>
+				
+
+				<key>textureRect</key>
+				
+
+				<string>{{0,342},{476,164}}</string>
+				
+
+				<key>textureRotated</key>
+				
+
+				<false/>
+				
+
+			</dict>
+			
+
+		</dict>
+		
+
+		<key>metadata</key>
+		
+
+		<dict>
+			
+
+			<key>format</key>
+			
+
+			<integer>3</integer>
+			
+
+			<key>pixelFormat</key>
+			
+
+			<string>RGBA8888</string>
+			
+
+			<key>premultiplyAlpha</key>
+			
+
+			<false/>
+			
+
+			<key>realTextureFileName</key>
+			
+
+			<string>002555.png</string>
+			
+
+			<key>size</key>
+			
+
+			<string>{512,506}</string>
+			
+
+			<key>smartupdate</key>
+			
+
+			<string>$TexturePacker:SmartUpdate:b62c1b61551396198ae83a2f38f619e1:2599dd36c75fea6cdeedb26f89f8eacd:ea92b5d310d58b0e00b5b278ef2ea069$</string>
+			<key>textureFileName</key>
+			
+
+			<string>002555.png</string>
+			
+
+		</dict>
+		
+
+
+	</dict>
+	
+
+</plist>
